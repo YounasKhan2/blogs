@@ -1,15 +1,15 @@
 import { compareDesc } from 'date-fns';
 
-// Try to import generated types, fall back to our own if not available
+// Import from contentlayer2 generated - read the JSON files directly
 let allPosts: any[] = [];
 let allAuthors: any[] = [];
 let allCategories: any[] = [];
 
 try {
-  const contentlayer = require('contentlayer/generated');
-  allPosts = contentlayer.allPosts || [];
-  allAuthors = contentlayer.allAuthors || [];
-  allCategories = contentlayer.allCategories || [];
+  // For development, we'll read the JSON files directly
+  allPosts = require('../.contentlayer/generated/Post/_index.json');
+  allAuthors = require('../.contentlayer/generated/Author/_index.json');
+  allCategories = require('../.contentlayer/generated/Category/_index.json');
 } catch (error) {
   console.log('Contentlayer not yet generated, using empty arrays');
 }

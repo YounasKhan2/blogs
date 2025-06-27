@@ -224,8 +224,9 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  // Enable static generation for blog posts
-  output: 'standalone',
+  // Enable static export for Netlify
+  // output: 'export', // Uncomment for static export if needed
+  trailingSlash: false,
   
   // Environment variables
   env: {

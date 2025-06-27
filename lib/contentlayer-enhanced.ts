@@ -3,7 +3,7 @@
 
 import { compareDesc } from 'date-fns';
 
-// Import Contentlayer generated content with fallback
+// Import Contentlayer generated content - read the JSON files directly
 let allPosts: any[] = [];
 let allAuthors: any[] = [];
 let allCategories: any[] = [];
@@ -14,10 +14,10 @@ export type Author = any;
 export type Category = any;
 
 try {
-  const contentlayer = require('../.contentlayer/generated');
-  allPosts = contentlayer.allPosts || [];
-  allAuthors = contentlayer.allAuthors || [];
-  allCategories = contentlayer.allCategories || [];
+  // For development, we'll read the JSON files directly
+  allPosts = require('../.contentlayer/generated/Post/_index.json');
+  allAuthors = require('../.contentlayer/generated/Author/_index.json');
+  allCategories = require('../.contentlayer/generated/Category/_index.json');
 } catch (error) {
   console.log('Contentlayer not yet generated in enhanced module, using empty arrays');
 }
