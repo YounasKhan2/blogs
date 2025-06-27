@@ -1,4 +1,7 @@
 import { MetadataRoute } from 'next'
+
+// Remove dynamic export for Netlify compatibility
+// export const dynamic = 'force-static'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://techblogpro.com'
