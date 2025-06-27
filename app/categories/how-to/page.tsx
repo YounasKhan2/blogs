@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -15,7 +15,7 @@ export default function HowToGuides() {
       id: 1,
       title: "How to Speed Up Your Computer: Complete Guide",
       excerpt: "Learn proven methods to optimize your PC or Mac performance with these simple steps.",
-      image: "/api/placeholder/400/250",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop&auto=format&q=80",
       category: "Computer Maintenance",
       readTime: "15 min read",
       difficulty: "Beginner",
@@ -28,7 +28,7 @@ export default function HowToGuides() {
       id: 2,
       title: "Setting Up a Home Network: From Router to WiFi",
       excerpt: "Complete guide to setting up a secure and fast home network for all your devices.",
-      image: "/api/placeholder/400/250",
+      image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=250&fit=crop&auto=format&q=80",
       category: "Networking",
       readTime: "20 min read",
       difficulty: "Intermediate",
@@ -41,7 +41,7 @@ export default function HowToGuides() {
       id: 3,
       title: "iPhone Data Recovery: Get Your Files Back",
       excerpt: "Step-by-step methods to recover lost photos, contacts, and data from your iPhone.",
-      image: "/api/placeholder/400/250",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=250&fit=crop&auto=format&q=80",
       category: "Data Recovery",
       readTime: "12 min read",
       difficulty: "Beginner",
@@ -57,7 +57,7 @@ export default function HowToGuides() {
       id: 4,
       title: "How to Build a Gaming PC on a Budget",
       excerpt: "Complete guide to building a powerful gaming PC without breaking the bank.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop&auto=format&q=80",
       category: "PC Building",
       readTime: "25 min read",
       difficulty: "Advanced",
@@ -69,7 +69,7 @@ export default function HowToGuides() {
       id: 5,
       title: "Troubleshooting Common Windows 11 Issues",
       excerpt: "Fix the most common Windows 11 problems with these proven solutions.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Troubleshooting",
       readTime: "10 min read",
       difficulty: "Beginner",
@@ -81,7 +81,7 @@ export default function HowToGuides() {
       id: 6,
       title: "How to Secure Your WiFi Network",
       excerpt: "Protect your home network from threats with these essential security steps.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Security",
       readTime: "8 min read",
       difficulty: "Beginner",
@@ -93,7 +93,7 @@ export default function HowToGuides() {
       id: 7,
       title: "Creating a Perfect Home Office Setup",
       excerpt: "Design an ergonomic and productive workspace with the right tech and furniture.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Setup Guides",
       readTime: "18 min read",
       difficulty: "Beginner",
@@ -105,7 +105,7 @@ export default function HowToGuides() {
       id: 8,
       title: "How to Transfer Files Between iPhone and PC",
       excerpt: "Multiple methods to easily transfer files between your iPhone and Windows PC.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=200&fit=crop&auto=format&q=80",
       category: "File Transfer",
       readTime: "12 min read",
       difficulty: "Beginner",
@@ -117,7 +117,7 @@ export default function HowToGuides() {
       id: 9,
       title: "Complete Guide to Cloud Storage Setup",
       excerpt: "Set up and optimize cloud storage across multiple devices and platforms.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Cloud Services",
       readTime: "16 min read",
       difficulty: "Intermediate",
@@ -224,12 +224,13 @@ export default function HowToGuides() {
                   <article key={guide.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                     <div className="md:flex">
                       <div className="md:w-1/3 relative">
-                        <Image 
+                        <OptimizedImage 
                           src={guide.image} 
                           alt={guide.title}
                           width={400}
                           height={300}
                           className="w-full h-48 md:h-full object-cover"
+                          category="howto"
                         />
                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 flex items-center">
                           <Play className="h-4 w-4 text-indigo-600 mr-2" />
@@ -285,12 +286,13 @@ export default function HowToGuides() {
                 {recentGuides.map((guide) => (
                   <article key={guide.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="relative">
-                      <Image 
+                      <OptimizedImage 
                         src={guide.image} 
                         alt={guide.title}
                         width={400}
                         height={200}
                         className="w-full h-48 object-cover"
+                        category="how-to"
                       />
                       <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">
                         <span className="text-sm font-medium">{guide.steps} steps</span>

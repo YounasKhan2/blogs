@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import OptimizedImage from '../../../components/OptimizedImage';
 import { Clock, User, ChevronRight, Brain, Star, Filter, TrendingUp } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -15,7 +15,7 @@ export default function AIReviews() {
       id: 3,
       title: "ChatGPT-4 vs Claude 3: AI Assistants Battle for Supremacy",
       excerpt: "A comprehensive comparison of the latest AI language models and their capabilities in real-world scenarios.",
-      image: "/api/placeholder/600/400",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&auto=format&q=80",
       author: "Mike Chen",
       date: "2025-06-23",
       readTime: "10 min read",
@@ -27,7 +27,7 @@ export default function AIReviews() {
       id: 16,
       title: "Google Gemini Pro Review: The Most Advanced AI Yet?",
       excerpt: "Google's latest AI model promises to revolutionize how we interact with artificial intelligence.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Sarah Johnson",
       date: "2025-06-20",
       readTime: "8 min read",
@@ -38,7 +38,7 @@ export default function AIReviews() {
       id: 17,
       title: "Best AI Writing Tools for Content Creators in 2025",
       excerpt: "Discover the top AI-powered writing tools that can help streamline your content creation process.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Lisa Brown",
       date: "2025-06-18",
       readTime: "12 min read",
@@ -49,7 +49,7 @@ export default function AIReviews() {
       id: 18,
       title: "Microsoft Copilot vs GitHub Copilot: Which AI Assistant Wins?",
       excerpt: "Comparing Microsoft's AI assistants for different use cases and productivity scenarios.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Tom Garcia",
       date: "2025-06-15",
       readTime: "9 min read",
@@ -60,7 +60,7 @@ export default function AIReviews() {
       id: 19,
       title: "AI Image Generators: DALL-E 3 vs Midjourney vs Stable Diffusion",
       excerpt: "The ultimate comparison of the most popular AI image generation tools available today.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Alex Turner",
       date: "2025-06-12",
       readTime: "15 min read",
@@ -165,13 +165,14 @@ export default function AIReviews() {
               <div key={review.id} className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
                 <div className="md:flex">
                   <div className="md:w-1/2">
-                    <Image
+                    <OptimizedImage
                       src={review.image}
                       alt={review.title}
                       width={600}
                       height={400}
                       className="w-full h-64 md:h-full object-cover"
                       priority
+                      category="ai"
                     />
                   </div>
                   <div className="md:w-1/2 p-8">
@@ -239,12 +240,13 @@ export default function AIReviews() {
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                 >
                   <div className="relative">
-                    <Image
+                    <OptimizedImage
                       src={review.image}
                       alt={review.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover"
+                      category="ai"
                     />
                   </div>
                   
@@ -334,7 +336,7 @@ export default function AIReviews() {
               </p>
               <input
                 type="email"
-                placeholder="Your email"
+                placeholder="younaskk120@gmail.com"
                 className="w-full px-4 py-2 rounded-lg text-gray-900 mb-3"
               />
               <button className="w-full bg-white text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-green-50 transition-colors">

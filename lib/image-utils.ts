@@ -49,8 +49,12 @@ export const ImageUtils = {
 
   // Check if an image URL is valid
   isValidImageUrl(url?: string): boolean {
-    if (!url) return false;
-    return url.startsWith('http') || url.startsWith('/');
+    if (!url || typeof url !== 'string') return false;
+    const trimmedUrl = url.trim();
+    if (!trimmedUrl || trimmedUrl.length === 0) return false;
+    // Reject placeholder-like URLs
+    if (trimmedUrl.includes('placeholder') || trimmedUrl.includes('dummyimage')) return false;
+    return trimmedUrl.startsWith('http') || trimmedUrl.startsWith('/');
   },
 
   // Generate blur data URL for placeholder

@@ -16,8 +16,14 @@ const Header = () => {
   const handleSignIn = async () => {
     try {
       await signInWithGoogle();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Sign in error:', error);
+      // Show user-friendly error message
+      if (error.message.includes('not available') || error.message.includes('not configured')) {
+        alert('Authentication is temporarily unavailable. Please try again later.');
+      } else {
+        alert('Failed to sign in. Please try again.');
+      }
     }
   };
 
@@ -25,8 +31,10 @@ const Header = () => {
     try {
       await signOutUser();
       setIsUserMenuOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Sign out error:', error);
+      // Force local sign out even if Firebase fails
+      setIsUserMenuOpen(false);
     }
   };
 

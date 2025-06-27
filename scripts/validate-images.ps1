@@ -49,7 +49,7 @@ $externalCount = 0
 foreach ($file in $markdownFiles) {
     $content = Get-Content $file.FullName -Raw
     
-    if ($content -match 'image:\s*["`'']?([^"`''\r\n]+)["`'']?') {
+    if ($content -match "image:\s*[`"'']?([^`"''\r\n]+)[`"'']?") {
         $imageRef = $matches[1].Trim()
         $fileName = $file.BaseName
         

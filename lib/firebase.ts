@@ -5,13 +5,23 @@ import { getAnalytics, isSupported } from 'firebase/analytics';
 
 // Firebase configuration - use environment variables for security
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyCdmYNQ_-uedBHElDOhJTrH3nna2zg64sc",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "blogs-864f2.firebaseapp.com",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "blogs-864f2",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "blogs-864f2.firebasestorage.app",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "96498213284",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:96498213284:web:30b0a68de699858b4c2131",
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "G-13JLXVL26F"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+};
+
+// Check if all required config is available
+const isFirebaseConfigured = () => {
+  return !!(
+    firebaseConfig.apiKey && 
+    firebaseConfig.authDomain && 
+    firebaseConfig.projectId && 
+    firebaseConfig.appId
+  );
 };
 
 // Initialize Firebase with error handling
@@ -20,30 +30,37 @@ let auth: any = null;
 let db: any = null;
 let analytics: any = null;
 
-try {
-  // Only initialize if we have required config
-  if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "AIzaSyCdmYNQ_-uedBHElDOhJTrH3nna2zg64sc") {
+if (isFirebaseConfigured()) {
+  try {
     app = initializeApp(firebaseConfig);
     
     // Initialize services
     auth = getAuth(app);
     db = getFirestore(app);
     
+    console.log('Firebase initialized successfully');
+    
     // Initialize Analytics only on client side and if supported
     if (typeof window !== 'undefined') {
       isSupported().then((supported) => {
         if (supported) {
           analytics = getAnalytics(app);
+          console.log('Firebase Analytics initialized');
         }
       }).catch((error) => {
         console.warn('Analytics not supported:', error);
       });
     }
-  } else {
-    console.warn('Firebase not configured. Please set up your environment variables.');
+  } catch (error) {
+    console.error('Firebase initialization error:', error);
   }
-} catch (error) {
-  console.error('Firebase initialization error:', error);
+} else {
+  console.warn('Firebase not configured. Missing environment variables:', {
+    hasApiKey: !!firebaseConfig.apiKey,
+    hasAuthDomain: !!firebaseConfig.authDomain,
+    hasProjectId: !!firebaseConfig.projectId,
+    hasAppId: !!firebaseConfig.appId
+  });
 }
 
 export { app, auth, db, analytics };
@@ -51,25 +68,57 @@ export { app, auth, db, analytics };
 // Auth providers
 let googleProvider: GoogleAuthProvider | null = null;
 if (auth) {
-  googleProvider = new GoogleAuthProvider();
-  googleProvider.setCustomParameters({
-    prompt: 'select_account'
-  });
+  try {
+    googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({
+      prompt: 'select_account'
+    });
+    console.log('Google Auth provider initialized');
+  } catch (error) {
+    console.error('Failed to initialize Google Auth provider:', error);
+  }
 }
 
 // Auth functions with error handling
-export const signInWithGoogle = () => {
-  if (!auth || !googleProvider) {
-    throw new Error('Firebase Auth not configured');
+export const signInWithGoogle = async () => {
+  if (!isFirebaseConfigured()) {
+    console.warn('Firebase not configured - sign in disabled');
+    throw new Error('Authentication is not available. Please check your configuration.');
   }
-  return signInWithPopup(auth, googleProvider);
+  
+  if (!auth || !googleProvider) {
+    console.error('Firebase Auth or Google provider not initialized');
+    throw new Error('Authentication service is not available.');
+  }
+  
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    console.log('Sign in successful');
+    return result;
+  } catch (error) {
+    console.error('Sign in error:', error);
+    throw error;
+  }
 };
 
-export const signOutUser = () => {
-  if (!auth) {
-    throw new Error('Firebase Auth not configured');
+export const signOutUser = async () => {
+  if (!isFirebaseConfigured()) {
+    console.warn('Firebase not configured - sign out disabled');
+    return;
   }
-  return signOut(auth);
+  
+  if (!auth) {
+    console.error('Firebase Auth not initialized');
+    return;
+  }
+  
+  try {
+    await signOut(auth);
+    console.log('Sign out successful');
+  } catch (error) {
+    console.error('Sign out error:', error);
+    throw error;
+  }
 };
 
 // Subscription functions
@@ -142,12 +191,28 @@ export const unsubscribeUser = async (email: string) => {
 
 // Auth state observer
 export const onAuthStateChange = (callback: (user: User | null) => void) => {
-  if (!auth) {
-    console.warn('Firebase Auth not configured');
+  if (!isFirebaseConfigured()) {
+    console.warn('Firebase not configured - auth state observer disabled');
     callback(null);
     return () => {}; // Return empty unsubscribe function
   }
-  return onAuthStateChanged(auth, callback);
+  
+  if (!auth) {
+    console.warn('Firebase Auth not initialized');
+    callback(null);
+    return () => {}; // Return empty unsubscribe function
+  }
+  
+  try {
+    return onAuthStateChanged(auth, (user) => {
+      console.log('Auth state changed:', user ? 'signed in' : 'signed out');
+      callback(user);
+    });
+  } catch (error) {
+    console.error('Auth state observer error:', error);
+    callback(null);
+    return () => {};
+  }
 };
 
 export default app;

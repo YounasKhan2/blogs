@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import OptimizedImage from '../../../components/OptimizedImage';
 import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp } from 'lucide-react';
 
 export default function MobileReviews() {
@@ -10,7 +10,7 @@ export default function MobileReviews() {
       id: 1,
       title: "iPhone 15 Pro Max Review: The Ultimate Smartphone Experience",
       excerpt: "Apple's latest flagship delivers incredible performance, stunning cameras, and titanium design that sets new standards for premium smartphones.",
-      image: "/api/placeholder/600/400",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop&auto=format&q=80",
       author: "John Smith",
       date: "2025-06-25",
       readTime: "8 min read",
@@ -22,7 +22,7 @@ export default function MobileReviews() {
       id: 6,
       title: "Samsung Galaxy Z Fold 5 Long-term Review: 6 Months Later",
       excerpt: "After using the Galaxy Z Fold 5 for six months, here's our honest long-term review of Samsung's flagship foldable.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
       author: "David Wilson",
       date: "2025-06-20",
       readTime: "9 min read",
@@ -33,7 +33,7 @@ export default function MobileReviews() {
       id: 9,
       title: "Google Pixel 8 Pro vs iPhone 15 Pro: Camera Showdown",
       excerpt: "We compare the camera capabilities of Google's AI-powered Pixel 8 Pro against Apple's iPhone 15 Pro.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Sarah Johnson",
       date: "2025-06-18",
       readTime: "12 min read",
@@ -44,7 +44,7 @@ export default function MobileReviews() {
       id: 10,
       title: "OnePlus 12 Review: Flagship Performance at a Great Price",
       excerpt: "OnePlus returns to form with the OnePlus 12, offering flagship features without the premium price tag.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Mike Chen",
       date: "2025-06-15",
       readTime: "7 min read",
@@ -55,7 +55,7 @@ export default function MobileReviews() {
       id: 11,
       title: "Best Budget Smartphones Under $400 in 2025",
       excerpt: "Discover the best budget smartphones that offer excellent value without compromising on essential features.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Alex Turner",
       date: "2025-06-12",
       readTime: "10 min read",
@@ -66,7 +66,7 @@ export default function MobileReviews() {
       id: 12,
       title: "Xiaomi 14 Ultra Review: Photography Powerhouse",
       excerpt: "Xiaomi's latest flagship focuses on photography with Leica partnership and impressive camera hardware.",
-      image: "/api/placeholder/400/300",
+      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
       author: "Lisa Brown",
       date: "2025-06-10",
       readTime: "11 min read",
@@ -171,13 +171,14 @@ export default function MobileReviews() {
               <div key={review.id} className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
                 <div className="md:flex">
                   <div className="md:w-1/2">
-                    <Image
+                    <OptimizedImage
                       src={review.image}
                       alt={review.title}
                       width={600}
                       height={400}
                       className="w-full h-64 md:h-full object-cover"
                       priority
+                      category="mobile"
                     />
                   </div>
                   <div className="md:w-1/2 p-8">
@@ -245,12 +246,13 @@ export default function MobileReviews() {
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                 >
                   <div className="relative">
-                    <Image
+                    <OptimizedImage
                       src={review.image}
                       alt={review.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover"
+                      category="mobile"
                     />
                   </div>
                   

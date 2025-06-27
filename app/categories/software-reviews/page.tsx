@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Star, Clock, TrendingUp, Settings, Download, Shield, Zap } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { getAllPosts, getPostsByCategory } from '@/lib/contentlayer';
@@ -37,7 +37,7 @@ export default function SoftwareReviews() {
       id: 'demo-office-365',
       title: "Microsoft Office 365 vs Google Workspace 2025: Complete Business Suite Comparison",
       excerpt: "Which office suite offers better value for businesses and individual professionals in 2025?",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Productivity",
       readTime: "9 min read",
       rating: 4.3,
@@ -50,7 +50,7 @@ export default function SoftwareReviews() {
       id: 'demo-figma-design',
       title: "Figma vs Adobe XD vs Sketch: UI/UX Design Tool Battle 2025",
       excerpt: "Which design tool is better for creating user interfaces, prototypes, and design systems?",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Design Software",
       readTime: "7 min read",
       rating: 4.6,
@@ -63,7 +63,7 @@ export default function SoftwareReviews() {
       id: 'demo-password-managers',
       title: "Best Password Managers 2025: 1Password vs Bitwarden vs Dashlane",
       excerpt: "Keep your accounts secure with these top-rated password management solutions and their latest features.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Security",
       readTime: "9 min read",
       rating: 4.8,
@@ -76,7 +76,7 @@ export default function SoftwareReviews() {
       id: 'demo-communication',
       title: "Slack vs Microsoft Teams vs Discord: Team Communication Platform Review",
       excerpt: "Compare features, pricing, and usability of the leading team communication and collaboration tools.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Communication",
       readTime: "8 min read",
       rating: 4.1,
@@ -89,7 +89,7 @@ export default function SoftwareReviews() {
       id: 'demo-antivirus',
       title: "Bitdefender vs Norton vs Kaspersky: Best Antivirus Software 2025",
       excerpt: "Protect your devices with comprehensive reviews of the top-rated antivirus and internet security solutions.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Security",
       readTime: "11 min read",
       rating: 4.4,
@@ -102,7 +102,7 @@ export default function SoftwareReviews() {
       id: 'demo-code-editors',
       title: "Visual Studio Code vs JetBrains vs Sublime Text: Code Editor Comparison",
       excerpt: "Which code editor and IDE offers the best features, performance, and value for developers in 2025?",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Development",
       readTime: "10 min read",
       rating: 4.5,
@@ -343,12 +343,13 @@ export default function SoftwareReviews() {
                     <article key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                       <div className="md:flex">
                         <div className="md:w-1/3">
-                          <Image 
+                          <OptimizedImage 
                             src={post.image} 
                             alt={post.title}
                             width={400}
                             height={300}
                             className="w-full h-48 md:h-full object-cover"
+                            category="software"
                           />
                         </div>
                         <div className="p-6 md:w-2/3">
@@ -390,12 +391,13 @@ export default function SoftwareReviews() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredPosts.slice(3).map((post) => (
                     <article key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                      <Image 
+                      <OptimizedImage 
                         src={post.image} 
                         alt={post.title}
                         width={400}
                         height={200}
                         className="w-full h-48 object-cover"
+                        category="software"
                       />
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-3">

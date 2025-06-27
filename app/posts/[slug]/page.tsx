@@ -124,7 +124,7 @@ export default async function PostPage({ params }: Props) {
               </div>
 
               {/* Featured Image */}
-              {post.metadata.image && (
+              {post.metadata.image && post.metadata.image.trim() && (
                 <div className="relative">
                   <OptimizedImage
                     src={post.metadata.image}

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Star, Clock, TrendingUp, Gamepad2, Headphones, Watch, Camera, Smartphone, Zap } from 'lucide-react';
 
 export default function AccessoriesGadgets() {
@@ -10,7 +10,7 @@ export default function AccessoriesGadgets() {
       id: 1,
       title: "AirPods Pro 3 vs Sony WF-1000XM5: Ultimate Comparison",
       excerpt: "Battle of the premium wireless earbuds with active noise cancellation.",
-      image: "/api/placeholder/400/250",
+      image: "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=250&fit=crop&auto=format&q=80",
       category: "Audio",
       readTime: "10 min read",
       rating: 4.7,
@@ -21,7 +21,7 @@ export default function AccessoriesGadgets() {
       id: 2,
       title: "Apple Watch Series 10 vs Samsung Galaxy Watch 7",
       excerpt: "Which smartwatch offers the best features for health, fitness, and productivity?",
-      image: "/api/placeholder/400/250",
+      image: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=400&h=250&fit=crop&auto=format&q=80",
       category: "Wearables",
       readTime: "12 min read",
       rating: 4.5,
@@ -32,7 +32,7 @@ export default function AccessoriesGadgets() {
       id: 3,
       title: "Best Gaming Mechanical Keyboards Under $200",
       excerpt: "Top mechanical keyboards that offer premium features without breaking the bank.",
-      image: "/api/placeholder/400/250",
+      image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=250&fit=crop&auto=format&q=80",
       category: "Gaming",
       readTime: "8 min read",
       rating: 4.6,
@@ -46,7 +46,7 @@ export default function AccessoriesGadgets() {
       id: 4,
       title: "Logitech MX Master 4 Review: The Ultimate Productivity Mouse",
       excerpt: "Is this the best wireless mouse for professionals and creatives?",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Peripherals",
       readTime: "7 min read",
       rating: 4.8,
@@ -56,7 +56,7 @@ export default function AccessoriesGadgets() {
       id: 5,
       title: "DJI Mini 4 Pro vs Air 3: Drone Comparison",
       excerpt: "Which compact drone offers the best value for aerial photography?",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Photography",
       readTime: "9 min read",
       rating: 4.4,
@@ -66,7 +66,7 @@ export default function AccessoriesGadgets() {
       id: 6,
       title: "Best Power Banks 2025: Portable Charging Solutions",
       excerpt: "Keep your devices charged on the go with these top-rated power banks.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1609592308687-5e5d2df2839b?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Charging",
       readTime: "6 min read",
       rating: 4.3,
@@ -76,7 +76,7 @@ export default function AccessoriesGadgets() {
       id: 7,
       title: "Ring Video Doorbell 4 vs Nest Doorbell Review",
       excerpt: "Smart doorbell comparison for home security and convenience.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Smart Home",
       readTime: "8 min read",
       rating: 4.2,
@@ -86,7 +86,7 @@ export default function AccessoriesGadgets() {
       id: 8,
       title: "Best Wireless Charging Pads 2025",
       excerpt: "Fast and efficient wireless charging solutions for your devices.",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1609592308687-5e5d2df2839b?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Charging",
       readTime: "5 min read",
       rating: 4.1,
@@ -96,7 +96,7 @@ export default function AccessoriesGadgets() {
       id: 9,
       title: "GoPro Hero 12 vs DJI Action 4: Action Camera Battle",
       excerpt: "Which action camera captures the best footage for your adventures?",
-      image: "/api/placeholder/300/200",
+      image: "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=300&h=200&fit=crop&auto=format&q=80",
       category: "Photography",
       readTime: "11 min read",
       rating: 4.6,
@@ -194,12 +194,13 @@ export default function AccessoriesGadgets() {
                   <article key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                     <div className="md:flex">
                       <div className="md:w-1/3">
-                        <Image 
+                        <OptimizedImage 
                           src={post.image} 
                           alt={post.title}
                           width={400}
                           height={300}
                           className="w-full h-48 md:h-full object-cover"
+                          category="gadgets"
                         />
                       </div>
                       <div className="p-6 md:w-2/3">
@@ -245,12 +246,13 @@ export default function AccessoriesGadgets() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {recentPosts.map((post) => (
                   <article key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <Image 
+                    <OptimizedImage 
                       src={post.image} 
                       alt={post.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover"
+                      category="gadgets"
                     />
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">
