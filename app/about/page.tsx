@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Users, Award, Target, Heart, Mail, Linkedin, Twitter } from 'lucide-react';
 
 export default function About() {
@@ -194,9 +195,11 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <img
+                <Image
                   src={member.image}
                   alt={member.name}
+                  width={300}
+                  height={300}
                   className="w-full h-64 object-cover"
                 />
                 <div className="p-6">

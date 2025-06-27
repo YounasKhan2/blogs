@@ -1,6 +1,7 @@
 {
   "title": "ChatGPT-4 vs Claude 3: AI Assistants Battle for Supremacy",
   "excerpt": "A comprehensive comparison of the latest AI language models and their capabilities in real-world scenarios, helping you choose the right AI assistant.",
+  "slug": "chatgpt-vs-claude-ai-comparison",
   "date": "2025-06-23T00:00:00.000Z",
   "author": "Mike Chen",
   "category": "AI Technology",
@@ -29,7 +30,6 @@
     "flattenedPath": "posts/chatgpt-vs-claude-ai-comparison"
   },
   "type": "Post",
-  "slug": "chatgpt-vs-claude-ai-comparison",
   "slugAsParams": "chatgpt-vs-claude-ai-comparison",
   "readingTime": {
     "text": "6 min read",
@@ -37,5 +37,8 @@
     "time": 317700,
     "words": 1059
   },
-  "wordCount": 1061
+  "wordCount": 1061,
+  "finalCategorySlug": "ai",
+  "finalExcerpt": "A comprehensive comparison of the latest AI language models and their capabilities in real-world scenarios, helping you choose the right AI assistant.",
+  "finalTitle": "ChatGPT-4 vs Claude 3: AI Assistants Battle for Supremacy"
 }

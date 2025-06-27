@@ -1,6 +1,7 @@
 {
   "title": "iPhone 15 Pro Max Review: The Ultimate Smartphone Experience",
   "excerpt": "Apple's latest flagship delivers incredible performance, stunning cameras, and titanium design that sets new standards for premium smartphones.",
+  "slug": "iphone-15-pro-max-review",
   "date": "2025-06-25T00:00:00.000Z",
   "author": "Muhammad Younas",
   "category": "Mobile Reviews",
@@ -57,7 +58,6 @@
     "flattenedPath": "posts/iphone-15-pro-max-review"
   },
   "type": "Post",
-  "slug": "iphone-15-pro-max-review",
   "slugAsParams": "iphone-15-pro-max-review",
   "readingTime": {
     "text": "3 min read",
@@ -65,5 +65,8 @@
     "time": 174900,
     "words": 583
   },
-  "wordCount": 585
+  "wordCount": 585,
+  "finalCategorySlug": "mobile-reviews",
+  "finalExcerpt": "Apple's latest flagship delivers incredible performance, stunning cameras, and titanium design that sets new standards for premium smartphones.",
+  "finalTitle": "iPhone 15 Pro Max Review: The Ultimate Smartphone Experience"
 }

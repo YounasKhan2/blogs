@@ -6,7 +6,7 @@ author: "Alex Turner"
 category: "Accessories & Gadgets"
 categorySlug: "accessories-gadgets"
 tags: ["Gaming", "Headsets", "Audio", "Budget", "Review", "Gaming Gear"]
-image: "/images/posts/best-gaming-headsets-2025.jpg"
+image: "https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?w=1200&h=630&fit=crop&auto=format"
 featured: false
 published: true
 ---

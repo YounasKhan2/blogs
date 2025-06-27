@@ -60,8 +60,20 @@ export type Post = {
   type: 'Post'
   /** The title of the post */
   title: string
+  /** SEO meta title (overrides title if provided) */
+  metaTitle?: string | undefined
   /** A brief description of the post */
-  excerpt: string
+  excerpt?: string | undefined
+  /** SEO meta description */
+  metaDescription?: string | undefined
+  /** Post description (legacy field) */
+  description?: string | undefined
+  /** Custom slug (legacy field - computed slug is preferred) */
+  slug?: string | undefined
+  /** Alt text for the featured image */
+  imageAlt?: string | undefined
+  /** SEO keywords */
+  keywords?: string[] | undefined
   /** The date of the post */
   date: IsoDateTimeString
   /** The author of the post */
@@ -69,7 +81,7 @@ export type Post = {
   /** The category display name */
   category: string
   /** The URL-friendly category slug */
-  categorySlug: string
+  categorySlug?: string | undefined
   /** Tags associated with the post */
   tags: string[]
   /** The featured image path */
@@ -96,6 +108,9 @@ export type Post = {
   slugAsParams: string
   readingTime: json
   wordCount: number
+  finalCategorySlug: string
+  finalExcerpt: string
+  finalTitle: string
 }  
 
 /** Nested types */

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -223,9 +224,11 @@ export default function HowToGuides() {
                   <article key={guide.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                     <div className="md:flex">
                       <div className="md:w-1/3 relative">
-                        <img 
+                        <Image 
                           src={guide.image} 
                           alt={guide.title}
+                          width={400}
+                          height={300}
                           className="w-full h-48 md:h-full object-cover"
                         />
                         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 flex items-center">
@@ -282,9 +285,11 @@ export default function HowToGuides() {
                 {recentGuides.map((guide) => (
                   <article key={guide.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="relative">
-                      <img 
+                      <Image 
                         src={guide.image} 
                         alt={guide.title}
+                        width={400}
+                        height={200}
                         className="w-full h-48 object-cover"
                       />
                       <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">

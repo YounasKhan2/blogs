@@ -36,10 +36,41 @@ export const Post = defineDocumentType(() => ({
       description: 'The title of the post',
       required: true,
     },
+    metaTitle: {
+      type: 'string',
+      description: 'SEO meta title (overrides title if provided)',
+      required: false,
+    },
     excerpt: {
       type: 'string',
       description: 'A brief description of the post',
-      required: true,
+      required: false, // Changed to false to handle missing excerpts
+    },
+    metaDescription: {
+      type: 'string',
+      description: 'SEO meta description',
+      required: false,
+    },
+    description: {
+      type: 'string',
+      description: 'Post description (legacy field)',
+      required: false,
+    },
+    slug: {
+      type: 'string',
+      description: 'Custom slug (legacy field - computed slug is preferred)',
+      required: false,
+    },
+    imageAlt: {
+      type: 'string',
+      description: 'Alt text for the featured image',
+      required: false,
+    },
+    keywords: {
+      type: 'list',
+      of: { type: 'string' },
+      description: 'SEO keywords',
+      required: false,
     },
     date: {
       type: 'date',
@@ -59,7 +90,7 @@ export const Post = defineDocumentType(() => ({
     categorySlug: {
       type: 'string',
       description: 'The URL-friendly category slug',
-      required: true,
+      required: false, // Changed to false to handle missing categorySlug
     },
     tags: {
       type: 'list',
@@ -116,7 +147,30 @@ export const Post = defineDocumentType(() => ({
       required: false,
     },
   },
-  computedFields,
+  computedFields: {
+    ...computedFields,
+    // Auto-generate categorySlug from category if not provided
+    finalCategorySlug: {
+      type: 'string',
+      resolve: (doc) => doc.categorySlug || doc.category?.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || 'uncategorized',
+    },
+    // Auto-generate excerpt if not provided
+    finalExcerpt: {
+      type: 'string',
+      resolve: (doc) => {
+        if (doc.excerpt) return doc.excerpt;
+        if (doc.metaDescription) return doc.metaDescription;
+        // Generate excerpt from first paragraph of content
+        const firstParagraph = doc.body.raw.split('\n\n')[0];
+        return firstParagraph.replace(/[#*`]/g, '').substring(0, 160) + (firstParagraph.length > 160 ? '...' : '');
+      },
+    },
+    // Use metaTitle if available, otherwise title
+    finalTitle: {
+      type: 'string',
+      resolve: (doc) => doc.metaTitle || doc.title,
+    },
+  },
 }));
 
 export const Author = defineDocumentType(() => ({

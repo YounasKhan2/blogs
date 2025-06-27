@@ -1,6 +1,7 @@
 {
   "title": "Samsung Galaxy S24 Ultra Review: The Android Flagship Champion",
   "excerpt": "Samsung's latest flagship delivers exceptional performance with cutting-edge features",
+  "slug": "example-new-post",
   "date": "2025-06-26T00:00:00.000Z",
   "author": "Muhammad Younas",
   "category": "Mobile Reviews",
@@ -47,7 +48,6 @@
     "flattenedPath": "posts/example-new-post"
   },
   "type": "Post",
-  "slug": "example-new-post",
   "slugAsParams": "example-new-post",
   "readingTime": {
     "text": "1 min read",
@@ -55,5 +55,8 @@
     "time": 32700,
     "words": 109
   },
-  "wordCount": 111
+  "wordCount": 111,
+  "finalCategorySlug": "mobile-reviews",
+  "finalExcerpt": "Samsung's latest flagship delivers exceptional performance with cutting-edge features",
+  "finalTitle": "Samsung Galaxy S24 Ultra Review: The Android Flagship Champion"
 }

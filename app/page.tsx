@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import OptimizedImage from '../components/OptimizedImage';
 import { ChevronRight, TrendingUp, Clock, User, Star, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen } from 'lucide-react';
 import { HeaderAd, ArticleAd } from '../components/AdSenseWrapper';
 import { getFeaturedPosts, getRecentPosts, getCategoryStats } from '../lib/contentlayer-enhanced';
@@ -160,10 +161,15 @@ export default function Home() {
                 }`}
               >
                 <div className="relative">
-                  <img
-                    src={post.image || "/api/placeholder/600/400"}
+                  <OptimizedImage
+                    src={post.image || "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&auto=format&q=80"}
                     alt={post.title || 'Article image'}
+                    width={600}
+                    height={index === 0 ? 320 : 192}
                     className={`w-full object-cover ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
+                    priority={index < 2}
+                    placeholder="blur"
+                    category={post.category}
                   />
                   <div className="absolute top-4 left-4">
                     <Link
@@ -284,10 +290,13 @@ export default function Home() {
                 className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
               >
                 <div className="relative">
-                  <img
-                    src={post.image || "/api/placeholder/400/300"}
+                  <OptimizedImage
+                    src={post.image || "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop&auto=format&q=80"}
                     alt={post.title || 'Article image'}
+                    width={400}
+                    height={300}
                     className="w-full h-48 object-cover"
+                    category={post.category}
                   />
                   <div className="absolute top-4 left-4">
                     <Link

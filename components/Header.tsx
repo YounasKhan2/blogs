@@ -2,11 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Search, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X, Search, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen, User, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { signInWithGoogle, signOutUser } from '@/lib/firebase';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const { user, loading } = useAuth();
+
+  const handleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.error('Sign in error:', error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOutUser();
+      setIsUserMenuOpen(false);
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
+  };
 
   const menuItems = [
     { href: '/', label: 'Home' },
@@ -54,7 +76,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Search and Mobile Menu */}
+          {/* Search, Auth and Mobile Menu */}
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setIsSearchOpen(true)}
@@ -63,6 +85,61 @@ const Header = () => {
             >
               <Search size={20} />
             </button>
+            
+            {/* Authentication */}
+            {!loading && (
+              <div className="relative">
+                {user ? (
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                      className="flex items-center space-x-2 p-1 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      {user.photoURL ? (
+                        <Image
+                          src={user.photoURL}
+                          alt={user.displayName || 'User'}
+                          width={32}
+                          height={32}
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                          <User size={16} className="text-white" />
+                        </div>
+                      )}
+                      <span className="hidden sm:block text-sm font-medium text-gray-700">
+                        {user.displayName || 'User'}
+                      </span>
+                    </button>
+                    
+                    {/* User Dropdown */}
+                    {isUserMenuOpen && (
+                      <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                        <div className="px-4 py-2 border-b border-gray-200">
+                          <p className="text-sm font-medium text-gray-900">{user.displayName}</p>
+                          <p className="text-xs text-gray-500">{user.email}</p>
+                        </div>
+                        <button
+                          onClick={handleSignOut}
+                          className="flex items-center space-x-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          <LogOut size={16} />
+                          <span>Sign Out</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleSignIn}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Sign In
+                  </button>
+                )}
+              </div>
+            )}
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}

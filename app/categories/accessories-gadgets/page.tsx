@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, Filter, Star, Clock, TrendingUp, Gamepad2, Headphones, Watch, Camera, Smartphone, Zap } from 'lucide-react';
 
 export default function AccessoriesGadgets() {
@@ -193,9 +194,11 @@ export default function AccessoriesGadgets() {
                   <article key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                     <div className="md:flex">
                       <div className="md:w-1/3">
-                        <img 
+                        <Image 
                           src={post.image} 
                           alt={post.title}
+                          width={400}
+                          height={300}
                           className="w-full h-48 md:h-full object-cover"
                         />
                       </div>
@@ -242,9 +245,11 @@ export default function AccessoriesGadgets() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {recentPosts.map((post) => (
                   <article key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <img 
+                    <Image 
                       src={post.image} 
                       alt={post.title}
+                      width={400}
+                      height={200}
                       className="w-full h-48 object-cover"
                     />
                     <div className="p-6">

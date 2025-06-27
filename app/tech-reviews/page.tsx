@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import OptimizedImage from '../../components/OptimizedImage';
 import { Clock, User, ChevronRight, Search, Filter, Calendar } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -206,10 +207,14 @@ export default function TechReviews() {
           <div key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
             <div className="md:flex">
               <div className="md:w-1/2">
-                <img
+                <OptimizedImage
                   src={post.image}
                   alt={post.title}
+                  width={600}
+                  height={400}
                   className="w-full h-64 md:h-full object-cover"
+                  priority
+                  category={post.category}
                 />
               </div>
               <div className="md:w-1/2 p-8">
@@ -279,10 +284,13 @@ export default function TechReviews() {
               className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
             >
               <div className="relative">
-                <img
+                <OptimizedImage
                   src={post.image}
                   alt={post.title}
+                  width={400}
+                  height={200}
                   className="w-full h-48 object-cover"
+                  category={post.category}
                 />
                 <div className="absolute top-4 left-4">
                   <Link

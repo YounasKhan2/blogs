@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock, User, ChevronRight, Brain, Star, Filter, TrendingUp } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -164,10 +165,13 @@ export default function AIReviews() {
               <div key={review.id} className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
                 <div className="md:flex">
                   <div className="md:w-1/2">
-                    <img
+                    <Image
                       src={review.image}
                       alt={review.title}
+                      width={600}
+                      height={400}
                       className="w-full h-64 md:h-full object-cover"
+                      priority
                     />
                   </div>
                   <div className="md:w-1/2 p-8">
@@ -235,9 +239,11 @@ export default function AIReviews() {
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                 >
                   <div className="relative">
-                    <img
+                    <Image
                       src={review.image}
                       alt={review.title}
+                      width={400}
+                      height={200}
                       className="w-full h-48 object-cover"
                     />
                   </div>

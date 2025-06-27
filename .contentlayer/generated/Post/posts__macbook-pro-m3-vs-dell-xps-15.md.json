@@ -1,6 +1,7 @@
 {
   "title": "MacBook Pro M3 vs Dell XPS 15: The Ultimate Laptop Showdown",
   "excerpt": "We pit Apple's latest MacBook Pro against Dell's flagship XPS 15 to see which laptop reigns supreme for professionals and creatives.",
+  "slug": "macbook-pro-m3-vs-dell-xps-15",
   "date": "2025-06-24T00:00:00.000Z",
   "author": "Sarah Johnson",
   "category": "Laptop Reviews",
@@ -29,7 +30,6 @@
     "flattenedPath": "posts/macbook-pro-m3-vs-dell-xps-15"
   },
   "type": "Post",
-  "slug": "macbook-pro-m3-vs-dell-xps-15",
   "slugAsParams": "macbook-pro-m3-vs-dell-xps-15",
   "readingTime": {
     "text": "5 min read",
@@ -37,5 +37,8 @@
     "time": 270600,
     "words": 902
   },
-  "wordCount": 904
+  "wordCount": 904,
+  "finalCategorySlug": "laptop-reviews",
+  "finalExcerpt": "We pit Apple's latest MacBook Pro against Dell's flagship XPS 15 to see which laptop reigns supreme for professionals and creatives.",
+  "finalTitle": "MacBook Pro M3 vs Dell XPS 15: The Ultimate Laptop Showdown"
 }
