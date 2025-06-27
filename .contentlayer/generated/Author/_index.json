@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Muhammad Younas",
+    "bio": "Senior Technology Reviewer and Apple enthusiast with over 8 years of experience testing and reviewing consumer electronics. Specializes in mobile devices, laptops, and emerging tech.",
+    "avatar": "/images/authors/muhammad-younas.jpg",
+    "twitter": "@muhammadyounas",
+    "linkedin": "https://linkedin.com/in/muhammad-younas",
+    "website": "https://muhammadyounas.tech",
+    "expertise": [
+      "Mobile Devices",
+      "Apple Products",
+      "Consumer Electronics",
+      "Photography",
+      "Tech Reviews"
+    ],
+    "body": {
+      "raw": "\n# About Muhammad Younas\n\nMuhammad is a passionate technology reviewer with a keen eye for detail and user experience. He has been covering the tech industry for major publications and has hands-on experience with hundreds of devices.\n\n## Expertise Areas\n\n- **Mobile Technology**: Comprehensive knowledge of iOS and Android ecosystems\n- **Apple Products**: Deep understanding of Apple's design philosophy and ecosystem\n- **Photography**: Technical expertise in mobile and professional photography\n- **Consumer Electronics**: Broad experience across various tech categories\n\n## Background\n\nWith a background in Computer Science and years of professional experience in tech journalism, Muhammad brings both technical expertise and real-world perspective to his reviews.\n\n## Review Philosophy\n\n\"I believe in honest, practical reviews that help real people make informed decisions about their tech purchases. Every review is based on extensive real-world testing.\"\n",
+      "code": "var Component=(()=>{var p=Object.create;var r=Object.defineProperty;var m=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var g=Object.getPrototypeOf,y=Object.prototype.hasOwnProperty;var v=(i,e)=>()=>(e||i((e={exports:{}}).exports,e),e.exports),x=(i,e)=>{for(var a in e)r(i,a,{get:e[a],enumerable:!0})},c=(i,e,a,o)=>{if(e&&typeof e==\"object\"||typeof e==\"function\")for(let s of u(e))!y.call(i,s)&&s!==a&&r(i,s,{get:()=>e[s],enumerable:!(o=m(e,s))||o.enumerable});return i};var b=(i,e,a)=>(a=i!=null?p(g(i)):{},c(e||!i||!i.__esModule?r(a,\"default\",{value:i,enumerable:!0}):a,i)),f=i=>c(r({},\"__esModule\",{value:!0}),i);var h=v((j,t)=>{t.exports=_jsx_runtime});var k={};x(k,{default:()=>d,frontmatter:()=>w});var n=b(h()),w={name:\"Muhammad Younas\",bio:\"Senior Technology Reviewer and Apple enthusiast with over 8 years of experience testing and reviewing consumer electronics. Specializes in mobile devices, laptops, and emerging tech.\",avatar:\"/images/authors/muhammad-younas.jpg\",twitter:\"@muhammadyounas\",linkedin:\"https://linkedin.com/in/muhammad-younas\",website:\"https://muhammadyounas.tech\",expertise:[\"Mobile Devices\",\"Apple Products\",\"Consumer Electronics\",\"Photography\",\"Tech Reviews\"]};function l(i){let e={a:\"a\",h1:\"h1\",h2:\"h2\",li:\"li\",p:\"p\",span:\"span\",strong:\"strong\",ul:\"ul\",...i.components};return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsxs)(e.h1,{id:\"about-muhammad-younas\",children:[(0,n.jsx)(e.a,{className:\"anchor\",href:\"#about-muhammad-younas\",children:(0,n.jsx)(e.span,{className:\"icon icon-link\"})}),\"About Muhammad Younas\"]}),`\n`,(0,n.jsx)(e.p,{children:\"Muhammad is a passionate technology reviewer with a keen eye for detail and user experience. He has been covering the tech industry for major publications and has hands-on experience with hundreds of devices.\"}),`\n`,(0,n.jsxs)(e.h2,{id:\"expertise-areas\",children:[(0,n.jsx)(e.a,{className:\"anchor\",href:\"#expertise-areas\",children:(0,n.jsx)(e.span,{className:\"icon icon-link\"})}),\"Expertise Areas\"]}),`\n`,(0,n.jsxs)(e.ul,{children:[`\n`,(0,n.jsxs)(e.li,{children:[(0,n.jsx)(e.strong,{children:\"Mobile Technology\"}),\": Comprehensive knowledge of iOS and Android ecosystems\"]}),`\n`,(0,n.jsxs)(e.li,{children:[(0,n.jsx)(e.strong,{children:\"Apple Products\"}),\": Deep understanding of Apple's design philosophy and ecosystem\"]}),`\n`,(0,n.jsxs)(e.li,{children:[(0,n.jsx)(e.strong,{children:\"Photography\"}),\": Technical expertise in mobile and professional photography\"]}),`\n`,(0,n.jsxs)(e.li,{children:[(0,n.jsx)(e.strong,{children:\"Consumer Electronics\"}),\": Broad experience across various tech categories\"]}),`\n`]}),`\n`,(0,n.jsxs)(e.h2,{id:\"background\",children:[(0,n.jsx)(e.a,{className:\"anchor\",href:\"#background\",children:(0,n.jsx)(e.span,{className:\"icon icon-link\"})}),\"Background\"]}),`\n`,(0,n.jsx)(e.p,{children:\"With a background in Computer Science and years of professional experience in tech journalism, Muhammad brings both technical expertise and real-world perspective to his reviews.\"}),`\n`,(0,n.jsxs)(e.h2,{id:\"review-philosophy\",children:[(0,n.jsx)(e.a,{className:\"anchor\",href:\"#review-philosophy\",children:(0,n.jsx)(e.span,{className:\"icon icon-link\"})}),\"Review Philosophy\"]}),`\n`,(0,n.jsx)(e.p,{children:'\"I believe in honest, practical reviews that help real people make informed decisions about their tech purchases. Every review is based on extensive real-world testing.\"'})]})}function d(i={}){let{wrapper:e}=i.components||{};return e?(0,n.jsx)(e,{...i,children:(0,n.jsx)(l,{...i})}):l(i)}return f(k);})();\n;return Component;"
+    },
+    "_id": "authors/muhammad-younas.md",
+    "_raw": {
+      "sourceFilePath": "authors/muhammad-younas.md",
+      "sourceFileName": "muhammad-younas.md",
+      "sourceFileDir": "authors",
+      "contentType": "markdown",
+      "flattenedPath": "authors/muhammad-younas"
+    },
+    "type": "Author",
+    "slug": "muhammad-younas"
+  }
+]
