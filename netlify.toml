@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && npm run build"
+  command = "npm run build"
   
 [build.environment]
   NODE_VERSION = "18"
@@ -12,22 +12,8 @@
   command = "npm run dev"
   port = 3000
 
-# Redirect rules for Next.js routing
-[[redirects]]
-  from = "/posts/*"
-  to = "/posts/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/categories/*"
-  to = "/categories/:splat"
-  status = 200
-
-# Catch-all redirect for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/404"
-  status = 404
+# Next.js routing handled by the plugin
+# Remove custom redirects and let @netlify/plugin-nextjs handle routing
 
 # Headers for security and performance
 [[headers]]
