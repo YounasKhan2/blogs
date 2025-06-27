@@ -10,7 +10,9 @@
     "type-check": "tsc --noEmit",
     "export": "next build && next export",
     "analyze": "ANALYZE=true next build",
-    "clean": "rm -rf .next out"
+    "clean": "rm -rf .next out",
+    "verify:images": "node scripts/verify-images.mjs",
+    "check:images": "powershell -ExecutionPolicy Bypass -File scripts/check-image-references.ps1"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.3.4",

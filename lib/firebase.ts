@@ -16,12 +16,23 @@ const firebaseConfig = {
 
 // Check if all required config is available
 const isFirebaseConfigured = () => {
-  return !!(
+  const hasConfig = !!(
     firebaseConfig.apiKey && 
     firebaseConfig.authDomain && 
     firebaseConfig.projectId && 
     firebaseConfig.appId
   );
+  
+  if (!hasConfig) {
+    console.log('Firebase config check failed:', {
+      apiKey: !!firebaseConfig.apiKey,
+      authDomain: !!firebaseConfig.authDomain,
+      projectId: !!firebaseConfig.projectId,
+      appId: !!firebaseConfig.appId
+    });
+  }
+  
+  return hasConfig;
 };
 
 // Initialize Firebase with error handling
@@ -29,7 +40,9 @@ let app: any = null;
 let auth: any = null;
 let db: any = null;
 let analytics: any = null;
+let googleProvider: GoogleAuthProvider | null = null;
 
+// Initialize Firebase (works in both client and server)
 if (isFirebaseConfigured()) {
   try {
     app = initializeApp(firebaseConfig);
@@ -37,6 +50,12 @@ if (isFirebaseConfigured()) {
     // Initialize services
     auth = getAuth(app);
     db = getFirestore(app);
+    
+    // Initialize Google provider
+    googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({
+      prompt: 'select_account'
+    });
     
     console.log('Firebase initialized successfully');
     
@@ -65,22 +84,12 @@ if (isFirebaseConfigured()) {
 
 export { app, auth, db, analytics };
 
-// Auth providers
-let googleProvider: GoogleAuthProvider | null = null;
-if (auth) {
-  try {
-    googleProvider = new GoogleAuthProvider();
-    googleProvider.setCustomParameters({
-      prompt: 'select_account'
-    });
-    console.log('Google Auth provider initialized');
-  } catch (error) {
-    console.error('Failed to initialize Google Auth provider:', error);
-  }
-}
-
 // Auth functions with error handling
 export const signInWithGoogle = async () => {
+  if (typeof window === 'undefined') {
+    throw new Error('Authentication is only available on the client side.');
+  }
+  
   if (!isFirebaseConfigured()) {
     console.warn('Firebase not configured - sign in disabled');
     throw new Error('Authentication is not available. Please check your configuration.');

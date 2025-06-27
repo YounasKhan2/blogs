@@ -70,18 +70,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col scroll-smooth`}
+    <html lang="en" suppressHydrationWarning>
+      <body 
+        className="antialiased min-h-screen flex flex-col scroll-smooth"
+        suppressHydrationWarning
       >
-        <AuthProvider>
-          <WebVitals />
-          <Header />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </AuthProvider>
+        <div className={`${geistSans.variable} ${geistMono.variable}`}>
+          <AuthProvider>
+            <WebVitals />
+            <Header />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </AuthProvider>
+        </div>
       </body>
     </html>
   );

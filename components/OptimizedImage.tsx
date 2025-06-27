@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState, useEffect, useMemo } from 'react';
 import { ImageUtils } from '../lib/image-utils';
 
+
 interface OptimizedImageProps {
   src: string;
   alt: string;
@@ -47,6 +48,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   // Memoize fallback generation
   const fallbackSrc = useMemo(() => {
     try {
+      // Use ImageUtils for fallback images
       let fallback = '';
       if (width && height) {
         fallback = ImageUtils.getResizedFallback(width, height, category);

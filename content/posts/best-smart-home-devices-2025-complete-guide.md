@@ -6,7 +6,7 @@ author: "Sarah Johnson"
 category: "Accessories & Gadgets"
 categorySlug: "accessories-gadgets"
 tags: ["Smart Home", "Home Automation", "Smart Speakers", "Smart Thermostat", "Smart Security", "IoT", "Alexa", "Google Home", "HomeKit", "Smart Lighting"]
-image: "https://images.unsplash.com/photo-1558618142-57c8d6e8cf8b?w=1200&h=630&fit=crop&auto=format"
+image: "https://images.unsplash.com/photo-1516192518150-0d8fee5425e3?w=1200&h=630&fit=crop&auto=format&q=80"
 featured: true
 published: true
 rating: 4.7
