@@ -2,6 +2,29 @@
 
 This guide will help you deploy your Next.js blog to Netlify.
 
+## Quick Fix for Current Issue
+
+The build is failing because dependencies aren't being installed. Here are the solutions:
+
+### Option 1: Updated netlify.toml (Recommended)
+```toml
+[build]
+  command = "npm install && npm run build"
+  
+[build.environment]
+  NODE_VERSION = "18"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+```
+
+### Option 2: Netlify UI Configuration
+If the toml approach doesn't work, configure in Netlify dashboard:
+- **Build command**: `npm install && npm run build`
+- **Publish directory**: Leave empty (plugin handles this)
+- **Node version**: `18`
+
 ## Prerequisites
 
 1. **Git Repository**: Your project should be in a Git repository (GitHub, GitLab, or Bitbucket)
@@ -89,10 +112,66 @@ Make sure your Firebase project allows your Netlify domain:
 
 ### Common Issues
 
-1. **Build fails**: Check that all dependencies are in `package.json`
-2. **Images not loading**: Verify image paths and Unsplash URLs
-3. **Firebase errors**: Ensure environment variables are set correctly
-4. **404 errors**: Check that redirects are configured in `netlify.toml`
+1. **"next: not found" error**: 
+   - **Cause**: Dependencies not installed before build
+   - **Solution**: Ensure build command includes `npm install && npm run build`
+   - **Alternative**: Set build command in Netlify UI instead of netlify.toml
+
+2. **Build fails with dependencies**: 
+   - Check that all dependencies are in `package.json`
+   - Verify `package-lock.json` is committed to repository
+   - Ensure Node.js version matches (use `.nvmrc` file)
+
+3. **Images not loading**: 
+   - Verify image paths and Unsplash URLs
+   - Check that `OptimizedImage` component is being used
+   - Ensure fallback images are working
+
+4. **Firebase errors**: 
+   - Ensure environment variables are set correctly in Netlify dashboard
+   - Check Firebase console for domain authorization
+   - Verify all Firebase environment variables are prefixed with `NEXT_PUBLIC_`
+
+5. **404 errors on routes**: 
+   - Check that redirects are configured in `netlify.toml`
+   - Ensure Next.js routing is working correctly
+   - Verify all pages exist in the `app/` directory
+
+6. **Contentlayer build issues**:
+   - Contentlayer may show warnings on build but should work fine
+   - Check that `.contentlayer` directory is in `.gitignore`
+   - Ensure content files are properly formatted
+
+### Build Command Options
+
+If the current build command fails, try these alternatives:
+
+1. **Simple approach**:
+   ```toml
+   [build]
+     command = "npm run build"
+   ```
+
+2. **With explicit install**:
+   ```toml
+   [build]
+     command = "npm ci && npm run build"
+   ```
+
+3. **Static export** (if dynamic features aren't needed):
+   ```toml
+   [build]
+     command = "npm run export"
+     publish = "out"
+   ```
+
+### Debug Build Issues
+
+1. **Check build logs** in Netlify dashboard under **Deploys**
+2. **Test locally** first: `npm run build`
+3. **Verify all files are committed** to Git
+4. **Check environment variables** are set in Netlify dashboard
+5. **Try deploying with minimal config** first
 
 ### Build Logs
 
