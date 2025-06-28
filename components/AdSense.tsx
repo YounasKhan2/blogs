@@ -18,7 +18,7 @@ const loadAdSenseScript = () => {
   return new Promise<void>((resolve, reject) => {
     const script = document.createElement('script');
     script.async = true;
-    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID';
+    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9113733158673282';
     script.crossOrigin = 'anonymous';
     
     script.onload = () => {
@@ -84,7 +84,7 @@ export default function AdSense({
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-YOUR_PUBLISHER_ID" // Replace with your actual AdSense publisher ID
+        data-ad-client="ca-pub-9113733158673282"
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
         data-full-width-responsive={fullWidthResponsive.toString()}
@@ -97,7 +97,7 @@ export default function AdSense({
 export function HeaderAd() {
   return (
     <AdSense 
-      adSlot="1234567890" // Replace with your actual ad slot ID
+      adSlot="1234567890" // TODO: Replace with your actual header ad slot ID from Google AdSense
       adFormat="banner"
       className="mb-4"
     />
@@ -107,7 +107,7 @@ export function HeaderAd() {
 export function SidebarAd() {
   return (
     <AdSense 
-      adSlot="2345678901" // Replace with your actual ad slot ID
+      adSlot="2345678901" // TODO: Replace with your actual sidebar ad slot ID from Google AdSense
       adFormat="rectangle"
       className="mb-6"
     />
@@ -117,7 +117,7 @@ export function SidebarAd() {
 export function ArticleAd() {
   return (
     <AdSense 
-      adSlot="3456789012" // Replace with your actual ad slot ID
+      adSlot="3456789012" // TODO: Replace with your actual article ad slot ID from Google AdSense
       adFormat="auto"
       className="my-6"
     />
@@ -127,7 +127,7 @@ export function ArticleAd() {
 export function FooterAd() {
   return (
     <AdSense 
-      adSlot="4567890123" // Replace with your actual ad slot ID
+      adSlot="4567890123" // TODO: Replace with your actual footer ad slot ID from Google AdSense
       adFormat="banner"
       className="mt-4"
     />

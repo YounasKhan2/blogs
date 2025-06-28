@@ -21,29 +21,62 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   if (!post) {
     return {
-      title: 'Post Not Found'
+      title: 'Post Not Found | TechBlog Pro'
     };
   }
 
+  const publishedTime = new Date(post.metadata.date).toISOString();
+  const modifiedTime = new Date().toISOString();
+
   return {
-    title: post.metadata.title,
+    title: `${post.metadata.title} | TechBlog Pro`,
     description: post.metadata.excerpt,
-    keywords: post.metadata.tags,
-    authors: [{ name: post.metadata.author }],
+    keywords: [...post.metadata.tags, 'tech review', 'technology', 'expert analysis', '2025'],
+    authors: [{ name: post.metadata.author, url: 'https://techblogpro.com/authors/muhammad-younas' }],
+    creator: post.metadata.author,
+    publisher: 'TechBlog Pro',
+    category: post.metadata.category,
     openGraph: {
       title: post.metadata.title,
       description: post.metadata.excerpt,
       type: 'article',
-      publishedTime: post.metadata.date,
+      publishedTime: publishedTime,
+      modifiedTime: modifiedTime,
       authors: [post.metadata.author],
       tags: post.metadata.tags,
-      images: post.metadata.image ? [post.metadata.image] : undefined,
+      section: post.metadata.category,
+      images: post.metadata.image ? [
+        {
+          url: post.metadata.image,
+          width: 1200,
+          height: 630,
+          alt: post.metadata.title,
+        }
+      ] : undefined,
+      url: `https://techblogpro.com/posts/${slug}`,
+      siteName: 'TechBlog Pro',
     },
     twitter: {
       card: 'summary_large_image',
       title: post.metadata.title,
       description: post.metadata.excerpt,
       images: post.metadata.image ? [post.metadata.image] : undefined,
+      creator: '@techblogpro',
+      site: '@techblogpro',
+    },
+    alternates: {
+      canonical: `https://techblogpro.com/posts/${slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }
@@ -58,22 +91,68 @@ export default async function PostPage({ params }: Props) {
 
   const relatedPosts = getRelatedPosts(slug, 3);
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-4 py-4">
-          <Link
-            href="/"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
-          >
-            <ArrowLeft className="mr-2" size={20} />
-            Back to Home
-          </Link>
-        </div>
-      </div>
+  // Generate structured data for the blog post
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.metadata.title,
+    "description": post.metadata.excerpt,
+    "image": post.metadata.image ? [post.metadata.image] : undefined,
+    "author": {
+      "@type": "Person",
+      "name": post.metadata.author,
+      "url": "https://techblogpro.com/authors/muhammad-younas"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TechBlog Pro",
+      "url": "https://techblogpro.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://techblogpro.com/logo.png"
+      }
+    },
+    "datePublished": new Date(post.metadata.date).toISOString(),
+    "dateModified": new Date().toISOString(),
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://techblogpro.com/posts/${slug}`
+    },
+    "keywords": post.metadata.tags.join(", "),
+    "articleSection": post.metadata.category,
+    "wordCount": post.readingTime.words,
+    "timeRequired": `PT${Math.ceil(post.readingTime.minutes)}M`,
+    "url": `https://techblogpro.com/posts/${slug}`,
+    "isPartOf": {
+      "@type": "Blog",
+      "name": "TechBlog Pro",
+      "url": "https://techblogpro.com"
+    }
+  };
 
-      <div className="container mx-auto px-4 py-8">
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData)
+        }}
+      />
+      <div className="min-h-screen bg-gray-50">
+        {/* Navigation */}
+        <div className="bg-white border-b">
+          <div className="container mx-auto px-4 py-4">
+            <Link
+              href="/"
+              className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+            >
+              <ArrowLeft className="mr-2" size={20} />
+              Back to Home
+            </Link>
+          </div>
+        </div>
+        
+        <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-3">
@@ -291,7 +370,7 @@ export default async function PostPage({ params }: Props) {
                 <div className="space-y-3">
                   <input
                     type="email"
-                    placeholder="Your email"
+                    placeholder="younaskk120@gmail.com"
                     className="w-full px-4 py-2 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-300 focus:outline-none"
                   />
                   <button className="w-full bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
@@ -303,6 +382,7 @@ export default async function PostPage({ params }: Props) {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

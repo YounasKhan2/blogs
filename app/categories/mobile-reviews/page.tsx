@@ -1,79 +1,122 @@
 'use client';
 
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
-import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp } from 'lucide-react';
+import AdSense, { SidebarAd, ArticleAd } from '../../../components/AdSense';
+import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp, Search } from 'lucide-react';
+// Note: SEO metadata for this client component is handled in the parent layout
 
 export default function MobileReviews() {
-  const mobileReviews = [
-    {
-      id: 1,
-      title: "iPhone 15 Pro Max Review: The Ultimate Smartphone Experience",
-      excerpt: "Apple's latest flagship delivers incredible performance, stunning cameras, and titanium design that sets new standards for premium smartphones.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop&auto=format&q=80",
-      author: "John Smith",
-      date: "2025-06-25",
-      readTime: "8 min read",
-      rating: 4.5,
-      featured: true,
-      tags: ["iPhone", "Apple", "Premium", "Camera"]
-    },
-    {
-      id: 6,
-      title: "Samsung Galaxy Z Fold 5 Long-term Review: 6 Months Later",
-      excerpt: "After using the Galaxy Z Fold 5 for six months, here's our honest long-term review of Samsung's flagship foldable.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
-      author: "David Wilson",
-      date: "2025-06-20",
-      readTime: "9 min read",
-      rating: 4.1,
-      tags: ["Samsung", "Foldable", "Android", "Long-term"]
-    },
-    {
-      id: 9,
-      title: "Google Pixel 8 Pro vs iPhone 15 Pro: Camera Showdown",
-      excerpt: "We compare the camera capabilities of Google's AI-powered Pixel 8 Pro against Apple's iPhone 15 Pro.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
-      author: "Sarah Johnson",
-      date: "2025-06-18",
-      readTime: "12 min read",
-      rating: 4.3,
-      tags: ["Google", "iPhone", "Camera", "Comparison"]
-    },
-    {
-      id: 10,
-      title: "OnePlus 12 Review: Flagship Performance at a Great Price",
-      excerpt: "OnePlus returns to form with the OnePlus 12, offering flagship features without the premium price tag.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
-      author: "Mike Chen",
-      date: "2025-06-15",
-      readTime: "7 min read",
-      rating: 4.2,
-      tags: ["OnePlus", "Value", "Performance", "Android"]
-    },
-    {
-      id: 11,
-      title: "Best Budget Smartphones Under $400 in 2025",
-      excerpt: "Discover the best budget smartphones that offer excellent value without compromising on essential features.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
-      author: "Alex Turner",
-      date: "2025-06-12",
-      readTime: "10 min read",
-      rating: 4.0,
-      tags: ["Budget", "Value", "Buying Guide", "Comparison"]
-    },
-    {
-      id: 12,
-      title: "Xiaomi 14 Ultra Review: Photography Powerhouse",
-      excerpt: "Xiaomi's latest flagship focuses on photography with Leica partnership and impressive camera hardware.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80",
-      author: "Lisa Brown",
-      date: "2025-06-10",
-      readTime: "11 min read",
-      rating: 4.4,
-      tags: ["Xiaomi", "Camera", "Leica", "Photography"]
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [allMobileReviews, setAllMobileReviews] = useState<any[]>([]);
+
+  // Mock data for mobile reviews - replace with actual data fetching
+  useEffect(() => {
+    const mockReviews = [
+      {
+        slug: 'iphone-15-pro-max-review',
+        title: 'iPhone 15 Pro Max Review: The Ultimate Smartphone Experience',
+        excerpt: 'Apple\'s latest flagship delivers incredible performance, stunning cameras, and titanium design that sets new standards for premium smartphones.',
+        author: 'Muhammad Younas',
+        date: '2025-06-25',
+        tags: ['iPhone', 'Apple', 'Smartphone', 'Review', 'Mobile', 'iOS'],
+        image: '/images/posts/iphone-15-pro-max.jpg',
+        featured: true,
+        category: 'Mobile Reviews',
+        categorySlug: 'mobile-reviews'
+      },
+      {
+        slug: 'samsung-galaxy-s24-ultra-review-2025',
+        title: 'Samsung Galaxy S24 Ultra Review 2025: The Ultimate Android Flagship with AI Power',
+        excerpt: 'Complete Samsung Galaxy S24 Ultra review 2025 covering AI features, S Pen performance, 200MP camera system, battery life, and whether it\'s worth upgrading.',
+        author: 'Muhammad Younas',
+        date: '2025-01-15',
+        tags: ['Samsung Galaxy S24 Ultra', 'Android flagship', 'smartphone review', 'S Pen', 'AI features'],
+        image: '/images/posts/samsung-galaxy-s24-ultra-review.jpg',
+        featured: false,
+        category: 'Mobile Reviews',
+        categorySlug: 'mobile-reviews'
+      },
+      {
+        slug: 'oneplus-12-review-flagship-killer',
+        title: 'OnePlus 12 Review: The Flagship Killer Returns with Premium Features',
+        excerpt: 'OnePlus 12 combines flagship performance with competitive pricing. Our comprehensive review covers camera quality, performance benchmarks, and whether it lives up to the flagship killer reputation.',
+        author: 'Muhammad Younas',
+        date: '2025-06-25',
+        tags: ['OnePlus 12', 'Flagship Killer', 'Android', 'Smartphone Review', 'Budget Flagship'],
+        image: '/images/posts/oneplus-12-review.jpg',
+        featured: false,
+        category: 'Mobile Reviews',
+        categorySlug: 'mobile-reviews'
+      },
+      {
+        slug: 'google-pixel-8-pro-vs-iphone-15-pro',
+        title: 'Google Pixel 8 Pro vs iPhone 15 Pro: Ultimate Camera Comparison 2025',
+        excerpt: 'In-depth comparison of Google Pixel 8 Pro and iPhone 15 Pro focusing on camera quality, performance, and value.',
+        author: 'Muhammad Younas',
+        date: '2025-06-26',
+        tags: ['Google Pixel 8 Pro', 'iPhone 15 Pro', 'Camera Comparison', 'Smartphone Photography'],
+        image: '/images/posts/google-pixel-8-pro-vs-iphone-15-pro.jpg',
+        featured: false,
+        category: 'Mobile Reviews',
+        categorySlug: 'mobile-reviews'
+      },
+      {
+        slug: 'best-budget-smartphones-under-400-2025',
+        title: 'Best Budget Smartphones Under $400 in 2025: Exceptional Value Android & iOS Options',
+        excerpt: 'Discover the best budget smartphones that deliver flagship-level features without breaking the bank.',
+        author: 'Muhammad Younas',
+        date: '2025-06-29',
+        tags: ['Budget Smartphones', 'Best Phone Under 400', 'Affordable Android', 'Value Smartphones'],
+        image: '/images/posts/best-budget-smartphones-under-400-2025.jpg',
+        featured: true,
+        category: 'Mobile Reviews',
+        categorySlug: 'mobile-reviews'
+      }
+    ];
+    setAllMobileReviews(mockReviews);
+  }, []);
+
+  // Filter posts based on active filter and search term
+  const filteredReviews = useMemo(() => {
+    let filtered = allMobileReviews;
+
+    // Apply category filter
+    if (activeFilter !== 'all') {
+      filtered = filtered.filter(review => {
+        const tags = review.tags.map((tag: string) => tag.toLowerCase());
+        switch (activeFilter) {
+          case 'iphone':
+            return tags.some((tag: string) => tag.includes('iphone') || tag.includes('apple'));
+          case 'samsung':
+            return tags.some((tag: string) => tag.includes('samsung') || tag.includes('galaxy'));
+          case 'google':
+            return tags.some((tag: string) => tag.includes('google') || tag.includes('pixel'));
+          case 'budget':
+            return tags.some((tag: string) => tag.includes('budget') || tag.includes('value') || tag.includes('under'));
+          default:
+            return true;
+        }
+      });
     }
-  ];
+
+    // Apply search filter
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter(review =>
+        review.title.toLowerCase().includes(searchLower) ||
+        review.excerpt.toLowerCase().includes(searchLower) ||
+        review.tags.some((tag: string) => tag.toLowerCase().includes(searchLower))
+      );
+    }
+
+    return filtered;
+  }, [allMobileReviews, activeFilter, searchTerm]);
+
+  // Get featured reviews
+  const featuredReviews = allMobileReviews.filter(review => review.featured);
 
   const popularPhones = [
     { name: "iPhone 15 Pro Max", rating: 4.5, reviews: 23 },
@@ -125,7 +168,7 @@ export default function MobileReviews() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                 Mobile Reviews
               </h1>
-              <p className="text-gray-600">145 smartphone reviews and counting</p>
+              <p className="text-gray-600">{allMobileReviews.length} smartphone reviews and counting</p>
             </div>
           </div>
           
@@ -140,40 +183,89 @@ export default function MobileReviews() {
           <div className="lg:col-span-3">
             {/* Filters */}
             <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                <div className="flex flex-wrap gap-2">
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-                    All Reviews
-                  </button>
-                  <button className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    iPhone
-                  </button>
-                  <button className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    Samsung
-                  </button>
-                  <button className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    Google Pixel
-                  </button>
-                  <button className="bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                    Budget Phones
-                  </button>
+              <div className="flex flex-col gap-4">
+                {/* Search */}
+                <div className="relative">
+                  <Search className="absolute left-3 top-3 text-gray-400" size={20} />
+                  <input
+                    type="text"
+                    placeholder="Search mobile reviews..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
                 </div>
                 
-                <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                  <Filter size={20} />
-                  <span>Filter</span>
-                </button>
+                {/* Filter buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                  <div className="flex flex-wrap gap-2">
+                    <button 
+                      onClick={() => setActiveFilter('all')}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                        activeFilter === 'all' 
+                          ? 'bg-blue-600 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      All Reviews
+                    </button>
+                    <button 
+                      onClick={() => setActiveFilter('iphone')}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                        activeFilter === 'iphone' 
+                          ? 'bg-blue-600 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      iPhone
+                    </button>
+                    <button 
+                      onClick={() => setActiveFilter('samsung')}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                        activeFilter === 'samsung' 
+                          ? 'bg-blue-600 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      Samsung
+                    </button>
+                    <button 
+                      onClick={() => setActiveFilter('google')}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                        activeFilter === 'google' 
+                          ? 'bg-blue-600 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      Google Pixel
+                    </button>
+                    <button 
+                      onClick={() => setActiveFilter('budget')}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                        activeFilter === 'budget' 
+                          ? 'bg-blue-600 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      Budget Phones
+                    </button>
+                  </div>
+                  
+                  <div className="text-sm text-gray-600">
+                    {filteredReviews.length} review{filteredReviews.length !== 1 ? 's' : ''} found
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Featured Review */}
-            {mobileReviews.filter(review => review.featured).map((review) => (
-              <div key={review.id} className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+            {featuredReviews.length > 0 && (
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
                 <div className="md:flex">
                   <div className="md:w-1/2">
                     <OptimizedImage
-                      src={review.image}
-                      alt={review.title}
+                      src={featuredReviews[0].image || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop&auto=format&q=80"}
+                      alt={featuredReviews[0].title}
                       width={600}
                       height={400}
                       className="w-full h-64 md:h-full object-cover"
@@ -189,24 +281,17 @@ export default function MobileReviews() {
                     </div>
                     
                     <h2 className="text-3xl font-bold text-gray-900 mb-4 hover:text-blue-600 transition-colors">
-                      <Link href={`/post/${review.id}`}>
-                        {review.title}
+                      <Link href={`/posts/${featuredReviews[0].slug}`}>
+                        {featuredReviews[0].title}
                       </Link>
                     </h2>
                     
-                    <div className="flex items-center mb-4">
-                      <div className="flex items-center mr-4">
-                        {renderStars(review.rating)}
-                        <span className="ml-2 text-sm text-gray-600">({review.rating}/5)</span>
-                      </div>
-                    </div>
-                    
                     <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-                      {review.excerpt}
+                      {featuredReviews[0].excerpt}
                     </p>
                     
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {review.tags.map((tag) => (
+                      {featuredReviews[0].tags.slice(0, 4).map((tag: string) => (
                         <span key={tag} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
                           {tag}
                         </span>
@@ -217,16 +302,16 @@ export default function MobileReviews() {
                       <div className="flex items-center space-x-4 text-sm text-gray-500">
                         <div className="flex items-center space-x-1">
                           <User size={16} />
-                          <span>{review.author}</span>
+                          <span>{featuredReviews[0].author}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock size={16} />
-                          <span>{review.readTime}</span>
+                          <span>5 min read</span>
                         </div>
                       </div>
                       
                       <Link
-                        href={`/post/${review.id}`}
+                        href={`/posts/${featuredReviews[0].slug}`}
                         className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center"
                       >
                         Read Review
@@ -236,18 +321,21 @@ export default function MobileReviews() {
                   </div>
                 </div>
               </div>
-            ))}
+            )}
+
+            {/* AdSense - Article Ad */}
+            <ArticleAd />
 
             {/* Reviews Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {mobileReviews.filter(review => !review.featured).map((review) => (
+              {filteredReviews.filter(review => !review.featured).map((review) => (
                 <article
-                  key={review.id}
+                  key={review.slug}
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                 >
                   <div className="relative">
                     <OptimizedImage
-                      src={review.image}
+                      src={review.image || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80"}
                       alt={review.title}
                       width={400}
                       height={200}
@@ -258,24 +346,17 @@ export default function MobileReviews() {
                   
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
-                      <Link href={`/post/${review.id}`}>
+                      <Link href={`/posts/${review.slug}`}>
                         {review.title}
                       </Link>
                     </h3>
-                    
-                    <div className="flex items-center mb-3">
-                      <div className="flex items-center">
-                        {renderStars(review.rating)}
-                        <span className="ml-2 text-sm text-gray-600">({review.rating})</span>
-                      </div>
-                    </div>
                     
                     <p className="text-gray-600 mb-4 line-clamp-2">
                       {review.excerpt}
                     </p>
                     
                     <div className="flex flex-wrap gap-1 mb-4">
-                      {review.tags.slice(0, 3).map((tag) => (
+                      {review.tags.slice(0, 3).map((tag: string) => (
                         <span key={tag} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
                           {tag}
                         </span>
@@ -290,22 +371,39 @@ export default function MobileReviews() {
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock size={16} />
-                          <span>{review.readTime}</span>
+                          <span>5 min read</span>
                         </div>
                       </div>
-                      <span>{new Date(review.date).toLocaleDateString()}</span>
+                      <Link
+                        href={`/posts/${review.slug}`}
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors inline-flex items-center"
+                      >
+                        Read More
+                        <ChevronRight className="ml-1" size={16} />
+                      </Link>
                     </div>
                   </div>
                 </article>
               ))}
             </div>
 
-            {/* Load More */}
-            <div className="text-center mt-8">
-              <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                Load More Reviews
-              </button>
-            </div>
+            {/* Show message if no reviews found */}
+            {filteredReviews.length === 0 && (
+              <div className="text-center py-12">
+                <Smartphone className="mx-auto text-gray-400 mb-4" size={48} />
+                <h3 className="text-xl font-medium text-gray-600 mb-2">No reviews found</h3>
+                <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
+              </div>
+            )}
+
+            {/* Load More - Show only if there are more than 6 non-featured reviews */}
+            {filteredReviews.filter((review: any) => !review.featured).length > 6 && (
+              <div className="text-center mt-8">
+                <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                  Load More Reviews
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -333,6 +431,9 @@ export default function MobileReviews() {
                 ))}
               </div>
             </div>
+
+            {/* AdSense - Sidebar Ad */}
+            <SidebarAd />
 
             {/* Newsletter */}
             <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl p-6 text-white">

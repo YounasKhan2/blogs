@@ -2,7 +2,7 @@
 title: "Best Budget Smartphones Under $400 in 2025: Exceptional Value Android & iOS Options"
 excerpt: "Discover the best budget smartphones that deliver flagship-level features without breaking the bank. Our comprehensive guide covers the top affordable phones under $400 with excellent cameras, performance, and battery life."
 date: "2025-06-29"
-author: "Sarah Johnson"
+author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
 tags: ["Budget Smartphones", "Best Phone Under 400", "Affordable Android", "Budget iPhone", "Value Smartphones", "Cheap Phones 2025", "Mobile Photography Budget", "Student Phones"]

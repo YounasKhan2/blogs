@@ -6,6 +6,27 @@ import { ChevronRight, TrendingUp, Clock, User, Star, Smartphone, Laptop, Brain,
 import { HeaderAd, ArticleAd } from '../components/AdSenseWrapper';
 import { getFeaturedPosts, getRecentPosts, getCategoryStats } from '../lib/contentlayer-enhanced';
 import { useEffect, useState } from 'react';
+import type { Metadata } from 'next';
+
+// Homepage-specific structured data
+const homepageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "TechBlog Pro",
+  "alternateName": "Tech Blog Pro - Expert Technology Reviews",
+  "url": "https://techblogpro.com",
+  "description": "Expert tech reviews & buying guides for 2025. iPhone 15, Samsung Galaxy S24, MacBook Pro M4, AI tools, gaming laptops & more.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "TechBlog Pro",
+    "url": "https://techblogpro.com"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://techblogpro.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
 
 export default function Home() {
   // State for content to prevent hydration issues

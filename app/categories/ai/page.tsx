@@ -4,9 +4,36 @@ import { Clock, User, ChevronRight, Brain, Star, Filter, TrendingUp } from 'luci
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'AI Technology Reviews - Latest AI Tools and News',
-  description: 'Comprehensive reviews of AI tools, language models, and artificial intelligence technology. Expert analysis of ChatGPT, Claude, and more.',
-  keywords: ['AI reviews', 'artificial intelligence', 'ChatGPT', 'Claude', 'AI tools', 'machine learning'],
+  title: 'AI Technology Reviews 2025 - ChatGPT, Claude, Gemini, AI Tools & Machine Learning News',
+  description: 'Expert AI technology reviews & comparisons 2025. ChatGPT-4, Claude 3, Google Gemini, AI image generators, video generators, coding assistants & productivity tools. Latest AI news & guides.',
+  keywords: [
+    'AI reviews 2025', 'artificial intelligence', 'ChatGPT review', 'Claude AI review', 'Google Gemini review',
+    'AI tools', 'machine learning', 'AI image generation', 'AI video generation', 'AI productivity tools',
+    'OpenAI', 'Anthropic', 'AI comparison', 'AI assistant', 'language models', 'generative AI',
+    'AI for business', 'AI news', 'AI technology trends', 'AI software', 'AI applications'
+  ],
+  openGraph: {
+    title: 'AI Technology Reviews 2025 - ChatGPT, Claude, AI Tools & Latest AI News',
+    description: 'Expert AI technology reviews & comparisons. ChatGPT-4, Claude 3, Google Gemini, AI image generators & productivity tools. Stay ahead with AI trends.',
+    url: 'https://techblogpro.com/categories/ai',
+    type: 'website',
+    images: [
+      {
+        url: '/images/ai-reviews-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AI Technology Reviews - ChatGPT, Claude, AI Tools & Machine Learning',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI Technology Reviews 2025 - Expert AI Tools & Technology Analysis',
+    description: 'ChatGPT, Claude, Gemini & AI tools reviews. Expert analysis of latest AI technology trends & applications.',
+  },
+  alternates: {
+    canonical: 'https://techblogpro.com/categories/ai',
+  },
 };
 
 export default function AIReviews() {

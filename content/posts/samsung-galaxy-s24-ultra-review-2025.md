@@ -2,7 +2,7 @@
 title: "Samsung Galaxy S24 Ultra Review 2025: The Ultimate Android Flagship with AI Power"
 excerpt: "Complete Samsung Galaxy S24 Ultra review 2025 covering AI features, S Pen performance, 200MP camera system, battery life, and whether it's worth upgrading from Galaxy S23 Ultra."
 date: "2025-01-15"
-author: "muhammad-younas"
+author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
 tags: ["Samsung Galaxy S24 Ultra", "Android flagship", "smartphone review", "S Pen", "AI features", "mobile photography", "tech review 2025"]

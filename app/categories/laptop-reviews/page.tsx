@@ -4,9 +4,36 @@ import { Clock, User, ChevronRight, Laptop, Star, Filter, TrendingUp } from 'luc
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Laptop Reviews - Best Laptop Reviews and Comparisons',
-  description: 'Comprehensive laptop reviews including MacBooks, gaming laptops, ultrabooks, and budget options. Expert analysis and buying guides.',
-  keywords: ['laptop reviews', 'MacBook reviews', 'gaming laptops', 'ultrabook reviews', 'laptop comparisons'],
+  title: 'Laptop Reviews 2025 - MacBook Pro M4, Gaming Laptops, Ultrabooks & Best Laptop Buying Guide',
+  description: 'Expert laptop reviews & comparisons 2025. MacBook Pro M4, Dell XPS, ThinkPad, gaming laptops, ultrabooks, budget laptops & business laptops. Find your perfect laptop with expert buying guides.',
+  keywords: [
+    'laptop reviews 2025', 'MacBook reviews', 'gaming laptops', 'ultrabook reviews', 'laptop comparisons',
+    'MacBook Pro M4 review', 'Dell XPS review', 'ThinkPad review', 'ASUS laptop review', 'HP laptop review',
+    'best laptops 2025', 'laptop buying guide', 'business laptops', 'creative laptops', 'student laptops',
+    'budget laptops', 'premium laptops', 'laptop performance', 'laptop battery life', 'portable laptops'
+  ],
+  openGraph: {
+    title: 'Laptop Reviews 2025 - MacBook Pro M4, Gaming Laptops & Best Laptop Buying Guide',
+    description: 'Expert laptop reviews & comparisons. MacBook Pro M4, Dell XPS, ThinkPad, gaming laptops & ultrabooks. Find your perfect laptop.',
+    url: 'https://techblogpro.com/categories/laptop-reviews',
+    type: 'website',
+    images: [
+      {
+        url: '/images/laptop-reviews-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Laptop Reviews - MacBook Pro M4, Gaming Laptops & Expert Laptop Comparisons',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Laptop Reviews 2025 - Expert Laptop Reviews & Buying Guide',
+    description: 'MacBook Pro M4, gaming laptops, ultrabooks & business laptops. Expert reviews & comparisons to find your perfect laptop.',
+  },
+  alternates: {
+    canonical: 'https://techblogpro.com/categories/laptop-reviews',
+  },
 };
 
 export default function LaptopReviews() {

@@ -2,7 +2,7 @@
 title: "OnePlus 12 Review: The Flagship Killer Returns with Premium Features"
 excerpt: "OnePlus 12 combines flagship performance with competitive pricing. Our comprehensive review covers camera quality, performance benchmarks, and whether it lives up to the flagship killer reputation."
 date: "2025-06-25"
-author: "Sarah Johnson"
+author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
 tags: ["OnePlus 12", "Flagship Killer", "Android", "Smartphone Review", "Budget Flagship", "Camera Review", "Performance", "Value for Money"]
