@@ -4,7 +4,7 @@ import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Star, Clock, TrendingUp, Settings, Download, Shield, Zap } from 'lucide-react';
 import { useState, useMemo } from 'react';
-import { getAllPosts, getPostsByCategory } from '@/lib/contentlayer';
+import { getAllPosts, getPostsByCategory } from '@/lib/contentlayer-enhanced';
 
 export default function SoftwareReviews() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>(['All Software']);
@@ -31,107 +31,15 @@ export default function SoftwareReviews() {
     }));
   }, []);
 
-  // Combine real posts with static demo posts for categories that might not have enough content
-  const staticDemoPosts = [
-    {
-      id: 'demo-office-365',
-      title: "Microsoft Office 365 vs Google Workspace 2025: Complete Business Suite Comparison",
-      excerpt: "Which office suite offers better value for businesses and individual professionals in 2025?",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Productivity",
-      readTime: "9 min read",
-      rating: 4.3,
-      date: "2025-01-03",
-      featured: false,
-      slug: 'microsoft-office-365-vs-google-workspace-2025',
-      tags: ['Microsoft', 'Google', 'Productivity']
-    },
-    {
-      id: 'demo-figma-design',
-      title: "Figma vs Adobe XD vs Sketch: UI/UX Design Tool Battle 2025",
-      excerpt: "Which design tool is better for creating user interfaces, prototypes, and design systems?",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Design Software",
-      readTime: "7 min read",
-      rating: 4.6,
-      date: "2025-01-01",
-      featured: false,
-      slug: 'figma-vs-adobe-xd-vs-sketch-2025',
-      tags: ['Figma', 'Adobe XD', 'Sketch', 'Design']
-    },
-    {
-      id: 'demo-password-managers',
-      title: "Best Password Managers 2025: 1Password vs Bitwarden vs Dashlane",
-      excerpt: "Keep your accounts secure with these top-rated password management solutions and their latest features.",
-      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Security",
-      readTime: "9 min read",
-      rating: 4.8,
-      date: "2024-12-28",
-      featured: false,
-      slug: 'best-password-managers-2025',
-      tags: ['1Password', 'Bitwarden', 'Dashlane', 'Security']
-    },
-    {
-      id: 'demo-communication',
-      title: "Slack vs Microsoft Teams vs Discord: Team Communication Platform Review",
-      excerpt: "Compare features, pricing, and usability of the leading team communication and collaboration tools.",
-      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Communication",
-      readTime: "8 min read",
-      rating: 4.1,
-      date: "2024-12-25",
-      featured: false,
-      slug: 'slack-vs-teams-vs-discord-2025',
-      tags: ['Slack', 'Teams', 'Discord', 'Communication']
-    },
-    {
-      id: 'demo-antivirus',
-      title: "Bitdefender vs Norton vs Kaspersky: Best Antivirus Software 2025",
-      excerpt: "Protect your devices with comprehensive reviews of the top-rated antivirus and internet security solutions.",
-      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Security",
-      readTime: "11 min read",
-      rating: 4.4,
-      date: "2024-12-22",
-      featured: false,
-      slug: 'best-antivirus-software-2025',
-      tags: ['Bitdefender', 'Norton', 'Kaspersky', 'Security']
-    },
-    {
-      id: 'demo-code-editors',
-      title: "Visual Studio Code vs JetBrains vs Sublime Text: Code Editor Comparison",
-      excerpt: "Which code editor and IDE offers the best features, performance, and value for developers in 2025?",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Development",
-      readTime: "10 min read",
-      rating: 4.5,
-      date: "2024-12-20",
-      featured: false,
-      slug: 'best-code-editors-2025',
-      tags: ['VS Code', 'JetBrains', 'Sublime', 'Development']
-    }
-  ];
-
-  // Filter out static posts that might conflict with real posts
-  const filteredStaticPosts = staticDemoPosts.filter(staticPost => 
-    !softwareReviewPosts.some(realPost => 
-      realPost.slug === staticPost.slug || 
-      realPost.title.toLowerCase().includes(staticPost.title.toLowerCase().substring(0, 20))
-    )
-  );
-  // Combine all posts for filtering
+  // Use only real posts from markdown files
   const allPosts = useMemo(() => {
-    return [...softwareReviewPosts, ...filteredStaticPosts].sort((a, b) => {
+    return softwareReviewPosts.sort((a, b) => {
       // Sort by featured first, then by date
       if (a.featured && !b.featured) return -1;
       if (!a.featured && b.featured) return 1;
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
-  }, [softwareReviewPosts, filteredStaticPosts]);
-
-  // Extract featured posts (real + demo)
-  const featuredPosts = allPosts.filter(post => post.featured).slice(0, 3);
+  }, [softwareReviewPosts]);
 
   // Top software for sidebar
   const topSoftware = [

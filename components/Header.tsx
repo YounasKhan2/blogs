@@ -5,37 +5,30 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, Search, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen, User, LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { signInWithGoogle, signOutUser } from '@/lib/firebase';
+import AuthModal from './AuthModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const { user, loading } = useAuth();
-
-  const handleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (error: any) {
-      console.error('Sign in error:', error);
-      // Show user-friendly error message
-      if (error.message.includes('not available') || error.message.includes('not configured')) {
-        alert('Authentication is temporarily unavailable. Please try again later.');
-      } else {
-        alert('Failed to sign in. Please try again.');
-      }
-    }
-  };
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const { user, loading, signOut } = useAuth();
 
   const handleSignOut = async () => {
     try {
-      await signOutUser();
+      await signOut();
       setIsUserMenuOpen(false);
     } catch (error: any) {
       console.error('Sign out error:', error);
       // Force local sign out even if Firebase fails
       setIsUserMenuOpen(false);
     }
+  };
+
+  const openAuthModal = (mode: 'signin' | 'signup') => {
+    setAuthMode(mode);
+    setIsAuthModalOpen(true);
   };
 
   const menuItems = [
@@ -54,6 +47,12 @@ const Header = () => {
     { href: '/categories/accessories-gadgets', label: 'Accessories & Gadgets', icon: Gamepad2 },
     { href: '/categories/how-to', label: 'How-to Guides', icon: BookOpen }
   ];
+
+  function handleSignIn(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    event.preventDefault();
+    setAuthMode('signin');
+    setIsAuthModalOpen(true);
+  }
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -139,12 +138,20 @@ const Header = () => {
                     )}
                   </div>
                 ) : (
-                  <button
-                    onClick={handleSignIn}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Sign In
-                  </button>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => openAuthModal('signin')}
+                      className="text-gray-700 hover:text-blue-600 transition-colors text-sm font-medium"
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      onClick={() => openAuthModal('signup')}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
                 )}
               </div>
             )}
@@ -246,6 +253,13 @@ const Header = () => {
           </div>
         </div>
       )}
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authMode}
+      />
     </header>
   );
 };

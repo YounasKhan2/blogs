@@ -5,7 +5,15 @@ date: "2025-06-27"
 author: "Muhammad Younas"
 category: "Software Reviews"
 categorySlug: "software-reviews"
-tags: ["Adobe Photoshop", "AI", "Creative Software", "Photo Editing", "Design", "Adobe", "Generative AI", "Productivity"]
+tags: 
+  - "Adobe Photoshop"
+  - "AI"
+  - "Creative Software"
+  - "Photo Editing"
+  - "Design"
+  - "Adobe"
+  - "Generative AI"
+  - "Productivity"
 image: "/images/posts/adobe-photoshop-2025-review.jpg"
 featured: true
 published: true
@@ -29,7 +37,14 @@ specifications:
   subscription: "$22.99/month (Photography Plan)"
 metaTitle: "Adobe Photoshop 2025 Review: AI-Powered Features & Performance Analysis"
 metaDescription: "Comprehensive review of Adobe Photoshop 2025 with new AI features, performance improvements, and value analysis. Is the upgrade worth it for creative professionals?"
-keywords: ["Adobe Photoshop 2025", "Photoshop AI features", "creative software review", "photo editing software", "Adobe Creative Cloud", "Generative AI", "Photoshop review"]
+keywords: 
+  - "Adobe Photoshop 2025"
+  - "Photoshop AI features"
+  - "creative software review"
+  - "photo editing software"
+  - "Adobe Creative Cloud"
+  - "Generative AI"
+  - "Photoshop review"
 ---
 
 # Adobe Photoshop 2025 Review: Revolutionary AI Features Transform Creative Workflow

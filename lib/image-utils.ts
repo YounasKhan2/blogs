@@ -1,16 +1,16 @@
 // Utility for image fallbacks and error handling
 export const ImageUtils = {
-  // Default fallback images for different contexts
+  // Default fallback images for different contexts (all local)
   fallbackImages: {
-    article: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&auto=format&q=80",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&auto=format&q=80",
-    tech: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=600&h=400&fit=crop&auto=format&q=80",
-    mobile: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop&auto=format&q=80",
-    laptop: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=400&fit=crop&auto=format&q=80",
-    ai: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop&auto=format&q=80",
-    software: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop&auto=format&q=80",
-    gadgets: "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=600&h=400&fit=crop&auto=format&q=80",
-    howto: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&auto=format&q=80",
+    article: "/images/posts/default-article.jpg",
+    avatar: "/images/posts/default-avatar.jpg", 
+    tech: "/images/posts/default-tech.jpg",
+    mobile: "/images/posts/default-mobile.jpg",
+    laptop: "/images/posts/default-laptop.jpg",
+    ai: "/images/posts/default-ai.jpg",
+    software: "/images/posts/default-software.jpg",
+    gadgets: "/images/posts/default-gadgets.jpg",
+    howto: "/images/posts/default-howto.jpg",
   },
 
   // Get fallback image by category
@@ -41,10 +41,9 @@ export const ImageUtils = {
     return this.fallbackImages.tech;
   },
 
-  // Get resized fallback image
+  // Get resized fallback image (note: since we're using local images, this returns the base URL)
   getResizedFallback(width: number, height: number, category?: string): string {
-    const baseUrl = this.getFallbackByCategory(category);
-    return baseUrl.replace(/w=\d+&h=\d+/, `w=${width}&h=${height}`);
+    return this.getFallbackByCategory(category);
   },
 
   // Check if an image URL is valid

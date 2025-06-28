@@ -9,36 +9,36 @@ export default function Contact() {
       icon: Mail,
       title: "Email Us",
       description: "General inquiries and feedback",
-      contact: "info@techblogpro.com",
-      action: "mailto:info@techblogpro.com"
+      contact: "younaskk120@gmail.com",
+      action: "mailto:younaskk120@gmail.com"
     },
     {
       icon: MessageCircle,
       title: "Press Inquiries",
       description: "Media relations and press kit",
-      contact: "press@techblogpro.com", 
-      action: "mailto:press@techblogpro.com"
+      contact: "younaskk120@gmail.com",
+      action: "mailto:younaskk120@gmail.com"
     },
     {
       icon: Users,
       title: "Partnerships",
       description: "Brand collaborations and sponsorships",
-      contact: "partnerships@techblogpro.com",
-      action: "mailto:partnerships@techblogpro.com"
+      contact: "younaskk120@gmail.com",
+      action: "mailto:younaskk120@gmail.com"
     },
     {
       icon: Zap,
       title: "Product Reviews",
       description: "Submit products for review consideration",
-      contact: "reviews@techblogpro.com",
-      action: "mailto:reviews@techblogpro.com"
+      contact: "younaskk120@gmail.com",
+      action: "mailto:younaskk120@gmail.com"
     }
   ];
 
   const officeInfo = {
-    address: "123 Tech Street, Silicon Valley, CA 94041",
-    phone: "+1 (555) 123-4567",
-    hours: "Monday - Friday: 9:00 AM - 6:00 PM PST"
+    address: "Quetta, Balochistan, Pakistan",
+    phone: "+92 (123) 456-7890",
+    hours: "Monday - Friday: 9:00 AM - 5:00 PM PKT"
   };
 
   const faqs = [

@@ -5,14 +5,29 @@ date: "2025-01-19"
 author: "Muhammad Younas"
 category: "Software Reviews"
 categorySlug: "software-reviews"
-tags: ["Figma", "Adobe XD", "Sketch", "UI Design", "UX Design", "Design Tools", "Prototyping", "Design Software"]
-image: "https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=1200&h=630&fit=crop&auto=format"
+tags: 
+  - "Figma"
+  - "Adobe XD"
+  - "Sketch"
+  - "UI Design"
+  - "UX Design"
+  - "Design Tools"
+  - "Prototyping"
+  - "Design Software"
+image: "/images/posts/figma-vs-adobe-xd-vs-sketch-2025.jpg"
 featured: false
 published: true
 rating: 4.6
 metaTitle: "Figma vs Adobe XD vs Sketch 2025: UI/UX Design Tool Comparison"
 metaDescription: "Compare Figma, Adobe XD, and Sketch for UI/UX design in 2025. Features, pricing, collaboration, and performance analysis for design professionals."
-keywords: ["Figma vs Adobe XD vs Sketch", "UI design tools", "UX design software", "design tool comparison", "Figma review", "Adobe XD review", "Sketch review"]
+keywords: 
+  - "Figma vs Adobe XD vs Sketch"
+  - "UI design tools"
+  - "UX design software"
+  - "design tool comparison"
+  - "Figma review"
+  - "Adobe XD review"
+  - "Sketch review"
 pros:
   - "Each tool excels in different areas of design workflow"
   - "Strong prototyping and collaboration features across all platforms"

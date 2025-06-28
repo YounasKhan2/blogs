@@ -5,13 +5,27 @@ date: "2025-01-20"
 author: "muhammad-younas"
 category: "AI"
 categorySlug: "ai"
-tags: ["Google Gemini 2.0", "ChatGPT-5", "AI comparison", "artificial intelligence", "AI assistant", "language models", "AI tools 2025"]
+tags: 
+  - "Google Gemini 2.0"
+  - "ChatGPT-5"
+  - "AI comparison"
+  - "artificial intelligence"
+  - "AI assistant"
+  - "language models"
+  - "AI tools 2025"
 image: "/images/posts/gemini-2-vs-chatgpt-5-comparison.jpg"
 imageAlt: "Google Gemini 2.0 vs ChatGPT-5 artificial intelligence comparison 2025"
 featured: true
 metaTitle: "Google Gemini 2.0 vs ChatGPT-5 2025: Complete AI Comparison"
 metaDescription: "In-depth Google Gemini 2.0 vs ChatGPT-5 comparison 2025. Performance, features, coding, pricing, and real-world AI assistant capabilities tested."
-keywords: ["Google Gemini 2.0 vs ChatGPT-5", "AI comparison 2025", "best AI assistant", "artificial intelligence tools", "language model comparison", "AI chatbot comparison", "generative AI"]
+keywords: 
+  - "Google Gemini 2.0 vs ChatGPT-5"
+  - "AI comparison 2025"
+  - "best AI assistant"
+  - "artificial intelligence tools"
+  - "language model comparison"
+  - "AI chatbot comparison"
+  - "generative AI"
 ---
 
 # Google Gemini 2.0 vs ChatGPT-5 2025: Ultimate AI Assistant Comparison

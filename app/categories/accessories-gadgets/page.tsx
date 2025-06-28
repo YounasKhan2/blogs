@@ -3,115 +3,51 @@
 import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Star, Clock, TrendingUp, Gamepad2, Headphones, Watch, Camera, Smartphone, Zap } from 'lucide-react';
+import { useMemo } from 'react';
+import { getPostsByCategory } from '@/lib/contentlayer-enhanced';
 
 export default function AccessoriesGadgets() {
-  const featuredPosts = [
-    {
-      id: 1,
-      title: "AirPods Pro 3 vs Sony WF-1000XM5: Ultimate Comparison",
-      excerpt: "Battle of the premium wireless earbuds with active noise cancellation.",
-      image: "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=250&fit=crop&auto=format&q=80",
-      category: "Audio",
-      readTime: "10 min read",
-      rating: 4.7,
-      date: "2025-01-10",
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Apple Watch Series 10 vs Samsung Galaxy Watch 7",
-      excerpt: "Which smartwatch offers the best features for health, fitness, and productivity?",
-      image: "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=400&h=250&fit=crop&auto=format&q=80",
-      category: "Wearables",
-      readTime: "12 min read",
-      rating: 4.5,
-      date: "2025-01-08",
-      featured: true
-    },
-    {
-      id: 3,
-      title: "Best Gaming Mechanical Keyboards Under $200",
-      excerpt: "Top mechanical keyboards that offer premium features without breaking the bank.",
-      image: "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=250&fit=crop&auto=format&q=80",
-      category: "Gaming",
-      readTime: "8 min read",
-      rating: 4.6,
-      date: "2025-01-05",
-      featured: true
-    }
-  ];
+  // Get all accessories and gadgets posts from Contentlayer
+  const accessoryPosts = useMemo(() => {
+    return getPostsByCategory('accessories-gadgets').map(post => ({
+      id: post.slug,
+      title: post.title,
+      excerpt: post.excerpt,
+      image: post.image || "/images/posts/default-gadgets.jpg",
+      category: post.category,
+      readTime: post.readingTime?.text || '5 min read',
+      rating: post.rating || 4.0,
+      date: new Date(post.date).toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      }),
+      featured: post.featured || false,
+      slug: post.slug,
+      tags: post.tags || []
+    }));
+  }, []);
 
-  const recentPosts = [
-    {
-      id: 4,
-      title: "Logitech MX Master 4 Review: The Ultimate Productivity Mouse",
-      excerpt: "Is this the best wireless mouse for professionals and creatives?",
-      image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Peripherals",
-      readTime: "7 min read",
-      rating: 4.8,
-      date: "2025-01-03"
-    },
-    {
-      id: 5,
-      title: "DJI Mini 4 Pro vs Air 3: Drone Comparison",
-      excerpt: "Which compact drone offers the best value for aerial photography?",
-      image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Photography",
-      readTime: "9 min read",
-      rating: 4.4,
-      date: "2025-01-01"
-    },
-    {
-      id: 6,
-      title: "Best Power Banks 2025: Portable Charging Solutions",
-      excerpt: "Keep your devices charged on the go with these top-rated power banks.",
-      image: "https://images.unsplash.com/photo-1609592308687-5e5d2df2839b?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Charging",
-      readTime: "6 min read",
-      rating: 4.3,
-      date: "2024-12-28"
-    },
-    {
-      id: 7,
-      title: "Ring Video Doorbell 4 vs Nest Doorbell Review",
-      excerpt: "Smart doorbell comparison for home security and convenience.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Smart Home",
-      readTime: "8 min read",
-      rating: 4.2,
-      date: "2024-12-25"
-    },
-    {
-      id: 8,
-      title: "Best Wireless Charging Pads 2025",
-      excerpt: "Fast and efficient wireless charging solutions for your devices.",
-      image: "https://images.unsplash.com/photo-1609592308687-5e5d2df2839b?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Charging",
-      readTime: "5 min read",
-      rating: 4.1,
-      date: "2024-12-22"
-    },
-    {
-      id: 9,
-      title: "GoPro Hero 12 vs DJI Action 4: Action Camera Battle",
-      excerpt: "Which action camera captures the best footage for your adventures?",
-      image: "https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Photography",
-      readTime: "11 min read",
-      rating: 4.6,
-      date: "2024-12-20"
-    }
-  ];
+  // Sort posts by featured first, then by date
+  const allPosts = useMemo(() => {
+    return accessoryPosts.sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+  }, [accessoryPosts]);
+
+  const featuredPosts = allPosts.filter(post => post.featured).slice(0, 3);
+  const recentPosts = allPosts.filter(post => !post.featured).slice(0, 6);
 
   const categories = [
-    { name: "All Accessories", count: 187, active: true },
-    { name: "Audio", count: 45 },
-    { name: "Gaming", count: 38 },
-    { name: "Wearables", count: 32 },
-    { name: "Peripherals", count: 28 },
-    { name: "Smart Home", count: 24 },
-    { name: "Photography", count: 20 }
+    { name: "All Accessories", count: allPosts.length, active: true },
+    { name: "Audio", count: allPosts.filter(p => p.category?.toLowerCase().includes('audio')).length },
+    { name: "Gaming", count: allPosts.filter(p => p.category?.toLowerCase().includes('gaming')).length },
+    { name: "Wearables", count: allPosts.filter(p => p.category?.toLowerCase().includes('wearable')).length },
+    { name: "Photography", count: allPosts.filter(p => p.category?.toLowerCase().includes('photo')).length },
+    { name: "Smart Home", count: allPosts.filter(p => p.category?.toLowerCase().includes('smart')).length },
+    { name: "Charging", count: allPosts.filter(p => p.category?.toLowerCase().includes('charging')).length }
   ];
 
   const topAccessories = [

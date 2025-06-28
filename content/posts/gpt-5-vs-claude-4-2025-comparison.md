@@ -5,7 +5,14 @@ date: "2025-01-16"
 author: "Muhammad Younas"
 category: "AI"
 categorySlug: "ai"
-tags: ["GPT-5", "Claude 4", "AI Comparison", "Language Models", "OpenAI", "Anthropic", "AI Assistant"]
+tags: 
+  - "GPT-5"
+  - "Claude 4"
+  - "AI Comparison"
+  - "Language Models"
+  - "OpenAI"
+  - "Anthropic"
+  - "AI Assistant"
 image: "/images/posts/gpt-5-vs-claude-4-2025-comparison.jpg"
 featured: true
 published: true

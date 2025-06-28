@@ -5,13 +5,27 @@ date: "2025-01-23"
 author: "muhammad-younas"
 category: "AI"
 categorySlug: "ai"
-tags: ["AI image generation", "DALL-E 3", "Midjourney", "Stable Diffusion", "AI art tools", "digital art AI", "creative AI tools"]
+tags: 
+  - "AI image generation"
+  - "DALL-E 3"
+  - "Midjourney"
+  - "Stable Diffusion"
+  - "AI art tools"
+  - "digital art AI"
+  - "creative AI tools"
 image: "/images/posts/ai-image-generation-tools-comparison.jpg"
 imageAlt: "AI image generation tools comparison 2025 - DALL-E 3 vs Midjourney vs Stable Diffusion"
 featured: true
 metaTitle: "Best AI Image Generation Tools 2025: DALL-E 3 vs Midjourney"
 metaDescription: "AI image generation tools comparison 2025. DALL-E 3, Midjourney, and Stable Diffusion features, quality, pricing, and professional use cases analyzed."
-keywords: ["AI image generation", "DALL-E 3 vs Midjourney", "AI art tools 2025", "Stable Diffusion", "AI image creation", "digital art AI", "creative AI software"]
+keywords: 
+  - "AI image generation"
+  - "DALL-E 3 vs Midjourney"
+  - "AI art tools 2025"
+  - "Stable Diffusion"
+  - "AI image creation"
+  - "digital art AI"
+  - "creative AI software"
 ---
 
 # AI Image Generation Tools 2025: DALL-E 3 vs Midjourney vs Stable Diffusion

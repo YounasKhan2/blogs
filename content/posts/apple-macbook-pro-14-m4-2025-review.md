@@ -5,13 +5,27 @@ date: "2025-01-19"
 author: "muhammad-younas"
 category: "Laptop Reviews"
 categorySlug: "laptop-reviews"
-tags: ["MacBook Pro 14 M4", "Apple M4 chip", "creative laptop", "video editing laptop", "professional MacBook", "macOS Sequoia", "creative workflows"]
+tags: 
+  - "MacBook Pro 14 M4"
+  - "Apple M4 chip"
+  - "creative laptop"
+  - "video editing laptop"
+  - "professional MacBook"
+  - "macOS Sequoia"
+  - "creative workflows"
 image: "/images/posts/macbook-pro-14-m4-2025-review.jpg"
 imageAlt: "Apple MacBook Pro 14 M4 2025 laptop for creative professionals with Liquid Retina display"
 featured: true
 metaTitle: "MacBook Pro 14 M4 2025 Review: Ultimate Creative Laptop"
 metaDescription: "Apple MacBook Pro 14 M4 review 2025. M4 chip performance, creative workflow testing, Liquid Retina display, battery life, and professional features analyzed."
-keywords: ["MacBook Pro 14 M4 review", "Apple M4 laptop", "creative laptop 2025", "video editing laptop", "MacBook Pro review", "professional laptop", "Apple laptop 2025"]
+keywords: 
+  - "MacBook Pro 14 M4 review"
+  - "Apple M4 laptop"
+  - "creative laptop 2025"
+  - "video editing laptop"
+  - "MacBook Pro review"
+  - "professional laptop"
+  - "Apple laptop 2025"
 ---
 
 # Apple MacBook Pro 14 M4 2025 Review: Creative Powerhouse Redefined

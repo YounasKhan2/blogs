@@ -5,7 +5,13 @@ date: "2025-06-23"
 author: "Mike Chen"
 category: "AI Technology"
 categorySlug: "ai"
-tags: ["ChatGPT", "Claude", "AI", "Language Models", "Comparison", "Artificial Intelligence"]
+tags: 
+  - "ChatGPT"
+  - "Claude"
+  - "AI"
+  - "Language Models"
+  - "Comparison"
+  - "Artificial Intelligence"
 image: "/images/posts/chatgpt-vs-claude.jpg"
 featured: true
 published: true

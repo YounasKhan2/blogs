@@ -5,14 +5,27 @@ date: "2025-01-20"
 author: "Muhammad Younas"
 category: "Software Reviews"
 categorySlug: "software-reviews"
-tags: ["Microsoft Office 365", "Google Workspace", "Business Software", "Productivity", "Cloud Office", "Collaboration", "Enterprise Software"]
-image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop&auto=format"
+tags: 
+  - "Microsoft Office 365"
+  - "Google Workspace"
+  - "Business Software"
+  - "Productivity"
+  - "Cloud Office"
+  - "Collaboration"
+  - "Enterprise Software"
+image: "/images/posts/microsoft-office-365-vs-google-workspace-2025.jpg"
 featured: false
 published: true
 rating: 4.5
 metaTitle: "Microsoft Office 365 vs Google Workspace 2025: Business Suite Comparison"
 metaDescription: "Compare Microsoft Office 365 and Google Workspace for business productivity. Features, pricing, security, and collaboration tools analyzed for enterprise decision-making."
-keywords: ["Microsoft Office 365 vs Google Workspace", "business productivity software", "cloud office suite", "enterprise collaboration tools", "Office 365 review", "Google Workspace comparison"]
+keywords: 
+  - "Microsoft Office 365 vs Google Workspace"
+  - "business productivity software"
+  - "cloud office suite"
+  - "enterprise collaboration tools"
+  - "Office 365 review"
+  - "Google Workspace comparison"
 pros:
   - "Both offer comprehensive business productivity suites"
   - "Strong collaboration and real-time editing capabilities"

@@ -11,13 +11,7 @@ declare global {
 }
 
 function sendToAnalytics(metric: any) {
-  // You can send the metrics to your analytics service
-  // For now, we'll just log them in development
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Web Vitals:', metric);
-  }
-  
-  // Example: Send to Google Analytics 4
+  // Send to Google Analytics 4 if available
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', metric.name, {
       value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),

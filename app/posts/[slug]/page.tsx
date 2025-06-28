@@ -291,7 +291,7 @@ export default async function PostPage({ params }: Props) {
                     >
                       <div className="relative">
                         <OptimizedImage
-                          src={relatedPost.metadata.image || "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=200&fit=crop&auto=format&q=80"}
+                          src={relatedPost.metadata.image || "/images/posts/default-tech.jpg"}
                           alt={relatedPost.metadata.title}
                           width={400}
                           height={200}

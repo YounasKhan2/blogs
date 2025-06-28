@@ -5,8 +5,18 @@ date: "2025-06-30"
 author: "Sarah Johnson"
 category: "Accessories & Gadgets"
 categorySlug: "accessories-gadgets"
-tags: ["Smart Home", "Home Automation", "Smart Speakers", "Smart Thermostat", "Smart Security", "IoT", "Alexa", "Google Home", "HomeKit", "Smart Lighting"]
-image: "https://images.unsplash.com/photo-1516192518150-0d8fee5425e3?w=1200&h=630&fit=crop&auto=format&q=80"
+tags: 
+  - "Smart Home"
+  - "Home Automation"
+  - "Smart Speakers"
+  - "Smart Thermostat"
+  - "Smart Security"
+  - "IoT"
+  - "Alexa"
+  - "Google Home"
+  - "HomeKit"
+  - "Smart Lighting"
+image: "/images/posts/best-smart-home-devices-2025.jpg"
 featured: true
 published: true
 rating: 4.7
@@ -26,7 +36,15 @@ specifications:
   budgetRange: "$25 - $500 per device"
 metaTitle: "Best Smart Home Devices 2025: Complete Home Automation Guide & Reviews"
 metaDescription: "Discover the best smart home devices of 2025 for every budget. Expert reviews of smart speakers, thermostats, security cameras, lighting and complete automation systems."
-keywords: ["best smart home devices 2025", "home automation", "smart home setup", "best smart speakers", "smart thermostat", "smart security cameras", "smart lighting", "Alexa vs Google Home"]
+keywords: 
+  - "best smart home devices 2025"
+  - "home automation"
+  - "smart home setup"
+  - "best smart speakers"
+  - "smart thermostat"
+  - "smart security cameras"
+  - "smart lighting"
+  - "Alexa vs Google Home"
 ---
 
 # Best Smart Home Devices 2025: Complete Guide to Home Automation on Any Budget

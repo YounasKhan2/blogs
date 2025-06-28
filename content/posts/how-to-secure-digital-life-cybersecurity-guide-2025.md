@@ -5,8 +5,16 @@ date: "2025-06-28"
 author: "Lisa Brown"
 category: "How-to Guides"
 categorySlug: "how-to"
-tags: ["Cybersecurity", "Digital Privacy", "Password Security", "Two-Factor Authentication", "Online Safety", "Data Protection", "Privacy Tools", "Internet Security"]
-image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&h=630&fit=crop&auto=format"
+tags: 
+  - "Cybersecurity"
+  - "Digital Privacy"
+  - "Password Security"
+  - "Two-Factor Authentication"
+  - "Online Safety"
+  - "Data Protection"
+  - "Privacy Tools"
+  - "Internet Security"
+image: "/images/posts/digital-security-guide-2025.jpg"
 featured: true
 published: true
 difficulty: "Beginner"
@@ -28,7 +36,15 @@ specifications:
   platforms: "Windows, Mac, iOS, Android"
 metaTitle: "Complete Digital Security Guide 2025: Protect Your Online Privacy & Data"
 metaDescription: "Learn how to secure your digital life with our comprehensive cybersecurity guide. Password management, 2FA, privacy tools, and threat protection strategies."
-keywords: ["digital security", "cybersecurity guide", "password manager", "two-factor authentication", "online privacy", "data protection", "internet safety", "cyber security tips"]
+keywords: 
+  - "digital security"
+  - "cybersecurity guide"
+  - "password manager"
+  - "two-factor authentication"
+  - "online privacy"
+  - "data protection"
+  - "internet safety"
+  - "cyber security tips"
 ---
 
 # How to Secure Your Digital Life: Complete Cybersecurity Guide for 2025

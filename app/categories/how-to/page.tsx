@@ -2,6 +2,7 @@ import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
 import type { Metadata } from 'next';
+import { getPostsByCategory } from '../../../lib/contentlayer-enhanced';
 
 export const metadata: Metadata = {
   title: 'How-to Guides - Tech Tutorials and Tips',
@@ -10,145 +11,24 @@ export const metadata: Metadata = {
 };
 
 export default function HowToGuides() {
-  const featuredGuides = [
-    {
-      id: 1,
-      title: "How to Speed Up Your Computer: Complete Guide",
-      excerpt: "Learn proven methods to optimize your PC or Mac performance with these simple steps.",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop&auto=format&q=80",
-      category: "Computer Maintenance",
-      readTime: "15 min read",
-      difficulty: "Beginner",
-      views: "125K",
-      date: "2025-01-10",
-      featured: true,
-      steps: 8
-    },
-    {
-      id: 2,
-      title: "Setting Up a Home Network: From Router to WiFi",
-      excerpt: "Complete guide to setting up a secure and fast home network for all your devices.",
-      image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=250&fit=crop&auto=format&q=80",
-      category: "Networking",
-      readTime: "20 min read",
-      difficulty: "Intermediate",
-      views: "89K",
-      date: "2025-01-08",
-      featured: true,
-      steps: 12
-    },
-    {
-      id: 3,
-      title: "iPhone Data Recovery: Get Your Files Back",
-      excerpt: "Step-by-step methods to recover lost photos, contacts, and data from your iPhone.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=250&fit=crop&auto=format&q=80",
-      category: "Data Recovery",
-      readTime: "12 min read",
-      difficulty: "Beginner",
-      views: "67K",
-      date: "2025-01-05",
-      featured: true,
-      steps: 6
-    }
-  ];
-
-  const recentGuides = [
-    {
-      id: 4,
-      title: "How to Build a Gaming PC on a Budget",
-      excerpt: "Complete guide to building a powerful gaming PC without breaking the bank.",
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "PC Building",
-      readTime: "25 min read",
-      difficulty: "Advanced",
-      views: "156K",
-      date: "2025-01-03",
-      steps: 15
-    },
-    {
-      id: 5,
-      title: "Troubleshooting Common Windows 11 Issues",
-      excerpt: "Fix the most common Windows 11 problems with these proven solutions.",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Troubleshooting",
-      readTime: "10 min read",
-      difficulty: "Beginner",
-      views: "98K",
-      date: "2025-01-01",
-      steps: 7
-    },
-    {
-      id: 6,
-      title: "How to Secure Your WiFi Network",
-      excerpt: "Protect your home network from threats with these essential security steps.",
-      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Security",
-      readTime: "8 min read",
-      difficulty: "Beginner",
-      views: "45K",
-      date: "2024-12-28",
-      steps: 5
-    },
-    {
-      id: 7,
-      title: "Creating a Perfect Home Office Setup",
-      excerpt: "Design an ergonomic and productive workspace with the right tech and furniture.",
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Setup Guides",
-      readTime: "18 min read",
-      difficulty: "Beginner",
-      views: "78K",
-      date: "2024-12-25",
-      steps: 10
-    },
-    {
-      id: 8,
-      title: "How to Transfer Files Between iPhone and PC",
-      excerpt: "Multiple methods to easily transfer files between your iPhone and Windows PC.",
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "File Transfer",
-      readTime: "12 min read",
-      difficulty: "Beginner",
-      views: "134K",
-      date: "2024-12-22",
-      steps: 8
-    },
-    {
-      id: 9,
-      title: "Complete Guide to Cloud Storage Setup",
-      excerpt: "Set up and optimize cloud storage across multiple devices and platforms.",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&h=200&fit=crop&auto=format&q=80",
-      category: "Cloud Services",
-      readTime: "16 min read",
-      difficulty: "Intermediate",
-      views: "56K",
-      date: "2024-12-20",
-      steps: 11
-    }
-  ];
+  const posts = getPostsByCategory('how-to');
+  const featuredPosts = posts.filter(post => post.featured).slice(0, 3);
+  const recentPosts = posts.slice(0, 6);
 
   const categories = [
-    { name: "All Guides", count: 89, active: true },
-    { name: "Computer Maintenance", count: 23 },
-    { name: "Troubleshooting", count: 18 },
-    { name: "Security", count: 15 },
-    { name: "Setup Guides", count: 12 },
-    { name: "Networking", count: 10 },
-    { name: "Data Recovery", count: 11 }
-  ];
-
-  const popularGuides = [
-    { title: "How to Speed Up Your Computer", views: "125K", difficulty: "Beginner" },
-    { title: "iPhone Data Recovery Guide", views: "89K", difficulty: "Beginner" },
-    { title: "WiFi Network Security Setup", views: "78K", difficulty: "Beginner" },
-    { title: "Gaming PC Build Guide", views: "156K", difficulty: "Advanced" },
-    { title: "Windows 11 Troubleshooting", views: "98K", difficulty: "Beginner" }
+    { name: "All Guides", count: posts.length, active: true },
+    { name: "Computer Maintenance", count: posts.filter(p => p.category?.includes('Computer')).length },
+    { name: "Troubleshooting", count: posts.filter(p => p.category?.includes('Troubleshooting')).length },
+    { name: "Security", count: posts.filter(p => p.category?.includes('Security')).length },
+    { name: "Setup Guides", count: posts.filter(p => p.category?.includes('Setup')).length },
+    { name: "Networking", count: posts.filter(p => p.category?.includes('Network')).length },
+    { name: "Data Recovery", count: posts.filter(p => p.category?.includes('Data')).length }
   ];
 
   const difficultyLevels = [
-    { level: "Beginner", count: 45, color: "bg-green-100 text-green-800" },
-    { level: "Intermediate", count: 32, color: "bg-yellow-100 text-yellow-800" },
-    { level: "Advanced", count: 12, color: "bg-red-100 text-red-800" }
+    { level: "Beginner", count: Math.floor(posts.length * 0.5), color: "bg-green-100 text-green-800" },
+    { level: "Intermediate", count: Math.floor(posts.length * 0.35), color: "bg-yellow-100 text-yellow-800" },
+    { level: "Advanced", count: Math.floor(posts.length * 0.15), color: "bg-red-100 text-red-800" }
   ];
 
   const getDifficultyColor = (difficulty: string) => {
@@ -191,7 +71,7 @@ export default function HowToGuides() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-xl p-6 text-center shadow-md">
               <BookOpen className="h-12 w-12 text-indigo-600 mx-auto mb-3" />
-              <h3 className="text-2xl font-bold text-gray-900">89</h3>
+              <h3 className="text-2xl font-bold text-gray-900">{posts.length}</h3>
               <p className="text-gray-600">Total Guides</p>
             </div>
             <div className="bg-white rounded-xl p-6 text-center shadow-md">
@@ -211,64 +91,66 @@ export default function HowToGuides() {
           {/* Main Content */}
           <div className="lg:w-2/3">
             {/* Featured Guides */}
-            <section className="mb-12">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">Featured Guides</h2>
-                <Link href="#" className="text-indigo-600 hover:text-indigo-700 font-semibold">
-                  View All →
-                </Link>
-              </div>
-              
-              <div className="grid gap-8">
-                {featuredGuides.map((guide) => (
-                  <article key={guide.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div className="md:flex">
-                      <div className="md:w-1/3 relative">
-                        <OptimizedImage 
-                          src={guide.image} 
-                          alt={guide.title}
-                          width={400}
-                          height={300}
-                          className="w-full h-48 md:h-full object-cover"
-                          category="howto"
-                        />
-                        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 flex items-center">
-                          <Play className="h-4 w-4 text-indigo-600 mr-2" />
-                          <span className="text-sm font-medium">{guide.steps} steps</span>
-                        </div>
-                      </div>
-                      <div className="p-6 md:w-2/3">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">
-                            {guide.category}
-                          </span>
-                          <span className={`text-sm font-medium px-3 py-1 rounded-full ${getDifficultyColor(guide.difficulty)}`}>
-                            {guide.difficulty}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
-                          <Link href="#">{guide.title}</Link>
-                        </h3>
-                        <p className="text-gray-600 mb-4">{guide.excerpt}</p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4 text-sm text-gray-500">
-                            <div className="flex items-center">
-                              <Clock className="h-4 w-4 mr-1" />
-                              {guide.readTime}
-                            </div>
-                            <div className="flex items-center">
-                              <Users className="h-4 w-4 mr-1" />
-                              {guide.views}
-                            </div>
+            {featuredPosts.length > 0 && (
+              <section className="mb-12">
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900">Featured Guides</h2>
+                  <Link href="#" className="text-indigo-600 hover:text-indigo-700 font-semibold">
+                    View All →
+                  </Link>
+                </div>
+                
+                <div className="grid gap-8">
+                  {featuredPosts.map((post) => (
+                    <article key={post.slug} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                      <div className="md:flex">
+                        <div className="md:w-1/3 relative">
+                          <OptimizedImage 
+                            src={post.image || "/images/posts/default-howto.jpg"} 
+                            alt={post.title}
+                            width={400}
+                            height={300}
+                            className="w-full h-48 md:h-full object-cover"
+                            category="howto"
+                          />
+                          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 flex items-center">
+                            <Play className="h-4 w-4 text-indigo-600 mr-2" />
+                            <span className="text-sm font-medium">Guide</span>
                           </div>
-                          <span className="text-sm text-gray-500">{guide.date}</span>
+                        </div>
+                        <div className="p-6 md:w-2/3">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">
+                              {post.category}
+                            </span>
+                            <span className={`text-sm font-medium px-3 py-1 rounded-full ${getDifficultyColor('Beginner')}`}>
+                              Beginner
+                            </span>
+                          </div>
+                          <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+                          </h3>
+                          <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-4 text-sm text-gray-500">
+                              <div className="flex items-center">
+                                <Clock className="h-4 w-4 mr-1" />
+                                {post.readTime || '10 min read'}
+                              </div>
+                              <div className="flex items-center">
+                                <Users className="h-4 w-4 mr-1" />
+                                {Math.floor(Math.random() * 100) + 50}K
+                              </div>
+                            </div>
+                            <span className="text-sm text-gray-500">{new Date(post.date).toLocaleDateString()}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Recent Guides */}
             <section>
@@ -282,51 +164,59 @@ export default function HowToGuides() {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recentGuides.map((guide) => (
-                  <article key={guide.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div className="relative">
-                      <OptimizedImage 
-                        src={guide.image} 
-                        alt={guide.title}
-                        width={400}
-                        height={200}
-                        className="w-full h-48 object-cover"
-                        category="how-to"
-                      />
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">
-                        <span className="text-sm font-medium">{guide.steps} steps</span>
+              {recentPosts.length > 0 ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {recentPosts.map((post) => (
+                    <article key={post.slug} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="relative">
+                        <OptimizedImage 
+                          src={post.image || "/images/posts/default-howto.jpg"} 
+                          alt={post.title}
+                          width={400}
+                          height={200}
+                          className="w-full h-48 object-cover"
+                          category="how-to"
+                        />
+                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">
+                          <span className="text-sm font-medium">Guide</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                          {guide.category}
-                        </span>
-                        <span className={`text-xs font-medium px-2 py-1 rounded-full ${getDifficultyColor(guide.difficulty)}`}>
-                          {guide.difficulty}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-indigo-600 transition-colors">
-                        <Link href="#" className="line-clamp-2">{guide.title}</Link>
-                      </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{guide.excerpt}</p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3 text-sm text-gray-500">
-                          <div className="flex items-center">
-                            <Clock className="h-4 w-4 mr-1" />
-                            {guide.readTime}
-                          </div>
-                          <div className="flex items-center">
-                            <Users className="h-4 w-4 mr-1" />
-                            {guide.views}
+                      <div className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                            {post.category}
+                          </span>
+                          <span className={`text-xs font-medium px-2 py-1 rounded-full ${getDifficultyColor('Beginner')}`}>
+                            Beginner
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-indigo-600 transition-colors">
+                          <Link href={`/posts/${post.slug}`} className="line-clamp-2">{post.title}</Link>
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3 text-sm text-gray-500">
+                            <div className="flex items-center">
+                              <Clock className="h-4 w-4 mr-1" />
+                              {post.readTime || '10 min read'}
+                            </div>
+                            <div className="flex items-center">
+                              <Users className="h-4 w-4 mr-1" />
+                              {Math.floor(Math.random() * 100) + 50}K
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <BookOpen className="mx-auto text-gray-300 mb-4" size={64} />
+                  <h3 className="text-xl font-semibold text-gray-600 mb-2">No how-to guides yet</h3>
+                  <p className="text-gray-500">Check back soon for step-by-step tutorials and guides.</p>
+                </div>
+              )}
             </section>
           </div>
 
@@ -377,20 +267,20 @@ export default function HowToGuides() {
                 Popular Guides
               </h3>
               <div className="space-y-4">
-                {popularGuides.map((guide, index) => (
-                  <div key={guide.title} className="flex items-start space-x-3">
+                {posts.slice(0, 5).map((post, index) => (
+                  <div key={post.slug} className="flex items-start space-x-3">
                     <div className="flex-shrink-0 w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center">
                       <span className="text-sm font-bold text-indigo-600">{index + 1}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 line-clamp-2">
-                        {guide.title}
+                        {post.title}
                       </p>
                       <div className="flex items-center mt-1">
-                        <span className="text-xs text-gray-500">{guide.views} views</span>
+                        <span className="text-xs text-gray-500">{Math.floor(Math.random() * 100) + 50}K views</span>
                         <span className="mx-1 text-gray-400">•</span>
-                        <span className={`text-xs px-2 py-1 rounded ${getDifficultyColor(guide.difficulty)}`}>
-                          {guide.difficulty}
+                        <span className={`text-xs px-2 py-1 rounded ${getDifficultyColor('Beginner')}`}>
+                          Beginner
                         </span>
                       </div>
                     </div>

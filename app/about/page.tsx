@@ -9,7 +9,7 @@ export default function About() {
     {
       name: "John Smith",
       role: "Founder & Mobile Expert",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&auto=format&q=80",
+      image: "/images/team/john-smith.jpg",
       bio: "10+ years in mobile technology journalism. Former editor at TechCrunch and The Verge.",
       social: {
         twitter: "@johnsmith_tech",
@@ -20,7 +20,7 @@ export default function About() {
     {
       name: "Sarah Johnson",
       role: "Laptop & Computing Specialist",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&auto=format&q=80",
+      image: "/images/team/sarah-johnson.jpg",
       bio: "Computer science background with expertise in laptop reviews and performance testing.",
       social: {
         twitter: "@sarah_tech",
@@ -31,7 +31,7 @@ export default function About() {
     {
       name: "Mike Chen",
       role: "AI & Software Analyst",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&auto=format&q=80",
+      image: "/images/team/mike-chen.jpg",
       bio: "AI researcher turned tech journalist, specializing in artificial intelligence and software reviews.",
       social: {
         twitter: "@mikechen_ai",
@@ -42,7 +42,7 @@ export default function About() {
     {
       name: "Lisa Brown",
       role: "Photography & Creative Tech",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&auto=format&q=80",
+      image: "/images/team/lisa-brown.jpg",
       bio: "Professional photographer with deep knowledge of camera technology and creative software.",
       social: {
         twitter: "@lisa_photo",

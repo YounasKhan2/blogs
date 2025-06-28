@@ -19,7 +19,7 @@ try {
   allAuthors = require('../.contentlayer/generated/Author/_index.json');
   allCategories = require('../.contentlayer/generated/Category/_index.json');
 } catch (error) {
-  console.log('Contentlayer not yet generated in enhanced module, using empty arrays');
+  // Contentlayer not yet generated - will use empty arrays
 }
 
 // Post-related functions

@@ -5,13 +5,27 @@ date: "2025-01-21"
 author: "muhammad-younas"
 category: "AI"
 categorySlug: "ai"
-tags: ["Claude 3.5 Sonnet", "GPT-4o", "AI coding assistant", "programming AI", "software development", "AI tools", "developer productivity"]
+tags: 
+  - "Claude 3.5 Sonnet"
+  - "GPT-4o"
+  - "AI coding assistant"
+  - "programming AI"
+  - "software development"
+  - "AI tools"
+  - "developer productivity"
 image: "/images/posts/claude-sonnet-vs-gpt4o-coding.jpg"
 imageAlt: "Claude 3.5 Sonnet vs GPT-4o AI coding assistant comparison for developers"
 featured: true
 metaTitle: "Claude 3.5 Sonnet vs GPT-4o: Best AI Coding Assistant 2025"
 metaDescription: "Claude 3.5 Sonnet vs GPT-4o coding comparison 2025. Programming performance, IDE integration, code quality, and developer productivity features tested."
-keywords: ["Claude 3.5 Sonnet vs GPT-4o", "AI coding assistant", "programming AI tools", "software development AI", "code generation AI", "developer productivity", "AI for programmers"]
+keywords: 
+  - "Claude 3.5 Sonnet vs GPT-4o"
+  - "AI coding assistant"
+  - "programming AI tools"
+  - "software development AI"
+  - "code generation AI"
+  - "developer productivity"
+  - "AI for programmers"
 ---
 
 # Anthropic Claude 3.5 Sonnet vs GPT-4o: AI Coding Assistant Showdown 2025

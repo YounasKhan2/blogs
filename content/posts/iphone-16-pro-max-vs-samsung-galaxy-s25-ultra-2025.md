@@ -5,7 +5,15 @@ date: "2025-06-28"
 author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
-tags: ["iPhone 16 Pro Max", "Samsung Galaxy S25 Ultra", "Flagship Comparison", "Smartphone Camera", "Mobile Photography", "Premium Phones", "Apple vs Samsung", "5G Smartphones"]
+tags: 
+  - "iPhone 16 Pro Max"
+  - "Samsung Galaxy S25 Ultra"
+  - "Flagship Comparison"
+  - "Smartphone Camera"
+  - "Mobile Photography"
+  - "Premium Phones"
+  - "Apple vs Samsung"
+  - "5G Smartphones"
 image: "/images/posts/iphone-16-pro-max-vs-galaxy-s25-ultra.jpg"
 featured: true
 published: true

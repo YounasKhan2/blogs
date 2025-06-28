@@ -5,13 +5,27 @@ date: "2025-01-18"
 author: "muhammad-younas"
 category: "Laptop Reviews"
 categorySlug: "laptop-reviews"
-tags: ["Lenovo ThinkPad X1 Carbon", "business laptop", "Intel Core Ultra", "ultrabook 2025", "enterprise laptop", "productivity laptop", "ThinkPad review"]
-image: "/images/posts/lenovo-thinkpad-x1-carbon-gen-12.jpg"
+tags: 
+  - "Lenovo ThinkPad X1 Carbon"
+  - "business laptop"
+  - "Intel Core Ultra"
+  - "ultrabook 2025"
+  - "enterprise laptop"
+  - "productivity laptop"
+  - "ThinkPad review"
+image: "/images/posts/lenovo-thinkpad-x1-carbon-gen-12-review-2025.mdlenovo-thinkpad-x1-carbon-gen-12.jpg"
 imageAlt: "Lenovo ThinkPad X1 Carbon Gen 12 2025 business ultrabook with TrackPoint and premium design"
 featured: true
 metaTitle: "Lenovo ThinkPad X1 Carbon Gen 12 Review 2025: Business Excellence"
 metaDescription: "Lenovo ThinkPad X1 Carbon Gen 12 review 2025. Intel Core Ultra performance, business security features, keyboard quality, and enterprise productivity tested."
-keywords: ["Lenovo ThinkPad X1 Carbon review", "business laptop 2025", "Intel Core Ultra laptop", "enterprise ultrabook", "ThinkPad review", "productivity laptop", "business ultrabook 2025"]
+keywords: 
+  - "Lenovo ThinkPad X1 Carbon review"
+  - "business laptop 2025"
+  - "Intel Core Ultra laptop"
+  - "enterprise ultrabook"
+  - "ThinkPad review"
+  - "productivity laptop"
+  - "business ultrabook 2025"
 ---
 
 # Lenovo ThinkPad X1 Carbon Gen 12 Review 2025: Business Laptop Perfection

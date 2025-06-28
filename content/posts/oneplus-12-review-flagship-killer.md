@@ -5,7 +5,15 @@ date: "2025-06-25"
 author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
-tags: ["OnePlus 12", "Flagship Killer", "Android", "Smartphone Review", "Budget Flagship", "Camera Review", "Performance", "Value for Money"]
+tags: 
+  - "OnePlus 12"
+  - "Flagship Killer"
+  - "Android"
+  - "Smartphone Review"
+  - "Budget Flagship"
+  - "Camera Review"
+  - "Performance"
+  - "Value for Money"
 image: "/images/posts/oneplus-12-review.jpg"
 featured: false
 published: true

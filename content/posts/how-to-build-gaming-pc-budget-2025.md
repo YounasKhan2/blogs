@@ -5,8 +5,16 @@ date: "2025-07-01"
 author: "Alex Turner"
 category: "How-to Guides"
 categorySlug: "how-to"
-tags: ["Gaming PC", "PC Building", "Budget Gaming", "Computer Assembly", "Gaming Setup", "DIY PC", "Hardware Guide", "Budget Build"]
-image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=1200&h=630&fit=crop&auto=format"
+tags: 
+  - "Gaming PC"
+  - "PC Building"
+  - "Budget Gaming"
+  - "Computer Assembly"
+  - "Gaming Setup"
+  - "DIY PC"
+  - "Hardware Guide"
+  - "Budget Build"
+image: "/images/posts/how-to-build-gaming-pc-budget-2025.jpg"
 featured: true
 published: true
 difficulty: "Intermediate"
@@ -28,7 +36,14 @@ specifications:
   timeRequired: "4-6 hours for first-time builders"
 metaTitle: "How to Build a Gaming PC on a Budget 2025: Complete Assembly Guide Under $800"
 metaDescription: "Step-by-step guide to building a powerful gaming PC for under $800. Complete parts list, assembly instructions, and money-saving tips for budget gaming builds."
-keywords: ["how to build gaming PC", "budget gaming PC build", "PC building guide 2025", "gaming PC under $800", "DIY gaming computer", "budget PC build guide", "gaming PC assembly"]
+keywords: 
+  - "how to build gaming PC"
+  - "budget gaming PC build"
+  - "PC building guide 2025"
+  - "gaming PC under $800"
+  - "DIY gaming computer"
+  - "budget PC build guide"
+  - "gaming PC assembly"
 ---
 
 # How to Build a Gaming PC on a Budget: Complete Step-by-Step Guide 2025

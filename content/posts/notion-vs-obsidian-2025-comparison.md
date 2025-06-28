@@ -5,7 +5,14 @@ date: "2025-01-14"
 author: "Muhammad Younas"
 category: "Software Reviews"
 categorySlug: "software-reviews"
-tags: ["Notion", "Obsidian", "Note Taking", "Productivity", "Knowledge Management", "PKM", "Software Comparison"]
+tags: 
+  - "Notion"
+  - "Obsidian"
+  - "Note Taking"
+  - "Productivity"
+  - "Knowledge Management"
+  - "PKM"
+  - "Software Comparison"
 image: "/images/posts/notion-vs-obsidian-2025-comparison.jpg"
 featured: false
 published: true

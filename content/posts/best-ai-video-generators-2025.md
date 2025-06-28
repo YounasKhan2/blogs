@@ -5,7 +5,14 @@ date: "2025-01-18"
 author: "Muhammad Younas"
 category: "AI"
 categorySlug: "ai"
-tags: ["AI Video Generation", "Runway ML", "Pika Labs", "AI Tools", "Video Creation", "Content Creation", "Artificial Intelligence"]
+tags: 
+  - "AI Video Generation"
+  - "Runway ML"
+  - "Pika Labs"
+  - "AI Tools"
+  - "Video Creation"
+  - "Content Creation"
+  - "Artificial Intelligence"
 image: "/images/posts/best-ai-video-generators-2025.jpg"
 featured: false
 published: true

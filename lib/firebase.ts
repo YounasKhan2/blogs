@@ -1,6 +1,27 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User } from 'firebase/auth';
-import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
+import { 
+  getAuth, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  signOut, 
+  onAuthStateChanged, 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  User 
+} from 'firebase/auth';
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  serverTimestamp, 
+  query, 
+  where, 
+  getDocs,
+  doc,
+  setDoc,
+  getDoc
+} from 'firebase/firestore';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 
 // Firebase configuration - use environment variables for security
@@ -57,21 +78,23 @@ if (isFirebaseConfigured()) {
       prompt: 'select_account'
     });
     
-    console.log('Firebase initialized successfully');
-    
     // Initialize Analytics only on client side and if supported
     if (typeof window !== 'undefined') {
       isSupported().then((supported) => {
         if (supported) {
           analytics = getAnalytics(app);
-          console.log('Firebase Analytics initialized');
         }
       }).catch((error) => {
-        console.warn('Analytics not supported:', error);
+        // Analytics not supported - silent fail
       });
     }
   } catch (error) {
     console.error('Firebase initialization error:', error);
+    // Reset variables on error
+    app = null;
+    auth = null;
+    db = null;
+    googleProvider = null;
   }
 } else {
   console.warn('Firebase not configured. Missing environment variables:', {
@@ -83,6 +106,106 @@ if (isFirebaseConfigured()) {
 }
 
 export { app, auth, db, analytics };
+
+// User profile interface
+export interface UserProfile {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL?: string;
+  provider: 'google' | 'email';
+  createdAt: any;
+  lastLoginAt: any;
+  preferences?: {
+    newsletter: boolean;
+    categories: string[];
+    frequency: 'daily' | 'weekly' | 'monthly';
+  };
+}
+
+// Create or update user profile in Firestore
+const createOrUpdateUserProfile = async (user: User, provider: 'google' | 'email', additionalData: any = {}) => {
+  if (!db) {
+    console.warn('Firestore not available, skipping user profile creation');
+    return;
+  }
+
+  try {
+    const userRef = doc(db, 'users', user.uid);
+    const userSnap = await getDoc(userRef);
+    
+    const userData: Partial<UserProfile> = {
+      uid: user.uid,
+      email: user.email || '',
+      displayName: user.displayName || additionalData.displayName || user.email?.split('@')[0] || 'User',
+      photoURL: user.photoURL || '',
+      provider,
+      lastLoginAt: serverTimestamp(),
+      ...additionalData
+    };
+
+    if (userSnap.exists()) {
+      // Update existing user
+      await setDoc(userRef, userData, { merge: true });
+    } else {
+      // Create new user profile
+      const newUserData: UserProfile = {
+        ...userData,
+        createdAt: serverTimestamp(),
+        preferences: {
+          newsletter: true,
+          categories: ['all'],
+          frequency: 'weekly'
+        }
+      } as UserProfile;
+      
+      await setDoc(userRef, newUserData);
+    }
+  } catch (error) {
+    console.error('Error creating/updating user profile:', error);
+    throw error; // Re-throw to handle in calling function
+  }
+};
+
+// Get user profile from Firestore
+export const getUserProfile = async (uid: string): Promise<UserProfile | null> => {
+  if (!db) {
+    console.warn('Firestore not available');
+    return null;
+  }
+  
+  try {
+    const userRef = doc(db, 'users', uid);
+    const userSnap = await getDoc(userRef);
+    
+    if (userSnap.exists()) {
+      return userSnap.data() as UserProfile;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    return null;
+  }
+};
+
+// Update user preferences
+export const updateUserPreferences = async (uid: string, preferences: Partial<UserProfile['preferences']>) => {
+  if (!db) {
+    throw new Error('Firebase Firestore not configured');
+  }
+  
+  try {
+    const userRef = doc(db, 'users', uid);
+    await setDoc(userRef, { 
+      preferences: preferences,
+      lastLoginAt: serverTimestamp()
+    }, { merge: true });
+  } catch (error) {
+    console.error('Error updating user preferences:', error);
+    throw error;
+  }
+};
 
 // Auth functions with error handling
 export const signInWithGoogle = async () => {
@@ -97,15 +220,114 @@ export const signInWithGoogle = async () => {
   
   if (!auth || !googleProvider) {
     console.error('Firebase Auth or Google provider not initialized');
-    throw new Error('Authentication service is not available.');
+    throw new Error('Google authentication service is not available.');
   }
   
   try {
     const result = await signInWithPopup(auth, googleProvider);
-    console.log('Sign in successful');
+    
+    // Create or update user profile in Firestore
+    await createOrUpdateUserProfile(result.user, 'google');
+    
     return result;
-  } catch (error) {
-    console.error('Sign in error:', error);
+  } catch (error: any) {
+    console.error('Google sign in error:', error);
+    
+    // Provide user-friendly error messages
+    if (error.code === 'auth/popup-closed-by-user') {
+      throw new Error('Sign-in was cancelled. Please try again.');
+    } else if (error.code === 'auth/popup-blocked') {
+      throw new Error('Pop-up was blocked by your browser. Please allow pop-ups and try again.');
+    } else if (error.code === 'auth/cancelled-popup-request') {
+      throw new Error('Sign-in was cancelled. Please try again.');
+    }
+    
+    throw error;
+  }
+};
+
+export const signUpWithEmail = async (email: string, password: string, displayName: string) => {
+  if (typeof window === 'undefined') {
+    throw new Error('Authentication is only available on the client side.');
+  }
+  
+  if (!isFirebaseConfigured()) {
+    console.warn('Firebase not configured - sign up disabled');
+    throw new Error('Authentication is not available. Please check your configuration.');
+  }
+  
+  if (!auth) {
+    console.error('Firebase Auth not initialized');
+    throw new Error('Authentication service is not available.');
+  }
+  
+  try {
+    // Create user account
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    
+    // Update user profile with display name
+    if (displayName && displayName.trim()) {
+      await updateProfile(result.user, { 
+        displayName: displayName.trim() 
+      });
+    }
+    
+    // Create user profile in Firestore
+    await createOrUpdateUserProfile(result.user, 'email', { 
+      displayName: displayName.trim() 
+    });
+    
+    return result;
+  } catch (error: any) {
+    console.error('Email sign up error:', error);
+    // Provide user-friendly error messages
+    if (error.code === 'auth/email-already-in-use') {
+      throw new Error('An account with this email already exists. Please sign in instead.');
+    } else if (error.code === 'auth/weak-password') {
+      throw new Error('Password should be at least 6 characters long.');
+    } else if (error.code === 'auth/invalid-email') {
+      throw new Error('Please enter a valid email address.');
+    }
+    throw error;
+  }
+};
+
+export const signInWithEmail = async (email: string, password: string) => {
+  if (typeof window === 'undefined') {
+    throw new Error('Authentication is only available on the client side.');
+  }
+  
+  if (!isFirebaseConfigured()) {
+    console.warn('Firebase not configured - sign in disabled');
+    throw new Error('Authentication is not available. Please check your configuration.');
+  }
+  
+  if (!auth) {
+    console.error('Firebase Auth not initialized');
+    throw new Error('Authentication service is not available.');
+  }
+  
+  try {
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    
+    // Update user profile in Firestore
+    await createOrUpdateUserProfile(result.user, 'email');
+    
+    return result;
+  } catch (error: any) {
+    console.error('Email sign in error:', error);
+    
+    // Provide user-friendly error messages
+    if (error.code === 'auth/user-not-found') {
+      throw new Error('No account found with this email address. Please sign up first.');
+    } else if (error.code === 'auth/wrong-password') {
+      throw new Error('Incorrect password. Please try again.');
+    } else if (error.code === 'auth/invalid-email') {
+      throw new Error('Please enter a valid email address.');
+    } else if (error.code === 'auth/too-many-requests') {
+      throw new Error('Too many failed attempts. Please try again later.');
+    }
+    
     throw error;
   }
 };
@@ -123,7 +345,6 @@ export const signOutUser = async () => {
   
   try {
     await signOut(auth);
-    console.log('Sign out successful');
   } catch (error) {
     console.error('Sign out error:', error);
     throw error;
@@ -190,7 +411,6 @@ export const unsubscribeUser = async (email: string) => {
     if (!querySnapshot.empty) {
       // Update status instead of deleting
       // This could be implemented with updateDoc if needed
-      console.log('User unsubscribed:', email);
     }
   } catch (error) {
     console.error('Error unsubscribing user:', error);
@@ -214,7 +434,6 @@ export const onAuthStateChange = (callback: (user: User | null) => void) => {
   
   try {
     return onAuthStateChanged(auth, (user) => {
-      console.log('Auth state changed:', user ? 'signed in' : 'signed out');
       callback(user);
     });
   } catch (error) {

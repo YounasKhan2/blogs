@@ -5,8 +5,18 @@ date: "2025-07-02"
 author: "Alex Turner"
 category: "Accessories & Gadgets"
 categorySlug: "accessories-gadgets"
-tags: ["Wireless Earbuds", "AirPods Pro", "Sony", "Bose", "Audio", "Review", "Noise Cancellation", "True Wireless", "Bluetooth", "Premium Audio"]
-image: "https://images.unsplash.com/photo-1564424224827-cd24b8915874?w=1200&h=630&fit=crop&auto=format"
+tags: 
+  - "Wireless Earbuds"
+  - "AirPods Pro"
+  - "Sony"
+  - "Bose"
+  - "Audio"
+  - "Review"
+  - "Noise Cancellation"
+  - "True Wireless"
+  - "Bluetooth"
+  - "Premium Audio"
+image: "/images/posts/best-wireless-earbuds-2025.jpg"
 featured: true
 published: true
 rating: 4.8
@@ -26,7 +36,14 @@ specifications:
   priceRange: "$50 - $300"
 metaTitle: "Best Wireless Earbuds 2025: AirPods Pro vs Sony vs Bose Review & Comparison"
 metaDescription: "Expert reviews of the best wireless earbuds in 2025. Compare AirPods Pro 3, Sony WF-1000XM5, Bose QuietComfort and find your perfect true wireless earbuds."
-keywords: ["best wireless earbuds 2025", "AirPods Pro 3 review", "Sony WF-1000XM5", "Bose QuietComfort earbuds", "true wireless earbuds", "noise cancelling earbuds", "wireless earbuds comparison"]
+keywords: 
+  - "best wireless earbuds 2025"
+  - "AirPods Pro 3 review"
+  - "Sony WF-1000XM5"
+  - "Bose QuietComfort earbuds"
+  - "true wireless earbuds"
+  - "noise cancelling earbuds"
+  - "wireless earbuds comparison"
 ---
 
 # Best Wireless Earbuds 2025: AirPods Pro vs Sony vs Bose Ultimate Comparison

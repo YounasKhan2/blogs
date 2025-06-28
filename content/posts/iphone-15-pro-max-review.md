@@ -5,7 +5,16 @@ date: "2025-06-25"
 author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
-tags: ["iPhone", "Apple", "Smartphone", "Review", "Mobile", "iOS", "5G", "Camera", "Premium"]
+tags: 
+  - "iPhone"
+  - "Apple"
+  - "Smartphone"
+  - "Review"
+  - "Mobile"
+  - "iOS"
+  - "5G"
+  - "Camera"
+  - "Premium"
 image: "/images/posts/iphone-15-pro-max.jpg"
 featured: true
 published: true

@@ -5,7 +5,13 @@ date: "2025-01-12"
 author: "Muhammad Younas"
 category: "Software Reviews"
 categorySlug: "software-reviews"
-tags: ["DaVinci Resolve", "Adobe Premiere Pro", "Video Editing", "Color Grading", "Post Production", "Creative Software"]
+tags: 
+  - "DaVinci Resolve"
+  - "Adobe Premiere Pro"
+  - "Video Editing"
+  - "Color Grading"
+  - "Post Production"
+  - "Creative Software"
 image: "/images/posts/davinci-resolve-vs-premiere-pro-2025.jpg"
 featured: false
 published: true

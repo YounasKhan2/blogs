@@ -5,7 +5,13 @@ date: "2025-06-24"
 author: "Sarah Johnson"
 category: "Laptop Reviews"
 categorySlug: "laptop-reviews"
-tags: ["MacBook Pro", "Dell XPS", "Laptop", "Comparison", "M3", "Performance"]
+tags: 
+  - "MacBook Pro"
+  - "Dell XPS"
+  - "Laptop"
+  - "Comparison"
+  - "M3"
+  - "Performance"
 image: "/images/posts/macbook-pro-m3-vs-dell-xps-15.jpg"
 featured: true
 published: true

@@ -5,7 +5,15 @@ date: "2025-06-26"
 author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
-tags: ["Google Pixel 8 Pro", "iPhone 15 Pro", "Camera Comparison", "Smartphone Photography", "Flagship Phones", "Android vs iOS", "Mobile Photography", "Phone Camera Review"]
+tags: 
+  - "Google Pixel 8 Pro"
+  - "iPhone 15 Pro"
+  - "Camera Comparison"
+  - "Smartphone Photography"
+  - "Flagship Phones"
+  - "Android vs iOS"
+  - "Mobile Photography"
+  - "Phone Camera Review"
 image: "/images/posts/google-pixel-8-pro-vs-iphone-15-pro.jpg"
 featured: true
 published: true

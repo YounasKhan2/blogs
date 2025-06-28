@@ -5,7 +5,14 @@ date: "2025-01-15"
 author: "Muhammad Younas"
 category: "Laptop Reviews"
 categorySlug: "laptop-reviews"
-tags: ["Gaming Laptops", "Budget Gaming", "RTX 4060", "Performance", "Value", "Under $1500", "Gaming"]
+tags: 
+  - "Gaming Laptops"
+  - "Budget Gaming"
+  - "RTX 4060"
+  - "Performance"
+  - "Value"
+  - "Under $1500"
+  - "Gaming"
 image: "/images/posts/best-gaming-laptops-under-1500-2025.jpg"
 featured: false
 published: true

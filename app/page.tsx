@@ -183,7 +183,7 @@ export default function Home() {
               >
                 <div className="relative">
                   <OptimizedImage
-                    src={post.image || "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop&auto=format&q=80"}
+                    src={post.image}
                     alt={post.title || 'Article image'}
                     width={600}
                     height={index === 0 ? 320 : 192}
@@ -312,7 +312,7 @@ export default function Home() {
               >
                 <div className="relative">
                   <OptimizedImage
-                    src={post.image || "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop&auto=format&q=80"}
+                    src={post.image || "/images/posts/default-tech.jpg"}
                     alt={post.title || 'Article image'}
                     width={400}
                     height={300}

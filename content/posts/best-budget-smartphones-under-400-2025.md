@@ -5,7 +5,15 @@ date: "2025-06-29"
 author: "Muhammad Younas"
 category: "Mobile Reviews"
 categorySlug: "mobile-reviews"
-tags: ["Budget Smartphones", "Best Phone Under 400", "Affordable Android", "Budget iPhone", "Value Smartphones", "Cheap Phones 2025", "Mobile Photography Budget", "Student Phones"]
+tags: 
+  - "Budget Smartphones"
+  - "Best Phone Under 400"
+  - "Affordable Android"
+  - "Budget iPhone"
+  - "Value Smartphones"
+  - "Cheap Phones 2025"
+  - "Mobile Photography Budget"
+  - "Student Phones"
 image: "/images/posts/best-budget-smartphones-under-400-2025.jpg"
 featured: true
 published: true

@@ -5,13 +5,27 @@ date: "2025-01-22"
 author: "muhammad-younas"
 category: "AI"
 categorySlug: "ai"
-tags: ["Microsoft Copilot", "Google Bard", "productivity AI", "office AI", "business AI tools", "AI assistant", "workplace automation"]
+tags: 
+  - "Microsoft Copilot"
+  - "Google Bard"
+  - "productivity AI"
+  - "office AI"
+  - "business AI tools"
+  - "AI assistant"
+  - "workplace automation"
 image: "/images/posts/microsoft-copilot-vs-google-bard.jpg"
 imageAlt: "Microsoft Copilot vs Google Bard productivity AI assistant comparison for business users"
 featured: true
 metaTitle: "Microsoft Copilot vs Google Bard 2025: Best Productivity AI"
 metaDescription: "Microsoft Copilot vs Google Bard productivity comparison 2025. Office integration, business features, pricing, and workflow automation capabilities tested."
-keywords: ["Microsoft Copilot vs Google Bard", "productivity AI assistant", "office AI integration", "business AI tools", "workplace automation", "AI productivity", "enterprise AI"]
+keywords: 
+  - "Microsoft Copilot vs Google Bard"
+  - "productivity AI assistant"
+  - "office AI integration"
+  - "business AI tools"
+  - "workplace automation"
+  - "AI productivity"
+  - "enterprise AI"
 ---
 
 # Microsoft Copilot vs Google Bard 2025: Productivity AI Assistant Battle

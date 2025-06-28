@@ -5,7 +5,15 @@ date: "2025-06-29"
 author: "Sarah Johnson"
 category: "How-to Guides"
 categorySlug: "how-to"
-tags: ["Home Office", "Remote Work", "Productivity", "Ergonomics", "Office Setup", "Work From Home", "Desk Setup", "Office Technology"]
+tags: 
+  - "Home Office"
+  - "Remote Work"
+  - "Productivity"
+  - "Ergonomics"
+  - "Office Setup"
+  - "Work From Home"
+  - "Desk Setup"
+  - "Office Technology"
 image: "/images/posts/home-office-setup-guide-2025.jpg"
 featured: true
 published: true
@@ -28,7 +36,15 @@ specifications:
   skillLevel: "No technical skills required"
 metaTitle: "How to Set Up a Home Office 2025: Complete Productivity & Ergonomics Guide"
 metaDescription: "Create the perfect home office setup for productivity and health. Complete guide covering desk setup, technology, ergonomics, lighting, and organization."
-keywords: ["home office setup", "remote work setup", "home office ideas", "ergonomic home office", "productivity workspace", "work from home setup", "office technology", "desk setup guide"]
+keywords: 
+  - "home office setup"
+  - "remote work setup"
+  - "home office ideas"
+  - "ergonomic home office"
+  - "productivity workspace"
+  - "work from home setup"
+  - "office technology"
+  - "desk setup guide"
 ---
 
 # How to Set Up a Home Office for Maximum Productivity: Complete Tech Guide 2025

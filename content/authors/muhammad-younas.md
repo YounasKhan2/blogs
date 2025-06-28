@@ -5,7 +5,12 @@ avatar: "/images/authors/muhammad-younas.jpg"
 twitter: "@muhammadyounas"
 linkedin: "https://linkedin.com/in/muhammad-younas"
 website: "https://muhammadyounas.tech"
-expertise: ["Mobile Devices", "Apple Products", "Consumer Electronics", "Photography", "Tech Reviews"]
+expertise: 
+  - "Mobile Devices"
+  - "Apple Products" 
+  - "Consumer Electronics"
+  - "Photography"
+  - "Tech Reviews"
 ---
 
 # About Muhammad Younas

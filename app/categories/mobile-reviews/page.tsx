@@ -5,6 +5,7 @@ import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
 import AdSense, { SidebarAd, ArticleAd } from '../../../components/AdSense';
 import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp, Search } from 'lucide-react';
+import { getPostsByCategory } from '@/lib/contentlayer-enhanced';
 // Note: SEO metadata for this client component is handled in the parent layout
 
 export default function MobileReviews() {
@@ -12,71 +13,21 @@ export default function MobileReviews() {
   const [searchTerm, setSearchTerm] = useState('');
   const [allMobileReviews, setAllMobileReviews] = useState<any[]>([]);
 
-  // Mock data for mobile reviews - replace with actual data fetching
+  // Get real mobile review posts from contentlayer
   useEffect(() => {
-    const mockReviews = [
-      {
-        slug: 'iphone-15-pro-max-review',
-        title: 'iPhone 15 Pro Max Review: The Ultimate Smartphone Experience',
-        excerpt: 'Apple\'s latest flagship delivers incredible performance, stunning cameras, and titanium design that sets new standards for premium smartphones.',
-        author: 'Muhammad Younas',
-        date: '2025-06-25',
-        tags: ['iPhone', 'Apple', 'Smartphone', 'Review', 'Mobile', 'iOS'],
-        image: '/images/posts/iphone-15-pro-max.jpg',
-        featured: true,
-        category: 'Mobile Reviews',
-        categorySlug: 'mobile-reviews'
-      },
-      {
-        slug: 'samsung-galaxy-s24-ultra-review-2025',
-        title: 'Samsung Galaxy S24 Ultra Review 2025: The Ultimate Android Flagship with AI Power',
-        excerpt: 'Complete Samsung Galaxy S24 Ultra review 2025 covering AI features, S Pen performance, 200MP camera system, battery life, and whether it\'s worth upgrading.',
-        author: 'Muhammad Younas',
-        date: '2025-01-15',
-        tags: ['Samsung Galaxy S24 Ultra', 'Android flagship', 'smartphone review', 'S Pen', 'AI features'],
-        image: '/images/posts/samsung-galaxy-s24-ultra-review.jpg',
-        featured: false,
-        category: 'Mobile Reviews',
-        categorySlug: 'mobile-reviews'
-      },
-      {
-        slug: 'oneplus-12-review-flagship-killer',
-        title: 'OnePlus 12 Review: The Flagship Killer Returns with Premium Features',
-        excerpt: 'OnePlus 12 combines flagship performance with competitive pricing. Our comprehensive review covers camera quality, performance benchmarks, and whether it lives up to the flagship killer reputation.',
-        author: 'Muhammad Younas',
-        date: '2025-06-25',
-        tags: ['OnePlus 12', 'Flagship Killer', 'Android', 'Smartphone Review', 'Budget Flagship'],
-        image: '/images/posts/oneplus-12-review.jpg',
-        featured: false,
-        category: 'Mobile Reviews',
-        categorySlug: 'mobile-reviews'
-      },
-      {
-        slug: 'google-pixel-8-pro-vs-iphone-15-pro',
-        title: 'Google Pixel 8 Pro vs iPhone 15 Pro: Ultimate Camera Comparison 2025',
-        excerpt: 'In-depth comparison of Google Pixel 8 Pro and iPhone 15 Pro focusing on camera quality, performance, and value.',
-        author: 'Muhammad Younas',
-        date: '2025-06-26',
-        tags: ['Google Pixel 8 Pro', 'iPhone 15 Pro', 'Camera Comparison', 'Smartphone Photography'],
-        image: '/images/posts/google-pixel-8-pro-vs-iphone-15-pro.jpg',
-        featured: false,
-        category: 'Mobile Reviews',
-        categorySlug: 'mobile-reviews'
-      },
-      {
-        slug: 'best-budget-smartphones-under-400-2025',
-        title: 'Best Budget Smartphones Under $400 in 2025: Exceptional Value Android & iOS Options',
-        excerpt: 'Discover the best budget smartphones that deliver flagship-level features without breaking the bank.',
-        author: 'Muhammad Younas',
-        date: '2025-06-29',
-        tags: ['Budget Smartphones', 'Best Phone Under 400', 'Affordable Android', 'Value Smartphones'],
-        image: '/images/posts/best-budget-smartphones-under-400-2025.jpg',
-        featured: true,
-        category: 'Mobile Reviews',
-        categorySlug: 'mobile-reviews'
-      }
-    ];
-    setAllMobileReviews(mockReviews);
+    const mobileReviews = getPostsByCategory('mobile-reviews').map(post => ({
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt,
+      author: post.author,
+      date: post.date,
+      tags: post.tags || [],
+      image: post.image,
+      featured: post.featured || false,
+      category: post.category,
+      categorySlug: post.categorySlug
+    }));
+    setAllMobileReviews(mobileReviews);
   }, []);
 
   // Filter posts based on active filter and search term
@@ -264,7 +215,7 @@ export default function MobileReviews() {
                 <div className="md:flex">
                   <div className="md:w-1/2">
                     <OptimizedImage
-                      src={featuredReviews[0].image || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop&auto=format&q=80"}
+                      src={featuredReviews[0].image || "/images/posts/default-mobile.jpg"}
                       alt={featuredReviews[0].title}
                       width={600}
                       height={400}
@@ -335,7 +286,7 @@ export default function MobileReviews() {
                 >
                   <div className="relative">
                     <OptimizedImage
-                      src={review.image || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop&auto=format&q=80"}
+                      src={review.image || "/images/posts/default-mobile.jpg"}
                       alt={review.title}
                       width={400}
                       height={200}

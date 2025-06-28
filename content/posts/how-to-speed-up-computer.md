@@ -5,7 +5,13 @@ date: "2025-06-21"
 author: "Lisa Brown"
 category: "How-to Guides"
 categorySlug: "how-to"
-tags: ["Computer Maintenance", "Performance", "Optimization", "Windows", "Mac", "Tutorial"]
+tags: 
+  - "Computer Maintenance"
+  - "Performance"
+  - "Optimization"
+  - "Windows"
+  - "Mac"
+  - "Tutorial"
 image: "/images/posts/speed-up-computer-guide.jpg"
 featured: false
 published: true
