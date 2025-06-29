@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import OptimizedImage from '../components/OptimizedImage';
+import Image from 'next/image';
 import { ChevronRight, TrendingUp, Clock, User, Star, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen } from 'lucide-react';
 import { HeaderAd, ArticleAd } from '../components/AdSenseWrapper';
 import { getFeaturedPosts, getRecentPosts, getAllCategories } from '../lib/posts';
@@ -145,16 +145,23 @@ export default async function Home() {
                 }`}
               >
                 <div className="relative">
-                  <OptimizedImage
-                    src={post.metadata.image}
-                    alt={post.metadata.title || 'Article image'}
-                    width={600}
-                    height={index === 0 ? 320 : 192}
-                    className={`w-full object-cover ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
-                    priority={index < 2}
-                    placeholder="blur"
-                    category={post.metadata.category}
-                  />
+                  {post.metadata.image && (
+                    <Image
+                      src={post.metadata.image}
+                      alt={post.metadata.title || 'Article image'}
+                      width={600}
+                      height={index === 0 ? 320 : 192}
+                      className={`w-full object-cover ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
+                      priority={index < 2}
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                    />
+                  )}
+                  {!post.metadata.image && (
+                    <div className={`w-full bg-gray-200 flex items-center justify-center ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}>
+                      <span className="text-gray-500 text-sm">No image available</span>
+                    </div>
+                  )}
                   <div className="absolute top-4 left-4">
                     <Link
                     href={`/categories/${post.metadata.categorySlug || 'uncategorized'}`}
@@ -274,14 +281,22 @@ export default async function Home() {
                 className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
               >
                 <div className="relative">
-                  <OptimizedImage
-                    src={post.metadata.image || "/images/posts/default-tech.jpg"}
-                    alt={post.metadata.title || 'Article image'}
-                    width={400}
-                    height={300}
-                    className="w-full h-48 object-cover"
-                    category={post.metadata.category}
-                  />
+                  {post.metadata.image && (
+                    <Image
+                      src={post.metadata.image}
+                      alt={post.metadata.title || 'Article image'}
+                      width={400}
+                      height={300}
+                      className="w-full h-48 object-cover"
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                    />
+                  )}
+                  {!post.metadata.image && (
+                    <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-500 text-sm">No image available</span>
+                    </div>
+                  )}
                   <div className="absolute top-4 left-4">
                     <Link
                     href={`/categories/${post.metadata.categorySlug || 'uncategorized'}`}

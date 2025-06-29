@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import OptimizedImage from '../../../components/OptimizedImage';
+import Image from 'next/image';
 import { ArrowLeft, Clock, User, Calendar, Tag, Share2 } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getPostBySlug, getAllPostSlugs, getRelatedPosts } from '../../../lib/posts';
@@ -205,14 +205,15 @@ export default async function PostPage({ params }: Props) {
               {/* Featured Image */}
               {post.metadata.image && post.metadata.image.trim() && (
                 <div className="relative">
-                  <OptimizedImage
+                  <Image
                     src={post.metadata.image}
                     alt={post.metadata.title}
                     width={800}
                     height={400}
                     className="w-full h-64 md:h-96 object-cover"
                     priority
-                    category={post.metadata.category}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFELQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                   />
                 </div>
               )}
@@ -290,14 +291,21 @@ export default async function PostPage({ params }: Props) {
                       className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                     >
                       <div className="relative">
-                        <OptimizedImage
-                          src={relatedPost.metadata.image || "/images/posts/default-tech.jpg"}
-                          alt={relatedPost.metadata.title}
-                          width={400}
-                          height={200}
-                          className="w-full h-48 object-cover"
-                          category={relatedPost.metadata.category}
-                        />
+                        {relatedPost.metadata.image ? (
+                          <Image
+                            src={relatedPost.metadata.image}
+                            alt={relatedPost.metadata.title}
+                            width={400}
+                            height={200}
+                            className="w-full h-48 object-cover"
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFELQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                          />
+                        ) : (
+                          <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                            <span className="text-gray-500 text-sm">No image available</span>
+                          </div>
+                        )}
                         <div className="absolute top-4 left-4">
                           <Link
                             href={`/categories/${relatedPost.metadata.categorySlug}`}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import OptimizedImage from '../../components/OptimizedImage';
+import Image from 'next/image';
 import { Clock, User, ChevronRight, Search, Calendar } from 'lucide-react';
 import { getAllPosts, getAllCategories, getPostsByCategory } from '@/lib/posts';
 
@@ -49,15 +49,22 @@ export default function TechReviews() {
           <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
             <div className="md:flex">
               <div className="md:w-1/2">
-                <OptimizedImage
-                  src={featuredPost.metadata.image || "/images/posts/default-tech.jpg"}
-                  alt={featuredPost.metadata.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-64 md:h-full object-cover"
-                  priority
-                  category={featuredPost.metadata.category}
-                />
+                {featuredPost.metadata.image ? (
+                  <Image
+                    src={featuredPost.metadata.image}
+                    alt={featuredPost.metadata.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-64 md:h-full object-cover"
+                    priority
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFELQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                  />
+                ) : (
+                  <div className="w-full h-64 md:h-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-500 text-sm">No image available</span>
+                  </div>
+                )}
               </div>
               <div className="md:w-1/2 p-8">
                 <div className="mb-4">
@@ -124,14 +131,21 @@ export default function TechReviews() {
                       className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                     >
                       <div className="relative">
-                        <OptimizedImage
-                          src={post.metadata.image || "/images/posts/default-tech.jpg"}
-                          alt={post.metadata.title}
-                          width={400}
-                          height={200}
-                          className="w-full h-48 object-cover"
-                          category={post.metadata.category}
-                        />
+                        {post.metadata.image ? (
+                          <Image
+                            src={post.metadata.image}
+                            alt={post.metadata.title}
+                            width={400}
+                            height={200}
+                            className="w-full h-48 object-cover"
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFELQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                          />
+                        ) : (
+                          <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                            <span className="text-gray-500 text-sm">No image available</span>
+                          </div>
+                        )}
                         <div className="absolute top-4 left-4">
                           <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                             {post.metadata.category}

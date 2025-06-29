@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import OptimizedImage from '../../../components/OptimizedImage';
+import Image from 'next/image';
 import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
@@ -105,14 +105,21 @@ export default function HowToGuides() {
                 {posts.map((post) => (
                   <article key={post.slug} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                     <div className="relative">
-                      <OptimizedImage
-                        src={post.metadata.image || "/images/posts/default-howto.jpg"}
-                        alt={post.metadata.title}
-                        width={400}
-                        height={300}
-                        className="w-full h-48 object-cover"
-                        category="howto"
-                      />
+                      {post.metadata.image ? (
+                        <Image
+                          src={post.metadata.image}
+                          alt={post.metadata.title}
+                          width={400}
+                          height={300}
+                          className="w-full h-48 object-cover"
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                        />
+                      ) : (
+                        <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                          <span className="text-gray-500 text-sm">No image available</span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">
