@@ -4,10 +4,13 @@ import { Search, Filter, Star, Clock, TrendingUp, Laptop, User, ChevronRight } f
 import { getPostsByCategory } from '@/lib/posts';
 
 export default async function LaptopReviews() {
-  const posts = getPostsByCategory('laptop-reviews');
+  // Get all posts and total count using consistent logic
+  const posts = getPostsByCategory('laptop-reviews').sort((a, b) => {
+    const dateA = new Date(a.metadata.date).getTime();
+    const dateB = new Date(b.metadata.date).getTime();
+    return dateB - dateA;
+  });
   const totalCount = posts.length;
-  const featuredReviews = posts.filter(post => post.metadata.featured);
-  const nonFeaturedReviews = posts.filter(post => !post.metadata.featured);
 
   const popularLaptops = [
     { name: "MacBook Pro 14 (M4)", rating: 4.8, reviews: 32 },
@@ -71,74 +74,18 @@ export default async function LaptopReviews() {
             {/* Filters and Search */}
             {/* Filters and search removed for server component version */}
 
-            {/* Featured Review */}
-            {featuredReviews.length > 0 && (
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
-                <div className="md:flex">
-                  <div className="md:w-1/2">
-                    <OptimizedImage
-                      src={featuredReviews[0].metadata.image || "/images/posts/default-laptop.jpg"}
-                      alt={featuredReviews[0].metadata.title}
-                      width={600}
-                      height={400}
-                      className="w-full h-64 md:h-full object-cover"
-                      category="laptop"
-                    />
-                  </div>
-                  <div className="md:w-1/2 p-8">
-                    <div className="flex items-center space-x-2 mb-4">
-                      <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded">
-                        Featured Review
-                      </span>
-                      <span className="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded">
-                        Editor's Choice
-                      </span>
-                    </div>
-                    
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4 leading-tight">
-                      {featuredReviews[0].metadata.title}
-                    </h2>
-                    <p className="text-gray-600 mb-6 line-clamp-3">
-                      {featuredReviews[0].metadata.excerpt}
-                    </p>
-                    
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
-                        <div className="flex items-center space-x-1">
-                          <User size={16} />
-                          <span>{featuredReviews[0].metadata.author}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock size={16} />
-                          <span>{featuredReviews[0].metadata.date ? new Date(featuredReviews[0].metadata.date).toLocaleDateString() : ''}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <Link 
-                      href={`/posts/${featuredReviews[0].slug}`}
-                      className="inline-flex items-center space-x-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-semibold"
-                    >
-                      <span>Read Full Review</span>
-                      <ChevronRight size={16} />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Reviews Grid */}
+            {/* All Reviews (latest first) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {nonFeaturedReviews.map((review) => (
+              {posts.map((post) => (
                 <Link 
-                  key={review.slug} 
-                  href={`/posts/${review.slug}`}
+                  key={post.slug} 
+                  href={`/posts/${post.slug}`}
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
                 >
                   <div className="relative">
                     <OptimizedImage
-                      src={review.metadata.image || "/images/posts/default-laptop.jpg"}
-                      alt={review.metadata.title}
+                      src={post.metadata.image || "/images/posts/default-laptop.jpg"}
+                      alt={post.metadata.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -147,24 +94,24 @@ export default async function LaptopReviews() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors line-clamp-2">
-                      {review.metadata.title}
+                      {post.metadata.title}
                     </h3>
                     <p className="text-gray-600 mb-4 line-clamp-3">
-                      {review.metadata.excerpt}
+                      {post.metadata.excerpt}
                     </p>
                     <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                       <div className="flex items-center space-x-1">
                         <User size={16} />
-                        <span>{review.metadata.author}</span>
+                        <span>{post.metadata.author}</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Clock size={16} />
-                        <span>{review.metadata.date ? new Date(review.metadata.date).toLocaleDateString() : ''}</span>
+                        <span>{post.metadata.date ? new Date(post.metadata.date).toLocaleDateString() : ''}</span>
                       </div>
                     </div>
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
-                      {review.metadata.tags.slice(0, 3).map((tag: string, index: number) => (
+                      {post.metadata.tags.slice(0, 3).map((tag: string, index: number) => (
                         <span 
                           key={index}
                           className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
@@ -179,7 +126,7 @@ export default async function LaptopReviews() {
             </div>
 
             {/* No Results Message */}
-            {nonFeaturedReviews.length === 0 && (
+            {posts.length === 0 && (
               <div className="text-center py-12">
                 <Laptop className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 mb-2">No laptop reviews found</h3>

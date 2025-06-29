@@ -5,10 +5,13 @@ import { getPostsByCategory } from '@/lib/posts';
 
 export default function HowToGuides() {
   // Server-side fetch
-  const posts = getPostsByCategory('how-to');
+  // Get all posts and total count using consistent logic
+  const posts = getPostsByCategory('how-to').sort((a, b) => {
+    const dateA = new Date(a.metadata.date).getTime();
+    const dateB = new Date(b.metadata.date).getTime();
+    return dateB - dateA;
+  });
   const totalCount = posts.length;
-  const featuredPosts = posts.filter(post => post.metadata.featured).slice(0, 3);
-  const recentPosts = posts.slice(0, 6);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -92,134 +95,58 @@ export default function HowToGuides() {
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Main Content */}
           <div className="lg:w-2/3">
-            {/* Featured Guides */}
-            {featuredPosts.length > 0 && (
-              <section className="mb-12">
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900">Featured Guides</h2>
-                  <Link href="#" className="text-indigo-600 hover:text-indigo-700 font-semibold">
-                    View All →
-                  </Link>
-                </div>
-                
-                <div className="grid gap-8">
-                  {featuredPosts.map((post) => (
-                    <article key={post.slug} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                      <div className="md:flex">
-                        <div className="md:w-1/3 relative">
-                          <OptimizedImage 
-                            src={post.metadata.image || "/images/posts/default-howto.jpg"}
-                            alt={post.metadata.title}
-                            width={400}
-                            height={300}
-                            className="w-full h-48 md:h-full object-cover"
-                            category="howto"
-                          />
-                          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 flex items-center">
-                            <Play className="h-4 w-4 text-indigo-600 mr-2" />
-                            <span className="text-sm font-medium">Guide</span>
-                          </div>
-                        </div>
-                        <div className="p-6 md:w-2/3">
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">
-                              {post.metadata.category}
-                            </span>
-                            <span className={`text-sm font-medium px-3 py-1 rounded-full ${getDifficultyColor('Beginner')}`}>
-                              Beginner
-                            </span>
-                          </div>
-                          <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
-                            <Link href={`/posts/${post.slug}`}>{post.metadata.title}</Link>
-                          </h3>
-                          <p className="text-gray-600 mb-4">{post.metadata.excerpt}</p>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-4 text-sm text-gray-500">
-                              <div className="flex items-center">
-                                <Clock className="h-4 w-4 mr-1" />
-                                {post.readingTime.text || '10 min read'}
-                              </div>
-                              <div className="flex items-center">
-                                <Users className="h-4 w-4 mr-1" />
-                                {Math.floor(Math.random() * 100) + 50}K
-                              </div>
-                            </div>
-                            <span className="text-sm text-gray-500">{formatDate(post.metadata.date)}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Recent Guides */}
-            <section>
+            {/* All How-to Guides (unified grid) */}
+            <section className="mb-12">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">Recent Guides</h2>
-                <div className="flex items-center space-x-4">
-                  <button className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-                    <Filter className="h-4 w-4 mr-2" />
-                    Filter
-                  </button>
-                </div>
+                <h2 className="text-3xl font-bold text-gray-900">All How-to Guides</h2>
+                <span className="text-indigo-600 font-semibold">{posts.length} total</span>
               </div>
-
-              {recentPosts.length > 0 ? (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {recentPosts.map((post) => (
-                    <article key={post.slug} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                      <div className="relative">
-                        <OptimizedImage 
-                          src={post.metadata.image || "/images/posts/default-howto.jpg"}
-                          alt={post.metadata.title}
-                          width={400}
-                          height={200}
-                          className="w-full h-48 object-cover"
-                          category="how-to"
-                        />
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">
-                          <span className="text-sm font-medium">Guide</span>
-                        </div>
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {posts.map((post) => (
+                  <article key={post.slug} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div className="relative">
+                      <OptimizedImage
+                        src={post.metadata.image || "/images/posts/default-howto.jpg"}
+                        alt={post.metadata.title}
+                        width={400}
+                        height={300}
+                        className="w-full h-48 object-cover"
+                        category="howto"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">
+                          {post.metadata.category}
+                        </span>
+                        <span className={`text-sm font-medium px-3 py-1 rounded-full ${getDifficultyColor('Beginner')}`}>
+                          Beginner
+                        </span>
                       </div>
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                            {post.metadata.category}
-                          </span>
-                          <span className={`text-xs font-medium px-2 py-1 rounded-full ${getDifficultyColor('Beginner')}`}>
-                            Beginner
-                          </span>
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-indigo-600 transition-colors">
-                          <Link href={`/posts/${post.slug}`} className="line-clamp-2">{post.metadata.title}</Link>
-                        </h3>
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.metadata.excerpt}</p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3 text-sm text-gray-500">
-                            <div className="flex items-center">
-                              <Clock className="h-4 w-4 mr-1" />
-                              {post.readingTime.text || '10 min read'}
-                            </div>
-                            <div className="flex items-center">
-                              <Users className="h-4 w-4 mr-1" />
-                              {Math.floor(Math.random() * 100) + 50}K
-                            </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                        <Link href={`/posts/${post.slug}`}>{post.metadata.title}</Link>
+                      </h3>
+                      <p className="text-gray-600 mb-4">{post.metadata.excerpt}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                          <div className="flex items-center">
+                            <Clock className="h-4 w-4 mr-1" />
+                            {post.readingTime.text || '10 min read'}
+                          </div>
+                          <div className="flex items-center">
+                            <Users className="h-4 w-4 mr-1" />
+                            {Math.floor(Math.random() * 100) + 50}K
                           </div>
                         </div>
+                        <span className="text-sm text-gray-500">{formatDate(post.metadata.date)}</span>
                       </div>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <BookOpen className="mx-auto text-gray-300 mb-4" size={64} />
-                  <h3 className="text-xl font-semibold text-gray-600 mb-2">No how-to guides yet</h3>
-                  <p className="text-gray-500">Check back soon for step-by-step tutorials and guides.</p>
-                </div>
-              )}
+                    </div>
+                  </article>
+                ))}
+              </div>
             </section>
+
+            {/* Recent Guides section removed: unified grid above shows all posts */}
           </div>
 
           {/* Sidebar */}

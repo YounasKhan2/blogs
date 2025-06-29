@@ -13,7 +13,7 @@ export default function AccessoriesGadgetsPage() {
   ];
   // Server-side fetch
 
-  // Get all posts, sort by date descending (latest first)
+  // Get all posts and total count using consistent logic
   const allPosts = getPostsByCategory('accessories-gadgets').sort((a, b) => {
     const dateA = new Date(a.metadata.date).getTime();
     const dateB = new Date(b.metadata.date).getTime();

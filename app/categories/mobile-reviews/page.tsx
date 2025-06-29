@@ -6,13 +6,13 @@ import { getPostsByCategory } from '@/lib/posts';
 
 // Server component: fetch posts at the top level
 export default async function MobileReviews() {
-  const posts = getPostsByCategory('mobile-reviews');
+  // Get all posts and total count using consistent logic
+  const posts = getPostsByCategory('mobile-reviews').sort((a, b) => {
+    const dateA = new Date(a.metadata.date).getTime();
+    const dateB = new Date(b.metadata.date).getTime();
+    return dateB - dateA;
+  });
   const totalCount = posts.length;
-
-  // Filtering and search will be implemented client-side in a subcomponent if needed
-  // For now, render all posts
-  const featuredReviews = posts.filter(post => post.metadata.featured);
-  const nonFeaturedReviews = posts.filter(post => !post.metadata.featured);
 
   const popularPhones = [
     { name: "iPhone 15 Pro Max", rating: 4.5, reviews: 23 },
@@ -76,80 +76,17 @@ export default async function MobileReviews() {
             {/* Filters */}
             {/* Filters and search removed for server component version */}
 
-            {/* Featured Review */}
-            {featuredReviews.length > 0 && (
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
-                <div className="md:flex">
-                  <div className="md:w-1/2">
-                    <OptimizedImage
-                      src={featuredReviews[0].metadata.image || "/images/posts/default-mobile.jpg"}
-                      alt={featuredReviews[0].metadata.title}
-                      width={600}
-                      height={400}
-                      className="w-full h-64 md:h-full object-cover"
-                      priority
-                      category="mobile"
-                    />
-                  </div>
-                  <div className="md:w-1/2 p-8">
-                    <div className="mb-4">
-                      <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
-                        Featured Review
-                      </span>
-                    </div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4 hover:text-blue-600 transition-colors">
-                      <Link href={`/posts/${featuredReviews[0].slug}`}>
-                        {featuredReviews[0].metadata.title}
-                      </Link>
-                    </h2>
-                    <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-                      {featuredReviews[0].metadata.excerpt}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {featuredReviews[0].metadata.tags.slice(0, 4).map((tag: string) => (
-                        <span key={tag} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
-                        <div className="flex items-center space-x-1">
-                          <User size={16} />
-                          <span>{featuredReviews[0].metadata.author}</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock size={16} />
-                          <span>5 min read</span>
-                        </div>
-                      </div>
-                      <Link
-                        href={`/posts/${featuredReviews[0].slug}`}
-                        className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center"
-                      >
-                        Read Review
-                        <ChevronRight className="ml-2" size={18} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* AdSense - Article Ad */}
-            <ArticleAd />
-
-            {/* Reviews Grid */}
+            {/* All Reviews Grid (latest first) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {nonFeaturedReviews.map((review) => (
+              {posts.map((post) => (
                 <article
-                  key={review.slug}
+                  key={post.slug}
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                 >
                   <div className="relative">
                     <OptimizedImage
-                      src={review.metadata.image || "/images/posts/default-mobile.jpg"}
-                      alt={review.metadata.title}
+                      src={post.metadata.image || "/images/posts/default-mobile.jpg"}
+                      alt={post.metadata.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover"
@@ -158,15 +95,13 @@ export default async function MobileReviews() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
-                      <Link href={`/posts/${review.slug}`}>
-                        {review.metadata.title}
-                      </Link>
+                      <Link href={`/posts/${post.slug}`}>{post.metadata.title}</Link>
                     </h3>
                     <p className="text-gray-600 mb-4 line-clamp-2">
-                      {review.metadata.excerpt}
+                      {post.metadata.excerpt}
                     </p>
                     <div className="flex flex-wrap gap-1 mb-4">
-                      {review.metadata.tags.slice(0, 3).map((tag: string) => (
+                      {post.metadata.tags.slice(0, 3).map((tag: string) => (
                         <span key={tag} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
                           {tag}
                         </span>
@@ -176,7 +111,7 @@ export default async function MobileReviews() {
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-1">
                           <User size={16} />
-                          <span>{review.metadata.author}</span>
+                          <span>{post.metadata.author}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock size={16} />
@@ -184,7 +119,7 @@ export default async function MobileReviews() {
                         </div>
                       </div>
                       <Link
-                        href={`/posts/${review.slug}`}
+                        href={`/posts/${post.slug}`}
                         className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors inline-flex items-center"
                       >
                         Read More
@@ -196,8 +131,11 @@ export default async function MobileReviews() {
               ))}
             </div>
 
+            {/* AdSense - Article Ad */}
+            <ArticleAd />
+
             {/* Show message if no reviews found */}
-            {nonFeaturedReviews.length === 0 && (
+            {posts.length === 0 && (
               <div className="text-center py-12">
                 <Smartphone className="mx-auto text-gray-400 mb-4" size={48} />
                 <h3 className="text-xl font-medium text-gray-600 mb-2">No reviews found</h3>
