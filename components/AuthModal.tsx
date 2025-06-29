@@ -1,8 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { Mail, Lock, User, X, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, User, X, Eye, EyeOff, CheckCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase'; // Make sure you have firebase initialized
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -18,15 +21,61 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const router = useRouter();
 
-  const { signInWithGoogle, signInWithEmail, signUpWithEmail } = useAuth();
+  const { 
+    signInWithGoogle, 
+    signInWithEmail, 
+    signUpWithEmail,
+    signOut 
+  } = useAuth();
+
+  // Store user data in Firestore
+  const storeUserData = async (userId: string, email: string, displayName: string, provider: string) => {
+    try {
+      const userRef = doc(db, 'users', userId);
+      const userSnapshot = await getDoc(userRef);
+
+      if (!userSnapshot.exists()) {
+        await setDoc(userRef, {
+          email,
+          displayName,
+          provider,
+          createdAt: new Date().toISOString(),
+          lastLogin: new Date().toISOString(),
+          role: 'user',
+          preferences: {}
+        });
+      } else {
+        // Update last login time
+        await setDoc(userRef, {
+          lastLogin: new Date().toISOString()
+        }, { merge: true });
+      }
+    } catch (error) {
+      console.error("Error storing user data:", error);
+    }
+  };
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
     setError('');
     try {
-      await signInWithGoogle();
-      onClose();
+      const result = await signInWithGoogle();
+      if (result?.user) {
+        await storeUserData(
+          result.user.uid, 
+          result.user.email || '', 
+          result.user.displayName || displayName || 'Anonymous', 
+          'google'
+        );
+        setSuccess('Successfully signed in with Google!');
+        setTimeout(() => {
+          onClose();
+          router.refresh(); // Refresh the page to update auth state
+        }, 1500);
+      }
     } catch (error: any) {
       setError(error.message || 'Failed to sign in with Google');
     } finally {
@@ -45,11 +94,26 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
           setError('Display name is required');
           return;
         }
-        await signUpWithEmail(email, password, displayName);
+        const result = await signUpWithEmail(email, password, displayName);
+        if (result?.user) {
+          await storeUserData(
+            result.user.uid, 
+            email, 
+            displayName, 
+            'email'
+          );
+          setSuccess('Account created successfully! Please sign in.');
+          setMode('signin');
+          resetForm();
+        }
       } else {
         await signInWithEmail(email, password);
+        setSuccess('Successfully signed in!');
+        setTimeout(() => {
+          onClose();
+          router.refresh(); // Refresh the page to update auth state
+        }, 1500);
       }
-      onClose();
     } catch (error: any) {
       setError(getErrorMessage(error.code));
     } finally {
@@ -69,6 +133,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
         return 'Password should be at least 6 characters';
       case 'auth/invalid-email':
         return 'Invalid email address';
+      case 'auth/too-many-requests':
+        return 'Too many attempts. Please try again later.';
+      case 'auth/account-exists-with-different-credential':
+        return 'An account already exists with the same email but different sign-in method';
       default:
         return 'An error occurred. Please try again.';
     }
@@ -84,8 +152,17 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
 
   const switchMode = () => {
     resetForm();
+    setSuccess('');
     setMode(mode === 'signin' ? 'signup' : 'signin');
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      // Reset form when modal closes
+      resetForm();
+      setSuccess('');
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -95,6 +172,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+          disabled={loading}
         >
           <X size={24} />
         </button>
@@ -106,6 +184,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-4 flex items-center">
+            <CheckCircle className="mr-2" size={20} />
+            {success}
           </div>
         )}
 
@@ -124,6 +209,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Your display name"
                   required
+                  disabled={loading}
                 />
               </div>
             </div>
@@ -142,6 +228,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="your@email.com"
                 required
+                disabled={loading}
               />
             </div>
           </div>
@@ -160,11 +247,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
                 placeholder="Enter your password"
                 required
                 minLength={6}
+                disabled={loading}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                disabled={loading}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -205,6 +294,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
           <button
             onClick={switchMode}
             className="text-blue-600 hover:text-blue-700 font-medium"
+            disabled={loading}
           >
             {mode === 'signin' ? 'Sign up' : 'Sign in'}
           </button>

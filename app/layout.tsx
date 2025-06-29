@@ -346,6 +346,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </AuthProvider>
+         
         </div>
       </body>
     </html>

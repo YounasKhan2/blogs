@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react';
 import { FooterAd } from './AdSenseWrapper';
 
@@ -9,12 +6,9 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
       {/* Footer Ad Section */}
-      {/* Footer Ad Section */}
-      <Suspense>
         <div className="bg-gray-800 py-4">
           <FooterAd />
         </div>
-      </Suspense>
       
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
