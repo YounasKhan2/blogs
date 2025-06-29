@@ -14,7 +14,6 @@ tags:
   - "productivity laptop"
   - "ThinkPad review"
 image: "/images/posts/lenovo-thinkpad-x1-carbon-gen-12-review-2025.mdlenovo-thinkpad-x1-carbon-gen-12.jpg"
-imageAlt: "Lenovo ThinkPad X1 Carbon Gen 12 2025 business ultrabook with TrackPoint and premium design"
 featured: true
 metaTitle: "Lenovo ThinkPad X1 Carbon Gen 12 Review 2025: Business Excellence"
 metaDescription: "Lenovo ThinkPad X1 Carbon Gen 12 review 2025. Intel Core Ultra performance, business security features, keyboard quality, and enterprise productivity tested."

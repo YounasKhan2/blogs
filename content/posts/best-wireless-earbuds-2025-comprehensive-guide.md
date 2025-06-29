@@ -16,7 +16,7 @@ tags:
   - "True Wireless"
   - "Bluetooth"
   - "Premium Audio"
-image: "/images/posts/Best Wireless Earbuds 2025 AirPods Pro vs Sony vs Bose Ultimate Comparison.jpg"
+image: "/images/posts/Best-Wireless-Earbuds-2025-AirPods-Pro-vs-Sony-vs-Bose-Ultimate-Comparison.jpg"
 featured: true
 published: true
 rating: 4.8

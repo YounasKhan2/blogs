@@ -14,7 +14,7 @@ tags:
   - "Cybersecurity"
   - "Digital Security"
   - "Privacy"
-image: "/images/posts/Best Password Managers 2025.jpg"
+image: "/images/posts/Best-Password-Managers-2025.jpg"
 featured: false
 published: true
 rating: 4.8

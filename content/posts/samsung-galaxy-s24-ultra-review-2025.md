@@ -14,7 +14,7 @@ tags:
   - "mobile photography"
   - "tech review 2025"
 image: "/images/posts/samsung-galaxy-s24-ultra-review.jpg"
-imageAlt: "Samsung Galaxy S24 Ultra 2025 flagship smartphone with S Pen and AI features"
+imageAlt: "Samsung-Galaxy-S24-Ultra-2025-flagship-smartphone-with-S-Pen-and-AI-features"
 featured: true
 metaTitle: "Samsung Galaxy S24 Ultra Review 2025: AI-Powered Android Flagship"
 metaDescription: "In-depth Samsung Galaxy S24 Ultra review 2025. Discover AI features, S Pen improvements, 200MP camera performance, battery life, and upgrade recommendations."

@@ -14,7 +14,7 @@ tags:
   - "Android vs iOS"
   - "Mobile Photography"
   - "Phone Camera Review"
-image: "/images/posts/Google Pixel 8 Pro vs iPhone 15 ProUltimate Camera Comparison 2025.jpg"
+image: "/images/posts/Google-Pixel-8-Pro-vs-iPhone-15-ProUltimate-Camera-Comparison-2025.jpg"
 featured: true
 published: true
 rating: 4.6
