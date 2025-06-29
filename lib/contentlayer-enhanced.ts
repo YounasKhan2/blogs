@@ -3,22 +3,50 @@
 
 import { compareDesc } from 'date-fns';
 
-// Import Contentlayer generated content - read the JSON files directly
-let allPosts: any[] = [];
-let allAuthors: any[] = [];
-let allCategories: any[] = [];
+// TypeScript interfaces for content types
+export interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  category: string;
+  categorySlug: string;
+  author: string;
+  tags: string[];
+  featured: boolean;
+  published: boolean;
+  image?: string;
+  readingTime: { minutes: number };
+  wordCount: number;
+  body: { raw: string; html: string };
+}
 
-// Types with fallback
-export type Post = any;
-export type Author = any;
-export type Category = any;
+export interface Author {
+  slug: string;
+  name: string;
+  email?: string;
+  bio?: string;
+  avatar?: string;
+}
+
+export interface Category {
+  slug: string;
+  title: string;
+  description?: string;
+  featured: boolean;
+}
+
+// Import Contentlayer generated content - read the JSON files directly
+let allPosts: Post[] = [];
+let allAuthors: Author[] = [];
+let allCategories: Category[] = [];
 
 try {
   // For development, we'll read the JSON files directly
-  allPosts = require('../.contentlayer/generated/Post/_index.json');
-  allAuthors = require('../.contentlayer/generated/Author/_index.json');
-  allCategories = require('../.contentlayer/generated/Category/_index.json');
-} catch (error) {
+  allPosts = require('../.contentlayer/generated/Post/_index.json') as Post[];
+  allAuthors = require('../.contentlayer/generated/Author/_index.json') as Author[];
+  allCategories = require('../.contentlayer/generated/Category/_index.json') as Category[];
+} catch {
   // Contentlayer not yet generated - will use empty arrays
 }
 
@@ -57,7 +85,7 @@ export function getPostsByAuthor(authorSlug: string, limit?: number): Post[] {
 }
 
 export function getPostsByTag(tag: string, limit?: number): Post[] {
-  const posts = getAllPosts().filter((post: any) =>
+  const posts = getAllPosts().filter((post: Post) =>
     post.tags && post.tags.some((postTag: string) => postTag.toLowerCase() === tag.toLowerCase())
   );
   return limit ? posts.slice(0, limit) : posts;

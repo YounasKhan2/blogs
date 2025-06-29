@@ -1,11 +1,12 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronRight, TrendingUp, Clock, User, Star, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen } from 'lucide-react';
+import { ChevronRight, Clock, User, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen } from 'lucide-react';
 import { HeaderAd, ArticleAd } from '../components/AdSenseWrapper';
 import { getFeaturedPosts, getRecentPosts, getAllCategories } from '../lib/posts';
 
 // Homepage-specific structured data
+/*
 const homepageStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -24,6 +25,7 @@ const homepageStructuredData = {
     "query-input": "required name=search_term_string"
   }
 };
+*/
 
 export default async function Home() {
   // Fetch data server-side using markdown system
@@ -37,42 +39,42 @@ export default async function Home() {
       name: "Mobile Reviews",
       slug: "mobile-reviews",
       icon: Smartphone,
-      count: categoriesData.find((c: any) => c.slug === "mobile-reviews")?.count || 0,
+      count: categoriesData.find((c) => c.slug === "mobile-reviews")?.count || 0,
       description: "Latest smartphone reviews and comparisons"
     },
     {
       name: "Laptop Reviews", 
       slug: "laptop-reviews",
       icon: Laptop,
-      count: categoriesData.find((c: any) => c.slug === "laptop-reviews")?.count || 0,
+      count: categoriesData.find((c) => c.slug === "laptop-reviews")?.count || 0,
       description: "In-depth laptop and computer reviews"
     },
     {
       name: "AI Technology",
       slug: "ai",
       icon: Brain,
-      count: categoriesData.find((c: any) => c.slug === "ai")?.count || 0,
+      count: categoriesData.find((c) => c.slug === "ai")?.count || 0,
       description: "Artificial intelligence news and reviews"
     },
     {
       name: "Software Reviews",
       slug: "software-reviews", 
       icon: Settings,
-      count: categoriesData.find((c: any) => c.slug === "software-reviews")?.count || 0,
+      count: categoriesData.find((c) => c.slug === "software-reviews")?.count || 0,
       description: "Software applications and tools reviews"
     },
     {
       name: "Accessories & Gadgets",
       slug: "accessories-gadgets",
       icon: Gamepad2,
-      count: categoriesData.find((c: any) => c.slug === "accessories-gadgets")?.count || 0,
+      count: categoriesData.find((c) => c.slug === "accessories-gadgets")?.count || 0,
       description: "Tech accessories and gadget reviews"
     },
     {
       name: "How-to Guides",
       slug: "how-to",
       icon: BookOpen,
-      count: categoriesData.find((c: any) => c.slug === "how-to")?.count || 0,
+      count: categoriesData.find((c) => c.slug === "how-to")?.count || 0,
       description: "Step-by-step tutorials and tech guides"
     }
   ];
@@ -219,7 +221,7 @@ export default async function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Explore Categories</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Dive deep into specific tech categories and find exactly what you're looking for
+              Dive deep into specific tech categories and find exactly what you&apos;re looking for
             </p>
           </div>
 

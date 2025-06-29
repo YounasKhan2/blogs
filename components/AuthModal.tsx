@@ -27,12 +27,16 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
   const { 
     signInWithGoogle, 
     signInWithEmail, 
-    signUpWithEmail,
-    signOut 
+    signUpWithEmail
   } = useAuth();
 
   // Store user data in Firestore
   const storeUserData = async (userId: string, email: string, displayName: string, provider: string) => {
+    if (!db) {
+      console.warn('Firestore not available, skipping user data storage');
+      return;
+    }
+    
     try {
       const userRef = doc(db, 'users', userId);
       const userSnapshot = await getDoc(userRef);
@@ -76,8 +80,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
           router.refresh(); // Refresh the page to update auth state
         }, 1500);
       }
-    } catch (error: any) {
-      setError(error.message || 'Failed to sign in with Google');
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Failed to sign in with Google');
     } finally {
       setLoading(false);
     }
@@ -114,8 +118,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode = 's
           router.refresh(); // Refresh the page to update auth state
         }, 1500);
       }
-    } catch (error: any) {
-      setError(getErrorMessage(error.code));
+    } catch (error: unknown) {
+      const errorCode = error && typeof error === 'object' && 'code' in error ? (error as { code: string }).code : 'unknown';
+      setError(getErrorMessage(errorCode));
     } finally {
       setLoading(false);
     }

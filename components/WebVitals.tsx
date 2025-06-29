@@ -6,11 +6,17 @@ import { onCLS, onINP, onFCP, onLCP, onTTFB } from 'web-vitals';
 // Extend Window interface for gtag
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
-function sendToAnalytics(metric: any) {
+interface WebVitalMetric {
+  name: string;
+  value: number;
+  id: string;
+}
+
+function sendToAnalytics(metric: WebVitalMetric) {
   // Send to Google Analytics 4 if available
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', metric.name, {

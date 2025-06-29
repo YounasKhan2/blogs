@@ -151,7 +151,7 @@ export default function Categories() {
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl">
             Explore our extensive collection of tech reviews organized by categories. 
-            Find exactly what you're looking for, from smartphone reviews to software analysis.
+            Find exactly what you&apos;re looking for, from smartphone reviews to software analysis.
           </p>
         </div>
 
@@ -284,7 +284,7 @@ export default function Categories() {
         <section className="mb-16">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white text-center">
             <h2 className="text-3xl font-bold mb-4">
-              Can't Find What You're Looking For?
+              Can&apos;t Find What You&apos;re Looking For?
             </h2>
             <p className="text-xl text-blue-100 mb-6">
               Use our search feature to find specific reviews, or contact us with suggestions for new content.

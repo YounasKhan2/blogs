@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, User, ChevronRight, Search, Calendar } from 'lucide-react';
-import { getAllPosts, getAllCategories, getPostsByCategory } from '@/lib/posts';
+import { getAllCategories, getPostsByCategory } from '@/lib/posts';
 
 export default function TechReviews() {
   // Fetch all categories and posts grouped by category
@@ -9,7 +9,7 @@ export default function TechReviews() {
 
   // Optionally, feature the most recent post from any category as a global featured post
   let featuredPost = null;
-  let firstCategoryWithPosts = categories.find(cat => getPostsByCategory(cat.slug).length > 0);
+  const firstCategoryWithPosts = categories.find(cat => getPostsByCategory(cat.slug).length > 0);
   if (firstCategoryWithPosts) {
     const posts = getPostsByCategory(firstCategoryWithPosts.slug);
     featuredPost = posts[0];
@@ -40,7 +40,7 @@ export default function TechReviews() {
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl">
             In-depth reviews, comparisons, and analysis of the latest technology products. 
-            From smartphones to laptops, AI tools to software - we test everything so you don't have to.
+            From smartphones to laptops, AI tools to software - we test everything so you don&apos;t have to.
           </p>
         </div>
 

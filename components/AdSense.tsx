@@ -64,7 +64,7 @@ export default function AdSense({
     try {
       // Push ads after script is loaded
       setTimeout(() => {
-        // @ts-ignore
+        // @ts-expect-error - AdSense global not in TypeScript definitions
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }, 100);
     } catch (err) {

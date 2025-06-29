@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, Filter, Star, Clock, TrendingUp, Settings, Download, Shield, Zap } from 'lucide-react';
+import { Search, Filter, Star, Clock, TrendingUp, Settings, Shield } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
 export default function SoftwareReviews() {
@@ -214,7 +214,7 @@ export default function SoftwareReviews() {
                   <div key={category} className="flex items-center justify-between p-2 rounded-lg">
                     <span className="font-medium text-gray-700">{category}</span>
                     <span className="text-sm bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
-                      {(categoryCounts as any)[category] || 0}
+                      {categoryCounts[category as keyof typeof categoryCounts] || 0}
                     </span>
                   </div>
                 ))}
@@ -233,7 +233,7 @@ export default function SoftwareReviews() {
                 Top Rated Software
               </h3>
               <div className="space-y-4">
-                {topSoftware.map((software, index) => (
+                {topSoftware.map((software) => (
                   <div key={software.name} className="flex items-center space-x-3">
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">

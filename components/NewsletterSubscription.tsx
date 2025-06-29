@@ -46,9 +46,9 @@ const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
       setMessage('Successfully subscribed to our newsletter!');
       setEmail('');
       setName('');
-    } catch (error: any) {
+    } catch (error: unknown) {
       setStatus('error');
-      setMessage(error.message || 'Failed to subscribe. Please try again.');
+      setMessage(error instanceof Error ? error.message : 'Failed to subscribe. Please try again.');
     }
   };
 

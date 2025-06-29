@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
+import { Search, Clock, TrendingUp, BookOpen, Users, CheckCircle } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
 export default function HowToGuides() {
@@ -21,12 +21,12 @@ export default function HowToGuides() {
 
   const categories = [
     { name: "All Guides", count: posts.length, active: true },
-    { name: "Computer Maintenance", count: posts.filter((p: any) => p.metadata.category?.includes('Computer')).length },
-    { name: "Troubleshooting", count: posts.filter((p: any) => p.metadata.category?.includes('Troubleshooting')).length },
-    { name: "Security", count: posts.filter((p: any) => p.metadata.category?.includes('Security')).length },
-    { name: "Setup Guides", count: posts.filter((p: any) => p.metadata.category?.includes('Setup')).length },
-    { name: "Networking", count: posts.filter((p: any) => p.metadata.category?.includes('Network')).length },
-    { name: "Data Recovery", count: posts.filter((p: any) => p.metadata.category?.includes('Data')).length }
+    { name: "Computer Maintenance", count: posts.filter((p) => p.metadata.category?.includes('Computer')).length },
+    { name: "Troubleshooting", count: posts.filter((p) => p.metadata.category?.includes('Troubleshooting')).length },
+    { name: "Security", count: posts.filter((p) => p.metadata.category?.includes('Security')).length },
+    { name: "Setup Guides", count: posts.filter((p) => p.metadata.category?.includes('Setup')).length },
+    { name: "Networking", count: posts.filter((p) => p.metadata.category?.includes('Network')).length },
+    { name: "Data Recovery", count: posts.filter((p) => p.metadata.category?.includes('Data')).length }
   ];
 
   const difficultyLevels = [

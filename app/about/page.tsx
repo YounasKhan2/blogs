@@ -98,7 +98,7 @@ export default function About() {
               About TechBlog Pro
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-              We're passionate tech enthusiasts dedicated to providing honest, in-depth reviews 
+              We&apos;re passionate tech enthusiasts dedicated to providing honest, in-depth reviews 
               and analysis to help you make informed technology decisions.
             </p>
           </div>
@@ -141,8 +141,8 @@ export default function About() {
               </p>
               <div className="bg-blue-50 rounded-xl p-6">
                 <p className="text-xl font-semibold text-blue-900 italic">
-                  "Technology should enhance your life, not complicate it. We're here to guide you 
-                  to the right choices."
+                  &ldquo;Technology should enhance your life, not complicate it. We&apos;re here to guide you 
+                  to the right choices.&rdquo;
                 </p>
               </div>
             </div>

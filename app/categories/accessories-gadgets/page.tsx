@@ -152,7 +152,7 @@ export default function AccessoriesGadgetsPage() {
                 Top Rated Accessories
               </h3>
               <div className="space-y-4">
-                {topAccessories.map((accessory, index) => (
+                {topAccessories.map((accessory) => (
                   <div key={accessory.name} className="flex items-center space-x-3">
                     <div className="flex-shrink-0">
                       <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">

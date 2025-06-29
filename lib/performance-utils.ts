@@ -128,12 +128,14 @@ export function registerServiceWorker(swPath: string = '/sw.js') {
 // Memory usage monitoring
 export function getMemoryUsage() {
   if (typeof performance !== 'undefined' && 'memory' in performance) {
-    const memory = (performance as any).memory;
-    return {
-      used: Math.round((memory.usedJSHeapSize / 1048576) * 100) / 100,
-      total: Math.round((memory.totalJSHeapSize / 1048576) * 100) / 100,
-      limit: Math.round((memory.jsHeapSizeLimit / 1048576) * 100) / 100,
-    };
+    const memory = (performance as { memory?: { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number } }).memory;
+    if (memory) {
+      return {
+        used: Math.round((memory.usedJSHeapSize / 1048576) * 100) / 100,
+        total: Math.round((memory.totalJSHeapSize / 1048576) * 100) / 100,
+        limit: Math.round((memory.jsHeapSizeLimit / 1048576) * 100) / 100,
+      };
+    }
   }
   return null;
 }

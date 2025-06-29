@@ -49,7 +49,7 @@ export default function TermsConditions() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">2. Use License</h2>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Permission is granted to temporarily download one copy of the materials on TechBlog Pro's website 
+                Permission is granted to temporarily download one copy of the materials on TechBlog Pro&apos;s website 
                 for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
               </p>
               <ul className="list-disc list-inside text-gray-600 mb-6 space-y-2">
@@ -146,7 +146,7 @@ export default function TermsConditions() {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Disclaimer of Warranties</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                The information on this website is provided on an "as is" basis. To the fullest extent permitted by law, 
+                The information on this website is provided on an &ldquo;as is&rdquo; basis. To the fullest extent permitted by law, 
                 TechBlog Pro excludes all representations, warranties, conditions, and terms (whether express or implied) 
                 in relation to our website and the use of this website.
               </p>

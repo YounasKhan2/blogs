@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Clock, User, ChevronRight, Brain, Star, Filter, TrendingUp } from 'lucide-react';
+import { Clock, User, Brain, Star, TrendingUp } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
 function renderStars(rating: number): React.ReactNode {

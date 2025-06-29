@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import AdSense, { SidebarAd, ArticleAd } from '../../../components/AdSense';
-import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp, Search } from 'lucide-react';
+import { Clock, User, Smartphone, TrendingUp, ChevronRight } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
 // Server component: fetch posts at the top level
@@ -139,7 +138,7 @@ export default async function MobileReviews() {
             </div>
 
             {/* AdSense - Article Ad */}
-            <ArticleAd />
+            {/* Ad space removed */}
 
             {/* Show message if no reviews found */}
             {posts.length === 0 && (
@@ -178,7 +177,7 @@ export default async function MobileReviews() {
             </div>
 
             {/* AdSense - Sidebar Ad */}
-            <SidebarAd />
+            {/* Ad space removed */}
 
             {/* Newsletter */}
             <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl p-6 text-white">

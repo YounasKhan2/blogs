@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, Filter, Star, Clock, TrendingUp, Laptop, User, ChevronRight } from 'lucide-react';
+import { Clock, TrendingUp, Laptop, User } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
 export default async function LaptopReviews() {

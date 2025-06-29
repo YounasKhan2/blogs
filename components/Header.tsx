@@ -19,7 +19,7 @@ const Header = () => {
     try {
       await signOut();
       setIsUserMenuOpen(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Sign out error:', error);
       // Force local sign out even if Firebase fails
       setIsUserMenuOpen(false);
@@ -47,12 +47,6 @@ const Header = () => {
     { href: '/categories/accessories-gadgets', label: 'Accessories & Gadgets', icon: Gamepad2 },
     { href: '/categories/how-to', label: 'How-to Guides', icon: BookOpen }
   ];
-
-  function handleSignIn(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    event.preventDefault();
-    setAuthMode('signin');
-    setIsAuthModalOpen(true);
-  }
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
