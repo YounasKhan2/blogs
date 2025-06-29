@@ -14,7 +14,7 @@ tags:
   - "DIY PC"
   - "Hardware Guide"
   - "Budget Build"
-image: "/images/posts/how-to-build-gaming-pc-budget-2025.jpg"
+image: "/images/posts/How to Build a Gaming PC on a BudgetComplete Step-by-Step Guide 2025.jpg"
 featured: true
 published: true
 difficulty: "Intermediate"
