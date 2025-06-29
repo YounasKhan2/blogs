@@ -13,7 +13,7 @@ tags:
   - "Value"
   - "Under $1500"
   - "Gaming"
-image: "/images/posts/best-gaming-laptops-under-1500-2025.jpg"
+image: "/images/posts/Best Gaming Laptops Under $1500 in 2025 Performance Without Breaking the Bank.jpg"
 featured: false
 published: true
 metaDescription: "Find the best gaming laptops under $1500 in 2025. Expert reviews, performance benchmarks, and buying advice for budget gaming laptops with RTX 4060/4070."

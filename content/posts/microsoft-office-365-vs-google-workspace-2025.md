@@ -13,7 +13,7 @@ tags:
   - "Cloud Office"
   - "Collaboration"
   - "Enterprise Software"
-image: "/images/posts/microsoft-office-365-vs-google-workspace-2025.jpg"
+image: "/images/posts/Microsoft Office 365 vs Google Workspace 2025 The Ultimate Business Suite Showdown.jpg"
 featured: false
 published: true
 rating: 4.5
