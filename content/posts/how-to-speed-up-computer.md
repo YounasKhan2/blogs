@@ -12,7 +12,7 @@ tags:
   - "Windows"
   - "Mac"
   - "Tutorial"
-image: "/images/posts/How-to-Speed-Up-Your-Computer-Complete-Guide.jpg"
+image: "/images/posts/how-to-speed-up-your-computer-complete-guide.jpg"
 featured: false
 published: true
 difficulty: "Beginner"

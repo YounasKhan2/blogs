@@ -15,7 +15,7 @@ tags:
   - "5G"
   - "Camera"
   - "Premium"
-image: "/images/posts/iPhone-15-Pro-Max-ReviewThe-Ultimate-Smartphone-Experience.jpg"
+image: "/images/posts/iphone-15-pro-max-review-the-ultimate-smartphone-experience.jpg"
 featured: true
 published: true
 rating: 4.8

@@ -14,7 +14,7 @@ tags:
   - "Cheap Phones 2025"
   - "Mobile Photography Budget"
   - "Student Phones"
-image: "/images/posts/Best-Budget-Smartphones-Under-$400-in-2025Exceptional-Value-Android-&-iOS-Options.jpg"
+image: "/images/posts/best-budget-smartphones-under-400-in-2025-exceptional-value-android-ios-options.jpg"
 featured: true
 published: true
 rating: 4.5

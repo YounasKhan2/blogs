@@ -13,8 +13,7 @@ tags:
   - "AI art tools"
   - "digital art AI"
   - "creative AI tools"
-image: "/images/posts/ai-image-generation-tools-comparison.jpg"
-imageAlt: "AI image generation tools comparison 2025 - DALL-E 3 vs Midjourney vs Stable Diffusion"
+image: "/images/posts/best-ai-video-generators-2025-create-professional-videos-with-artificial-intelligence.jpg.jpg"
 featured: true
 metaTitle: "Best AI Image Generation Tools 2025: DALL-E 3 vs Midjourney"
 metaDescription: "AI image generation tools comparison 2025. DALL-E 3, Midjourney, and Stable Diffusion features, quality, pricing, and professional use cases analyzed."

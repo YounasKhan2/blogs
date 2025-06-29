@@ -14,7 +14,7 @@ tags:
   - "Data Protection"
   - "Privacy Tools"
   - "Internet Security"
-image: "/images/posts/How-to-Secure-Your-Digital-Life-Complete-Cybersecurity-Guide-for-2025.jpg"
+image: "/images/posts/how-to-secure-your-digital-life-complete-cybersecurity-guide-for-2025.jpg"
 featured: true
 published: true
 difficulty: "Beginner"

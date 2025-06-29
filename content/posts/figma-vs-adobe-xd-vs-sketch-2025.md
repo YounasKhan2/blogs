@@ -14,7 +14,7 @@ tags:
   - "Design Tools"
   - "Prototyping"
   - "Design Software"
-image: "/images/posts/Figma-vs-Adobe-XD-vs-Sketch-2025The-Ultimate-UIUX-Design-Tool-Battle.jpg"
+image: "/images/posts/figma-vs-adobe-xd-vs-sketch-2025-the-ultimate-uiux-design-tool-battle.jpg"
 featured: false
 published: true
 rating: 4.6

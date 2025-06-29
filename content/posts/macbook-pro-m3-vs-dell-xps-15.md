@@ -12,7 +12,7 @@ tags:
   - "Comparison"
   - "M3"
   - "Performance"
-image: "/images/posts/MacBook-Pro-M3-vs-Dell-XPS-15The-Ultimate-Laptop-Showdown.jpeg"
+image: "/images/posts/macbook-pro-m3-vs-dell-xps-15-the-ultimate-laptop-showdown.jpeg"
 featured: true
 published: true
 ---

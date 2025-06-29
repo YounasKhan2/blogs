@@ -12,7 +12,7 @@ tags:
   - "Language Models"
   - "Comparison"
   - "Artificial Intelligence"
-image: "/images/posts/ChatGPT-4-vs-Claude-3-AI-Assistants-Battle-for-Supremacy.jpg"
+image: "/images/posts/chatgpt-4-vs-claude-3-ai-assistants-battle-for-supremacy.jpg"
 featured: true
 published: true
 ---

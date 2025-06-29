@@ -14,7 +14,7 @@ tags:
   - "Office"
   - "Work"
   - "Computer Accessories"
-image: "/images/posts/Best-Wireless-Mice-for-Productivity-in-2025-Expert-Reviews-&-Buying-Guide.jpg"
+image: "/images/posts/best-wireless-mice-for-productivity-in-2025-expert-reviews-buying-guide.jpg"
 featured: false
 published: true
 rating: 4.6

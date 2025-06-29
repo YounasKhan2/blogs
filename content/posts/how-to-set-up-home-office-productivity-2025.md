@@ -14,7 +14,7 @@ tags:
   - "Work From Home"
   - "Desk Setup"
   - "Office Technology"
-image: "/images/posts/How-to-Set-Up-a-Home-Office-for-Maximum-Productivity-Complete-Tech-Guide-025.jpg"
+image: "/images/posts/how-to-set-up-a-home-office-for-maximum-productivity-complete-tech-guide-2025.jpg"
 featured: true
 published: true
 difficulty: "Beginner"
