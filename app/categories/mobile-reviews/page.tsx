@@ -1,73 +1,18 @@
-'use client';
-
-import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
 import AdSense, { SidebarAd, ArticleAd } from '../../../components/AdSense';
 import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp, Search } from 'lucide-react';
-import { getPostsByCategory } from '@/lib/contentlayer-enhanced';
-// Note: SEO metadata for this client component is handled in the parent layout
+import { getPostsByCategory } from '@/lib/posts';
 
-export default function MobileReviews() {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [allMobileReviews, setAllMobileReviews] = useState<any[]>([]);
+// Server component: fetch posts at the top level
+export default async function MobileReviews() {
+  const posts = getPostsByCategory('mobile-reviews');
+  const totalCount = posts.length;
 
-  // Get real mobile review posts from contentlayer
-  useEffect(() => {
-    const mobileReviews = getPostsByCategory('mobile-reviews').map(post => ({
-      slug: post.slug,
-      title: post.title,
-      excerpt: post.excerpt,
-      author: post.author,
-      date: post.date,
-      tags: post.tags || [],
-      image: post.image,
-      featured: post.featured || false,
-      category: post.category,
-      categorySlug: post.categorySlug
-    }));
-    setAllMobileReviews(mobileReviews);
-  }, []);
-
-  // Filter posts based on active filter and search term
-  const filteredReviews = useMemo(() => {
-    let filtered = allMobileReviews;
-
-    // Apply category filter
-    if (activeFilter !== 'all') {
-      filtered = filtered.filter(review => {
-        const tags = review.tags.map((tag: string) => tag.toLowerCase());
-        switch (activeFilter) {
-          case 'iphone':
-            return tags.some((tag: string) => tag.includes('iphone') || tag.includes('apple'));
-          case 'samsung':
-            return tags.some((tag: string) => tag.includes('samsung') || tag.includes('galaxy'));
-          case 'google':
-            return tags.some((tag: string) => tag.includes('google') || tag.includes('pixel'));
-          case 'budget':
-            return tags.some((tag: string) => tag.includes('budget') || tag.includes('value') || tag.includes('under'));
-          default:
-            return true;
-        }
-      });
-    }
-
-    // Apply search filter
-    if (searchTerm) {
-      const searchLower = searchTerm.toLowerCase();
-      filtered = filtered.filter(review =>
-        review.title.toLowerCase().includes(searchLower) ||
-        review.excerpt.toLowerCase().includes(searchLower) ||
-        review.tags.some((tag: string) => tag.toLowerCase().includes(searchLower))
-      );
-    }
-
-    return filtered;
-  }, [allMobileReviews, activeFilter, searchTerm]);
-
-  // Get featured reviews
-  const featuredReviews = allMobileReviews.filter(review => review.featured);
+  // Filtering and search will be implemented client-side in a subcomponent if needed
+  // For now, render all posts
+  const featuredReviews = posts.filter(post => post.metadata.featured);
+  const nonFeaturedReviews = posts.filter(post => !post.metadata.featured);
 
   const popularPhones = [
     { name: "iPhone 15 Pro Max", rating: 4.5, reviews: 23 },
@@ -81,20 +26,16 @@ export default function MobileReviews() {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-    
     for (let i = 0; i < fullStars; i++) {
       stars.push(<span key={i} className="text-yellow-400">★</span>);
     }
-    
     if (hasHalfStar) {
       stars.push(<span key="half" className="text-yellow-400">☆</span>);
     }
-    
     const emptyStars = 5 - Math.ceil(rating);
     for (let i = 0; i < emptyStars; i++) {
       stars.push(<span key={`empty-${i}`} className="text-gray-300">★</span>);
     }
-    
     return stars;
   };
 
@@ -119,7 +60,7 @@ export default function MobileReviews() {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                 Mobile Reviews
               </h1>
-              <p className="text-gray-600">{allMobileReviews.length} smartphone reviews and counting</p>
+              <p className="text-gray-600">{totalCount} smartphone review{totalCount !== 1 ? 's' : ''} and counting</p>
             </div>
           </div>
           
@@ -133,81 +74,7 @@ export default function MobileReviews() {
           {/* Main Content */}
           <div className="lg:col-span-3">
             {/* Filters */}
-            <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-              <div className="flex flex-col gap-4">
-                {/* Search */}
-                <div className="relative">
-                  <Search className="absolute left-3 top-3 text-gray-400" size={20} />
-                  <input
-                    type="text"
-                    placeholder="Search mobile reviews..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                
-                {/* Filter buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                  <div className="flex flex-wrap gap-2">
-                    <button 
-                      onClick={() => setActiveFilter('all')}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        activeFilter === 'all' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      All Reviews
-                    </button>
-                    <button 
-                      onClick={() => setActiveFilter('iphone')}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        activeFilter === 'iphone' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      iPhone
-                    </button>
-                    <button 
-                      onClick={() => setActiveFilter('samsung')}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        activeFilter === 'samsung' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      Samsung
-                    </button>
-                    <button 
-                      onClick={() => setActiveFilter('google')}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        activeFilter === 'google' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      Google Pixel
-                    </button>
-                    <button 
-                      onClick={() => setActiveFilter('budget')}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        activeFilter === 'budget' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      Budget Phones
-                    </button>
-                  </div>
-                  
-                  <div className="text-sm text-gray-600">
-                    {filteredReviews.length} review{filteredReviews.length !== 1 ? 's' : ''} found
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Filters and search removed for server component version */}
 
             {/* Featured Review */}
             {featuredReviews.length > 0 && (
@@ -215,8 +82,8 @@ export default function MobileReviews() {
                 <div className="md:flex">
                   <div className="md:w-1/2">
                     <OptimizedImage
-                      src={featuredReviews[0].image || "/images/posts/default-mobile.jpg"}
-                      alt={featuredReviews[0].title}
+                      src={featuredReviews[0].metadata.image || "/images/posts/default-mobile.jpg"}
+                      alt={featuredReviews[0].metadata.title}
                       width={600}
                       height={400}
                       className="w-full h-64 md:h-full object-cover"
@@ -230,37 +97,32 @@ export default function MobileReviews() {
                         Featured Review
                       </span>
                     </div>
-                    
                     <h2 className="text-3xl font-bold text-gray-900 mb-4 hover:text-blue-600 transition-colors">
                       <Link href={`/posts/${featuredReviews[0].slug}`}>
-                        {featuredReviews[0].title}
+                        {featuredReviews[0].metadata.title}
                       </Link>
                     </h2>
-                    
                     <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-                      {featuredReviews[0].excerpt}
+                      {featuredReviews[0].metadata.excerpt}
                     </p>
-                    
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {featuredReviews[0].tags.slice(0, 4).map((tag: string) => (
+                      {featuredReviews[0].metadata.tags.slice(0, 4).map((tag: string) => (
                         <span key={tag} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium">
                           {tag}
                         </span>
                       ))}
                     </div>
-                    
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4 text-sm text-gray-500">
                         <div className="flex items-center space-x-1">
                           <User size={16} />
-                          <span>{featuredReviews[0].author}</span>
+                          <span>{featuredReviews[0].metadata.author}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock size={16} />
                           <span>5 min read</span>
                         </div>
                       </div>
-                      
                       <Link
                         href={`/posts/${featuredReviews[0].slug}`}
                         className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center"
@@ -279,46 +141,42 @@ export default function MobileReviews() {
 
             {/* Reviews Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredReviews.filter(review => !review.featured).map((review) => (
+              {nonFeaturedReviews.map((review) => (
                 <article
                   key={review.slug}
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                 >
                   <div className="relative">
                     <OptimizedImage
-                      src={review.image || "/images/posts/default-mobile.jpg"}
-                      alt={review.title}
+                      src={review.metadata.image || "/images/posts/default-mobile.jpg"}
+                      alt={review.metadata.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover"
                       category="mobile"
                     />
                   </div>
-                  
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
                       <Link href={`/posts/${review.slug}`}>
-                        {review.title}
+                        {review.metadata.title}
                       </Link>
                     </h3>
-                    
                     <p className="text-gray-600 mb-4 line-clamp-2">
-                      {review.excerpt}
+                      {review.metadata.excerpt}
                     </p>
-                    
                     <div className="flex flex-wrap gap-1 mb-4">
-                      {review.tags.slice(0, 3).map((tag: string) => (
+                      {review.metadata.tags.slice(0, 3).map((tag: string) => (
                         <span key={tag} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
                           {tag}
                         </span>
                       ))}
                     </div>
-                    
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-1">
                           <User size={16} />
-                          <span>{review.author}</span>
+                          <span>{review.metadata.author}</span>
                         </div>
                         <div className="flex items-center space-x-1">
                           <Clock size={16} />
@@ -339,20 +197,11 @@ export default function MobileReviews() {
             </div>
 
             {/* Show message if no reviews found */}
-            {filteredReviews.length === 0 && (
+            {nonFeaturedReviews.length === 0 && (
               <div className="text-center py-12">
                 <Smartphone className="mx-auto text-gray-400 mb-4" size={48} />
                 <h3 className="text-xl font-medium text-gray-600 mb-2">No reviews found</h3>
-                <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
-              </div>
-            )}
-
-            {/* Load More - Show only if there are more than 6 non-featured reviews */}
-            {filteredReviews.filter((review: any) => !review.featured).length > 6 && (
-              <div className="text-center mt-8">
-                <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                  Load More Reviews
-                </button>
+                <p className="text-gray-500">No mobile reviews are available at this time.</p>
               </div>
             )}
           </div>

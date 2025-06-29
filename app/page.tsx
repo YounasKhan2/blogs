@@ -1,12 +1,9 @@
-'use client';
 
 import Link from 'next/link';
 import OptimizedImage from '../components/OptimizedImage';
 import { ChevronRight, TrendingUp, Clock, User, Star, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen } from 'lucide-react';
 import { HeaderAd, ArticleAd } from '../components/AdSenseWrapper';
-import { getFeaturedPosts, getRecentPosts, getCategoryStats } from '../lib/contentlayer-enhanced';
-import { useEffect, useState } from 'react';
-import type { Metadata } from 'next';
+import { getFeaturedPosts, getRecentPosts, getAllCategories } from '../lib/posts';
 
 // Homepage-specific structured data
 const homepageStructuredData = {
@@ -28,33 +25,11 @@ const homepageStructuredData = {
   }
 };
 
-export default function Home() {
-  // State for content to prevent hydration issues
-  const [featuredPosts, setFeaturedPosts] = useState<any[]>([]);
-  const [recentPosts, setRecentPosts] = useState<any[]>([]);
-  const [categoriesData, setCategoriesData] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Load content on client side to prevent hydration mismatch
-  useEffect(() => {
-    try {
-      const featured = getFeaturedPosts(3);
-      const recent = getRecentPosts(6);
-      const categories = getCategoryStats();
-      
-      setFeaturedPosts(featured);
-      setRecentPosts(recent);
-      setCategoriesData(categories);
-    } catch (error) {
-      console.error('Error loading content:', error);
-      // Fallback to empty arrays
-      setFeaturedPosts([]);
-      setRecentPosts([]);
-      setCategoriesData([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+export default async function Home() {
+  // Fetch data server-side using markdown system
+  const featuredPosts = getFeaturedPosts(3);
+  const recentPosts = getRecentPosts(6);
+  const categoriesData = getAllCategories();
 
   // Map categories to include icons and descriptions
   const categories = [
@@ -101,18 +76,6 @@ export default function Home() {
       description: "Step-by-step tutorials and tech guides"
     }
   ];
-
-  // Show loading state
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading content...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -183,21 +146,21 @@ export default function Home() {
               >
                 <div className="relative">
                   <OptimizedImage
-                    src={post.image}
-                    alt={post.title || 'Article image'}
+                    src={post.metadata.image}
+                    alt={post.metadata.title || 'Article image'}
                     width={600}
                     height={index === 0 ? 320 : 192}
                     className={`w-full object-cover ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
                     priority={index < 2}
                     placeholder="blur"
-                    category={post.category}
+                    category={post.metadata.category}
                   />
                   <div className="absolute top-4 left-4">
                     <Link
-                      href={`/categories/${post.categorySlug || 'uncategorized'}`}
+                    href={`/categories/${post.metadata.categorySlug || 'uncategorized'}`}
                       className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
                     >
-                      {post.category || 'Uncategorized'}
+                      {post.metadata.category || 'Uncategorized'}
                     </Link>
                   </div>
                 </div>
@@ -206,24 +169,24 @@ export default function Home() {
                     index === 0 ? 'text-2xl md:text-3xl' : 'text-xl'
                   }`}>
                     <Link href={`/posts/${post.slug}`}>
-                      {post.title || 'Untitled'}
+                      {post.metadata.title || 'Untitled'}
                     </Link>
                   </h3>
                   <p className={`text-gray-600 mb-4 line-clamp-3 ${index === 0 ? 'text-lg' : ''}`}>
-                    {post.excerpt || 'No excerpt available'}
+                    {post.metadata.excerpt || 'No excerpt available'}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-500">
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-1">
                         <User size={16} />
-                        <span>{post.author || 'Anonymous'}</span>
+                        <span>{post.metadata.author || 'Anonymous'}</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Clock size={16} />
                         <span>{post.readingTime?.text || '5 min read'}</span>
                       </div>
                     </div>
-                    <span>{post.date ? new Date(post.date).toLocaleDateString() : ''}</span>
+                    <span>{post.metadata.date ? new Date(post.metadata.date).toLocaleDateString() : ''}</span>
                   </div>
                 </div>
               </article>
@@ -312,43 +275,43 @@ export default function Home() {
               >
                 <div className="relative">
                   <OptimizedImage
-                    src={post.image || "/images/posts/default-tech.jpg"}
-                    alt={post.title || 'Article image'}
+                    src={post.metadata.image || "/images/posts/default-tech.jpg"}
+                    alt={post.metadata.title || 'Article image'}
                     width={400}
                     height={300}
                     className="w-full h-48 object-cover"
-                    category={post.category}
+                    category={post.metadata.category}
                   />
                   <div className="absolute top-4 left-4">
                     <Link
-                      href={`/categories/${post.categorySlug || 'uncategorized'}`}
+                    href={`/categories/${post.metadata.categorySlug || 'uncategorized'}`}
                       className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
                     >
-                      {post.category || 'Uncategorized'}
+                      {post.metadata.category || 'Uncategorized'}
                     </Link>
                   </div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
                     <Link href={`/posts/${post.slug}`}>
-                      {post.title || 'Untitled'}
+                      {post.metadata.title || 'Untitled'}
                     </Link>
                   </h3>
                   <p className="text-gray-600 mb-4 line-clamp-3">
-                    {post.excerpt || 'No excerpt available'}
+                    {post.metadata.excerpt || 'No excerpt available'}
                   </p>
                   <div className="flex items-center justify-between text-sm text-gray-500">
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-1">
                         <User size={16} />
-                        <span>{post.author || 'Anonymous'}</span>
+                        <span>{post.metadata.author || 'Anonymous'}</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Clock size={16} />
                         <span>{post.readingTime?.text || '5 min read'}</span>
                       </div>
                     </div>
-                    <span>{post.date ? new Date(post.date).toLocaleDateString() : ''}</span>
+                    <span>{post.metadata.date ? new Date(post.metadata.date).toLocaleDateString() : ''}</span>
                   </div>
                 </div>
               </article>

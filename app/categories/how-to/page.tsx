@@ -1,28 +1,29 @@
 import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
-import type { Metadata } from 'next';
-import { getPostsByCategory } from '../../../lib/contentlayer-enhanced';
-
-export const metadata: Metadata = {
-  title: 'How-to Guides - Tech Tutorials and Tips',
-  description: 'Step-by-step tutorials, troubleshooting guides, and tech tips to help you master technology.',
-  keywords: ['how-to guides', 'tech tutorials', 'troubleshooting', 'tech tips', 'step-by-step guides'],
-};
+import { getPostsByCategory } from '@/lib/posts';
 
 export default function HowToGuides() {
+  // Server-side fetch
   const posts = getPostsByCategory('how-to');
-  const featuredPosts = posts.filter(post => post.featured).slice(0, 3);
+  const totalCount = posts.length;
+  const featuredPosts = posts.filter(post => post.metadata.featured).slice(0, 3);
   const recentPosts = posts.slice(0, 6);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  };
+  // ...existing code...
 
   const categories = [
     { name: "All Guides", count: posts.length, active: true },
-    { name: "Computer Maintenance", count: posts.filter(p => p.category?.includes('Computer')).length },
-    { name: "Troubleshooting", count: posts.filter(p => p.category?.includes('Troubleshooting')).length },
-    { name: "Security", count: posts.filter(p => p.category?.includes('Security')).length },
-    { name: "Setup Guides", count: posts.filter(p => p.category?.includes('Setup')).length },
-    { name: "Networking", count: posts.filter(p => p.category?.includes('Network')).length },
-    { name: "Data Recovery", count: posts.filter(p => p.category?.includes('Data')).length }
+    { name: "Computer Maintenance", count: posts.filter((p: any) => p.metadata.category?.includes('Computer')).length },
+    { name: "Troubleshooting", count: posts.filter((p: any) => p.metadata.category?.includes('Troubleshooting')).length },
+    { name: "Security", count: posts.filter((p: any) => p.metadata.category?.includes('Security')).length },
+    { name: "Setup Guides", count: posts.filter((p: any) => p.metadata.category?.includes('Setup')).length },
+    { name: "Networking", count: posts.filter((p: any) => p.metadata.category?.includes('Network')).length },
+    { name: "Data Recovery", count: posts.filter((p: any) => p.metadata.category?.includes('Data')).length }
   ];
 
   const difficultyLevels = [
@@ -51,6 +52,7 @@ export default function HowToGuides() {
             <p className="text-xl md:text-2xl mb-8 text-indigo-100">
               Step-by-step tutorials and guides to master technology
             </p>
+            <p className="text-lg text-indigo-200 font-semibold mb-2">{totalCount} blog{totalCount !== 1 ? 's' : ''} in this category</p>
             <div className="max-w-2xl mx-auto">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -106,8 +108,8 @@ export default function HowToGuides() {
                       <div className="md:flex">
                         <div className="md:w-1/3 relative">
                           <OptimizedImage 
-                            src={post.image || "/images/posts/default-howto.jpg"} 
-                            alt={post.title}
+                            src={post.metadata.image || "/images/posts/default-howto.jpg"}
+                            alt={post.metadata.title}
                             width={400}
                             height={300}
                             className="w-full h-48 md:h-full object-cover"
@@ -121,28 +123,28 @@ export default function HowToGuides() {
                         <div className="p-6 md:w-2/3">
                           <div className="flex items-center justify-between mb-3">
                             <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">
-                              {post.category}
+                              {post.metadata.category}
                             </span>
                             <span className={`text-sm font-medium px-3 py-1 rounded-full ${getDifficultyColor('Beginner')}`}>
                               Beginner
                             </span>
                           </div>
                           <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
-                            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+                            <Link href={`/posts/${post.slug}`}>{post.metadata.title}</Link>
                           </h3>
-                          <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                          <p className="text-gray-600 mb-4">{post.metadata.excerpt}</p>
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-4 text-sm text-gray-500">
                               <div className="flex items-center">
                                 <Clock className="h-4 w-4 mr-1" />
-                                {post.readTime || '10 min read'}
+                                {post.readingTime.text || '10 min read'}
                               </div>
                               <div className="flex items-center">
                                 <Users className="h-4 w-4 mr-1" />
                                 {Math.floor(Math.random() * 100) + 50}K
                               </div>
                             </div>
-                            <span className="text-sm text-gray-500">{new Date(post.date).toLocaleDateString()}</span>
+                            <span className="text-sm text-gray-500">{formatDate(post.metadata.date)}</span>
                           </div>
                         </div>
                       </div>
@@ -170,8 +172,8 @@ export default function HowToGuides() {
                     <article key={post.slug} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                       <div className="relative">
                         <OptimizedImage 
-                          src={post.image || "/images/posts/default-howto.jpg"} 
-                          alt={post.title}
+                          src={post.metadata.image || "/images/posts/default-howto.jpg"}
+                          alt={post.metadata.title}
                           width={400}
                           height={200}
                           className="w-full h-48 object-cover"
@@ -184,21 +186,21 @@ export default function HowToGuides() {
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-3">
                           <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                            {post.category}
+                            {post.metadata.category}
                           </span>
                           <span className={`text-xs font-medium px-2 py-1 rounded-full ${getDifficultyColor('Beginner')}`}>
                             Beginner
                           </span>
                         </div>
                         <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-indigo-600 transition-colors">
-                          <Link href={`/posts/${post.slug}`} className="line-clamp-2">{post.title}</Link>
+                          <Link href={`/posts/${post.slug}`} className="line-clamp-2">{post.metadata.title}</Link>
                         </h3>
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.metadata.excerpt}</p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center space-x-3 text-sm text-gray-500">
                             <div className="flex items-center">
                               <Clock className="h-4 w-4 mr-1" />
-                              {post.readTime || '10 min read'}
+                              {post.readingTime.text || '10 min read'}
                             </div>
                             <div className="flex items-center">
                               <Users className="h-4 w-4 mr-1" />
@@ -274,7 +276,7 @@ export default function HowToGuides() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 line-clamp-2">
-                        {post.title}
+                        {post.metadata.title}
                       </p>
                       <div className="flex items-center mt-1">
                         <span className="text-xs text-gray-500">{Math.floor(Math.random() * 100) + 50}K views</span>

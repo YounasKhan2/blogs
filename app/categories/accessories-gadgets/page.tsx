@@ -1,55 +1,9 @@
-'use client';
-
 import Link from 'next/link';
 import OptimizedImage from '../../../components/OptimizedImage';
 import { Search, Filter, Star, Clock, TrendingUp, Gamepad2, Headphones, Watch, Camera, Smartphone, Zap } from 'lucide-react';
-import { useMemo } from 'react';
-import { getPostsByCategory } from '@/lib/contentlayer-enhanced';
+import { getPostsByCategory } from '@/lib/posts';
 
-export default function AccessoriesGadgets() {
-  // Get all accessories and gadgets posts from Contentlayer
-  const accessoryPosts = useMemo(() => {
-    return getPostsByCategory('accessories-gadgets').map(post => ({
-      id: post.slug,
-      title: post.title,
-      excerpt: post.excerpt,
-      image: post.image || "/images/posts/default-gadgets.jpg",
-      category: post.category,
-      readTime: post.readingTime?.text || '5 min read',
-      rating: post.rating || 4.0,
-      date: new Date(post.date).toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric' 
-      }),
-      featured: post.featured || false,
-      slug: post.slug,
-      tags: post.tags || []
-    }));
-  }, []);
-
-  // Sort posts by featured first, then by date
-  const allPosts = useMemo(() => {
-    return accessoryPosts.sort((a, b) => {
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
-  }, [accessoryPosts]);
-
-  const featuredPosts = allPosts.filter(post => post.featured).slice(0, 3);
-  const recentPosts = allPosts.filter(post => !post.featured).slice(0, 6);
-
-  const categories = [
-    { name: "All Accessories", count: allPosts.length, active: true },
-    { name: "Audio", count: allPosts.filter(p => p.category?.toLowerCase().includes('audio')).length },
-    { name: "Gaming", count: allPosts.filter(p => p.category?.toLowerCase().includes('gaming')).length },
-    { name: "Wearables", count: allPosts.filter(p => p.category?.toLowerCase().includes('wearable')).length },
-    { name: "Photography", count: allPosts.filter(p => p.category?.toLowerCase().includes('photo')).length },
-    { name: "Smart Home", count: allPosts.filter(p => p.category?.toLowerCase().includes('smart')).length },
-    { name: "Charging", count: allPosts.filter(p => p.category?.toLowerCase().includes('charging')).length }
-  ];
-
+export default function AccessoriesGadgetsPage() {
   const topAccessories = [
     { name: "AirPods Pro 3", rating: 4.7, reviews: 1850, category: "Audio", icon: Headphones },
     { name: "Apple Watch Series 10", rating: 4.6, reviews: 1240, category: "Wearables", icon: Watch },
@@ -57,6 +11,21 @@ export default function AccessoriesGadgets() {
     { name: "Sony WH-1000XM6", rating: 4.9, reviews: 1650, category: "Audio", icon: Headphones },
     { name: "iPad Pro Magic Keyboard", rating: 4.4, reviews: 750, category: "Peripherals", icon: Gamepad2 }
   ];
+  // Server-side fetch
+
+  // Get all posts, sort by date descending (latest first)
+  const allPosts = getPostsByCategory('accessories-gadgets').sort((a, b) => {
+    const dateA = new Date(a.metadata.date).getTime();
+    const dateB = new Date(b.metadata.date).getTime();
+    return dateB - dateA;
+  });
+  const totalCount = allPosts.length;
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  };
+  // ...existing code...
 
   const trendingCategories = [
     { name: "Wireless Earbuds", icon: Headphones, color: "bg-blue-100 text-blue-600", count: "45 reviews" },
@@ -78,6 +47,7 @@ export default function AccessoriesGadgets() {
             <p className="text-xl md:text-2xl mb-8 text-purple-100">
               Discover the best tech accessories and gadgets to enhance your digital lifestyle
             </p>
+            <p className="text-lg text-purple-200 font-semibold mb-2">{totalCount} blog{totalCount !== 1 ? 's' : ''} in this category</p>
             <div className="max-w-2xl mx-auto">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
@@ -116,61 +86,10 @@ export default function AccessoriesGadgets() {
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Main Content */}
           <div className="lg:w-2/3">
-            {/* Featured Reviews */}
-            <section className="mb-12">
-              <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">Featured Reviews</h2>
-                <Link href="#" className="text-purple-600 hover:text-purple-700 font-semibold">
-                  View All →
-                </Link>
-              </div>
-              
-              <div className="grid gap-8">
-                {featuredPosts.map((post) => (
-                  <article key={post.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div className="md:flex">
-                      <div className="md:w-1/3">
-                        <OptimizedImage 
-                          src={post.image} 
-                          alt={post.title}
-                          width={400}
-                          height={300}
-                          className="w-full h-48 md:h-full object-cover"
-                          category="gadgets"
-                        />
-                      </div>
-                      <div className="p-6 md:w-2/3">
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">
-                            {post.category}
-                          </span>
-                          <div className="flex items-center text-yellow-400">
-                            <Star className="h-4 w-4 fill-current" />
-                            <span className="ml-1 text-gray-600 text-sm">{post.rating}</span>
-                          </div>
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-purple-600 transition-colors">
-                          <Link href="#">{post.title}</Link>
-                        </h3>
-                        <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center text-sm text-gray-500">
-                            <Clock className="h-4 w-4 mr-1" />
-                            {post.readTime}
-                          </div>
-                          <span className="text-sm text-gray-500">{post.date}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            {/* Recent Reviews */}
+            {/* All Reviews (latest first) */}
             <section>
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">Recent Reviews</h2>
+                <h2 className="text-3xl font-bold text-gray-900">All Reviews</h2>
                 <div className="flex items-center space-x-4">
                   <button className="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
                     <Filter className="h-4 w-4 mr-2" />
@@ -180,11 +99,11 @@ export default function AccessoriesGadgets() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recentPosts.map((post) => (
-                  <article key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                {allPosts.map((post) => (
+                  <article key={post.slug} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <OptimizedImage 
-                      src={post.image} 
-                      alt={post.title}
+                      src={post.metadata.image || "/images/posts/default-gadgets.jpg"}
+                      alt={post.metadata.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover"
@@ -193,23 +112,20 @@ export default function AccessoriesGadgets() {
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">
                         <span className="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full">
-                          {post.category}
+                          {post.metadata.category}
                         </span>
-                        <div className="flex items-center text-yellow-400">
-                          <Star className="h-4 w-4 fill-current" />
-                          <span className="ml-1 text-gray-600 text-sm">{post.rating}</span>
-                        </div>
+                        {/* No rating in metadata, skip or use a default if needed */}
                       </div>
                       <h3 className="text-lg font-bold text-gray-900 mb-2 hover:text-purple-600 transition-colors">
-                        <Link href="#" className="line-clamp-2">{post.title}</Link>
+                        <Link href={`/posts/${post.slug}`} className="line-clamp-2">{post.metadata.title}</Link>
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.metadata.excerpt}</p>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center text-sm text-gray-500">
                           <Clock className="h-4 w-4 mr-1" />
-                          {post.readTime}
+                          {post.readingTime.text}
                         </div>
-                        <span className="text-sm text-gray-500">{post.date}</span>
+                        <span className="text-sm text-gray-500">{formatDate(post.metadata.date)}</span>
                       </div>
                     </div>
                   </article>
@@ -220,28 +136,7 @@ export default function AccessoriesGadgets() {
 
           {/* Sidebar */}
           <div className="lg:w-1/3">
-            {/* Categories */}
-            <div className="bg-white rounded-xl shadow-md p-6 mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Categories</h3>
-              <div className="space-y-2">
-                {categories.map((category) => (
-                  <Link 
-                    key={category.name}
-                    href="#" 
-                    className={`flex items-center justify-between p-3 rounded-lg transition-colors ${
-                      category.active 
-                        ? 'bg-purple-100 text-purple-800' 
-                        : 'hover:bg-gray-100'
-                    }`}
-                  >
-                    <span className="font-medium">{category.name}</span>
-                    <span className="text-sm bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
-                      {category.count}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {/* Categories removed (was using undefined variable) */}
 
             {/* Top Rated Accessories */}
             <div className="bg-white rounded-xl shadow-md p-6 mb-8">
@@ -298,3 +193,4 @@ export default function AccessoriesGadgets() {
     </div>
   );
 }
+
