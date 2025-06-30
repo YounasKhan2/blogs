@@ -14,7 +14,7 @@ tags:
   - "Camera Review"
   - "Performance"
   - "Value for Money"
-image: "/images/posts/oneplus-12-review-the-flagship-killer-returns-with-premium-features.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321250/hbwqo9go1fzibkvm5bue.jpg"
 featured: false
 published: true
 rating: 4.5

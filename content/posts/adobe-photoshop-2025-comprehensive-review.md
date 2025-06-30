@@ -14,7 +14,7 @@ tags:
   - "Adobe"
   - "Generative AI"
   - "Productivity"
-image: "/images/posts/adobe-photoshop-2025-review-revolutionary-ai-features-transform-creative-workflow.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321248/vcxgc6faijl4tkylpfi9.jpg"
 featured: true
 published: true
 rating: 4.7

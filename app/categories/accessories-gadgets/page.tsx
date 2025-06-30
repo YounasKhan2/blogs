@@ -1,5 +1,6 @@
+
 import Link from 'next/link';
-import OptimizedImage from '../../../components/OptimizedImage';
+import Image from 'next/image';
 import { Search, Filter, Star, Clock, TrendingUp, Gamepad2, Headphones, Watch, Camera, Smartphone, Zap } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
@@ -101,14 +102,17 @@ export default function AccessoriesGadgetsPage() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {allPosts.map((post) => (
                   <article key={post.slug} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <OptimizedImage 
-                      src={post.metadata.image || "/images/posts/default-gadgets.jpg"}
-                      alt={post.metadata.title}
-                      width={400}
-                      height={200}
-                      className="w-full h-48 object-cover"
-                      category="gadgets"
-                    />
+                    {post.metadata.image && (
+                      <Image
+                        src={post.metadata.image}
+                        alt={post.metadata.title}
+                        width={400}
+                        height={250}
+                        className="w-full h-48 object-cover"
+                        priority
+                        placeholder="empty"
+                      />
+                    )}
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">
                         <span className="bg-pink-100 text-pink-800 text-sm font-medium px-3 py-1 rounded-full">

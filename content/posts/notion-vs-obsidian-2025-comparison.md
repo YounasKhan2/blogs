@@ -13,7 +13,7 @@ tags:
   - "Knowledge Management"
   - "PKM"
   - "Software Comparison"
-image: "/images/posts/notion-vs-obsidian-2025-the-ultimate.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321250/vgq6jidzbgs2gwipcf8k.jpg"
 featured: false
 published: true
 metaDescription: "Notion vs Obsidian 2025 comparison: Features, pricing, performance, and real-world testing. Which note-taking app is best for productivity and knowledge management?"

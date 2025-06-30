@@ -1,5 +1,6 @@
+
 import Link from 'next/link';
-import OptimizedImage from '../../../components/OptimizedImage';
+import Image from 'next/image';
 import { Clock, User, ChevronRight, Brain, Star, Filter, TrendingUp } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
@@ -76,16 +77,17 @@ export default async function AiCategoryPage() {
                   href={`/posts/${post.slug}`}
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
                 >
-                  <div className="relative">
-                    <OptimizedImage
-                      src={post.metadata.image || "/images/posts/default-ai.jpg"}
+                  {post.metadata.image && (
+                    <Image
+                      src={post.metadata.image}
                       alt={post.metadata.title}
                       width={400}
-                      height={200}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      category="ai"
+                      height={250}
+                      className="w-full h-48 object-cover"
+                      priority
+                      placeholder="empty"
                     />
-                  </div>
+                  )}
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">{post.metadata.title}</h3>
                     <p className="text-gray-600 mb-4 line-clamp-3">{post.metadata.excerpt}</p>

@@ -1,5 +1,6 @@
+
 import Link from 'next/link';
-import OptimizedImage from '../../../components/OptimizedImage';
+import Image from 'next/image';
 import { Search, Filter, Star, Clock, TrendingUp, Settings, Download, Shield, Zap } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
@@ -109,16 +110,17 @@ export default function SoftwareReviews() {
                   {filteredPosts.slice(0, 3).map((post) => (
                     <article key={post.slug} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                       <div className="md:flex">
-                        <div className="md:w-1/3">
-                          <OptimizedImage 
-                            src={post.metadata.image || "/images/posts/default-software.jpg"}
+                        {post.metadata.image && (
+                          <Image
+                            src={post.metadata.image}
                             alt={post.metadata.title}
                             width={400}
-                            height={300}
-                            className="w-full h-48 md:h-full object-cover"
-                            category="software"
+                            height={250}
+                            className="w-full h-48 object-cover md:w-1/3"
+                            priority
+                            placeholder="empty"
                           />
-                        </div>
+                        )}
                         <div className="p-6 md:w-2/3">
                           <div className="flex items-center justify-between mb-3">
                             <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
@@ -154,14 +156,17 @@ export default function SoftwareReviews() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredPosts.slice(3).map((post) => (
                     <article key={post.slug} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                      <OptimizedImage 
-                        src={post.metadata.image || "/images/posts/default-software.jpg"}
-                        alt={post.metadata.title}
-                        width={400}
-                        height={200}
-                        className="w-full h-48 object-cover"
-                        category="software"
-                      />
+                      {post.metadata.image && (
+                        <Image
+                          src={post.metadata.image}
+                          alt={post.metadata.title}
+                          width={400}
+                          height={250}
+                          className="w-full h-48 object-cover"
+                          priority
+                          placeholder="empty"
+                        />
+                      )}
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-3">
                           <span className="bg-purple-100 text-purple-800 text-sm font-medium px-3 py-1 rounded-full">

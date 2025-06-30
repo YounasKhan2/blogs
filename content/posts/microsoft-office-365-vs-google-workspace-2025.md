@@ -13,7 +13,7 @@ tags:
   - "Cloud Office"
   - "Collaboration"
   - "Enterprise Software"
-image: "/images/posts/microsoft-office-365-vs-google-workspace-2025-the-ultimate-business-suite-showdown.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321250/terxsxtahlrztjnscsbk.jpgg"
 featured: false
 published: true
 rating: 4.5

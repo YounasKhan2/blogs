@@ -14,7 +14,7 @@ tags:
   - "Premium Phones"
   - "Apple vs Samsung"
   - "5G Smartphones"
-image: "/images/posts/iphone-16-pro-max-vs-samsung-galaxy-s25-ultra-ultimate-flagship-showdown-2025.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321249/jpdqb54xezmdqpnbnpw7.jpg"
 featured: true
 published: true
 rating: 4.8

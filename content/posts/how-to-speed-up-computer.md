@@ -12,7 +12,7 @@ tags:
   - "Windows"
   - "Mac"
   - "Tutorial"
-image: "/images/posts/how-to-speed-up-your-computer-complete-guide.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321248/ksn7pahdfdfopskkt1yh.jpg"
 featured: false
 published: true
 difficulty: "Beginner"

@@ -1,6 +1,6 @@
-
 import Link from 'next/link';
-import OptimizedImage from '../components/OptimizedImage';
+import Image from 'next/image';
+
 import { ChevronRight, TrendingUp, Clock, User, Star, Smartphone, Laptop, Brain, Settings, Gamepad2, BookOpen } from 'lucide-react';
 import { HeaderAd, ArticleAd } from '../components/AdSenseWrapper';
 import { getFeaturedPosts, getRecentPosts, getAllCategories } from '../lib/posts';
@@ -145,16 +145,16 @@ export default async function Home() {
                 }`}
               >
                 <div className="relative">
-                  <OptimizedImage
-                    src={post.metadata.image}
-                    alt={post.metadata.title || 'Article image'}
-                    width={600}
-                    height={index === 0 ? 320 : 192}
-                    className={`w-full object-cover ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
-                    priority={index < 2}
-                    placeholder="blur"
-                    category={post.metadata.category}
-                  />
+                  {/* Replace with Next.js <Image> or your preferred image component */}
+                    <Image
+                      src={post.metadata.image}
+                      alt={post.metadata.title || 'Article image'}
+                      width={600}
+                      height={index === 0 ? 320 : 192}
+                      className={`w-full object-cover ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
+                      priority={index < 2}
+                      placeholder="empty"
+                    />
                   <div className="absolute top-4 left-4">
                     <Link
                     href={`/categories/${post.metadata.categorySlug || 'uncategorized'}`}
@@ -274,17 +274,20 @@ export default async function Home() {
                 className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
               >
                 <div className="relative">
-                  <OptimizedImage
-                    src={post.metadata.image || "/images/posts/default-tech.jpg"}
-                    alt={post.metadata.title || 'Article image'}
-                    width={400}
-                    height={300}
-                    className="w-full h-48 object-cover"
-                    category={post.metadata.category}
-                  />
+                  {post.metadata.image && (
+                    <Image
+                      src={post.metadata.image}
+                      alt={post.metadata.title || 'Article image'}
+                      width={400}
+                      height={300}
+                      className="w-full h-48 object-cover"
+                      priority
+                      placeholder="empty"
+                    />
+                  )}
                   <div className="absolute top-4 left-4">
                     <Link
-                    href={`/categories/${post.metadata.categorySlug || 'uncategorized'}`}
+                      href={`/categories/${post.metadata.categorySlug || 'uncategorized'}`}
                       className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
                     >
                       {post.metadata.category || 'Uncategorized'}

@@ -12,7 +12,7 @@ tags:
   - "Color Grading"
   - "Post Production"
   - "Creative Software"
-image: "/images/posts/davinci-resolve-vs-adobe-premiere-pro.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321250/b2cm0mr2rxkiutbphwh5.jpg"
 featured: false
 published: true
 metaDescription: "DaVinci Resolve vs Adobe Premiere Pro 2025 comparison. Features, performance, pricing, and workflows tested. Which video editing software is best for your needs?"

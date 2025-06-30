@@ -12,7 +12,7 @@ tags:
   - "Budget"
   - "Review"
   - "Gaming Gear"
-image: "/images/posts/best-gaming-headsets-under-200-our-top-picks-for-2025.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321248/q0hmtushdbmwzinjrd7q.jpg"
 featured: false
 published: true
 ---

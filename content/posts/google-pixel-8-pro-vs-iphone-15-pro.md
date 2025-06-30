@@ -14,7 +14,7 @@ tags:
   - "Android vs iOS"
   - "Mobile Photography"
   - "Phone Camera Review"
-image: "/images/posts/google-pixel-8-pro-vs-iphone-15-proultimate-camera-comparison-2025.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321250/iv7kuywh68ofawkegxz3.jpg"
 featured: true
 published: true
 rating: 4.6

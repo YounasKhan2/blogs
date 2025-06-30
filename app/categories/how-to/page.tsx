@@ -1,5 +1,6 @@
+
 import Link from 'next/link';
-import OptimizedImage from '../../../components/OptimizedImage';
+import Image from 'next/image';
 import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
 
@@ -104,16 +105,17 @@ export default function HowToGuides() {
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {posts.map((post) => (
                   <article key={post.slug} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div className="relative">
-                      <OptimizedImage
-                        src={post.metadata.image || "/images/posts/default-howto.jpg"}
+                    {post.metadata.image && (
+                      <Image
+                        src={post.metadata.image}
                         alt={post.metadata.title}
                         width={400}
-                        height={300}
+                        height={250}
                         className="w-full h-48 object-cover"
-                        category="howto"
+                        priority
+                        placeholder="empty"
                       />
-                    </div>
+                    )}
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">
                         <span className="bg-indigo-100 text-indigo-800 text-sm font-medium px-3 py-1 rounded-full">

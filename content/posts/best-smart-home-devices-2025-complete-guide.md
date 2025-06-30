@@ -16,7 +16,7 @@ tags:
   - "Google Home"
   - "HomeKit"
   - "Smart Lighting"
-image: "/images/posts/best-smart-home-devices-2025-complete-guide-to-home-automation-on-any-budget.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321248/m2zicfgearqdoxoxgho7.jpg"
 featured: true
 published: true
 rating: 4.7

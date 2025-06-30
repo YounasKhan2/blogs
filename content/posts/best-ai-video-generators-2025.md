@@ -13,7 +13,7 @@ tags:
   - "Video Creation"
   - "Content Creation"
   - "Artificial Intelligence"
-image: "/images/posts/best-ai-video-generators-2025-create-professional-videos-with-artificial-intelligence.jpg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321248/non85kfbvj0t88rksyj2.jpg"
 featured: false
 published: true
 metaDescription: "Best AI video generators 2025 review: Runway ML, Pika Labs, Stable Video Diffusion. Compare features, pricing, and quality for AI-powered video creation."

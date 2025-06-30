@@ -1,5 +1,6 @@
+
 import Link from 'next/link';
-import OptimizedImage from '../../../components/OptimizedImage';
+import Image from 'next/image';
 import AdSense, { SidebarAd, ArticleAd } from '../../../components/AdSense';
 import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp, Search } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
@@ -83,16 +84,17 @@ export default async function MobileReviews() {
                   key={post.slug}
                   className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
                 >
-                  <div className="relative">
-                    <OptimizedImage
-                      src={post.metadata.image || "/images/posts/default-mobile.jpg"}
+                  {post.metadata.image && (
+                    <Image
+                      src={post.metadata.image}
                       alt={post.metadata.title}
                       width={400}
-                      height={200}
+                      height={250}
                       className="w-full h-48 object-cover"
-                      category="mobile"
+                      priority
+                      placeholder="empty"
                     />
-                  </div>
+                  )}
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-blue-600 transition-colors">
                       <Link href={`/posts/${post.slug}`}>{post.metadata.title}</Link>
