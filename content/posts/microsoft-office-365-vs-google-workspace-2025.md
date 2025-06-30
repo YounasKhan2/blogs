@@ -13,7 +13,7 @@ tags:
   - "Cloud Office"
   - "Collaboration"
   - "Enterprise Software"
-image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321250/terxsxtahlrztjnscsbk.jpgg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321250/terxsxtahlrztjnscsbk.jpg"
 featured: false
 published: true
 rating: 4.5

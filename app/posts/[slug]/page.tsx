@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { ArrowLeft, Clock, User, Calendar, Tag, Share2 } from 'lucide-react';
 import type { Metadata } from 'next';
@@ -205,15 +206,14 @@ export default async function PostPage({ params }: Props) {
               {/* Featured Image */}
               {post.metadata.image && post.metadata.image.trim() && (
                 <div className="relative">
-                  {/* Replace with Next.js <Image> or your preferred image component */}
+                  <Image
                     src={post.metadata.image}
                     alt={post.metadata.title}
                     width={800}
                     height={400}
-                    className="w-full h-64 md:h-96 object-cover"
+                    className="w-full h-64 md:h-96 object-cover object-center"
                     priority
-                    category={post.metadata.category}
-                  
+                  />
                 </div>
               )}
 

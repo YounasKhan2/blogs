@@ -151,7 +151,7 @@ export default async function Home() {
                       alt={post.metadata.title || 'Article image'}
                       width={600}
                       height={index === 0 ? 320 : 192}
-                      className={`w-full object-cover ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
+                      className={`w-full object-cover object-center ${index === 0 ? 'h-64 md:h-80' : 'h-48'}`}
                       priority={index < 2}
                       placeholder="empty"
                     />
@@ -280,7 +280,7 @@ export default async function Home() {
                       alt={post.metadata.title || 'Article image'}
                       width={400}
                       height={300}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-48 object-cover object-center"
                       priority
                       placeholder="empty"
                     />

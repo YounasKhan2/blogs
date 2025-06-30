@@ -14,7 +14,7 @@ tags:
   - "DIY PC"
   - "Hardware Guide"
   - "Budget Build"
-image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321248/n3jkx6xanmhtvk3onjvk.jpgg"
+image: "https://res.cloudinary.com/dwzwegpm4/image/upload/v1751321248/n3jkx6xanmhtvk3onjvk.jpg"
 featured: true
 published: true
 difficulty: "Intermediate"

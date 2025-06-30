@@ -90,7 +90,7 @@ export default async function MobileReviews() {
                       alt={post.metadata.title}
                       width={400}
                       height={250}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-48 object-cover object-center"
                       priority
                       placeholder="empty"
                     />

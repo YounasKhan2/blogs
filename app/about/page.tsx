@@ -1,54 +1,20 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { Users, Award, Target, Heart, Mail, Linkedin, Twitter } from 'lucide-react';
+import { Users, Award, Target, Heart, Mail, Linkedin, Twitter, Globe } from 'lucide-react';
 
 export default function About() {
   const teamMembers = [
     {
-      name: "John Smith",
-      role: "Founder & Mobile Expert",
-      image: "/images/team/john-smith.jpg",
-      bio: "10+ years in mobile technology journalism. Former editor at TechCrunch and The Verge.",
+      name: "Muhammad Younas",
+      role: "Founder & Senior Technology Reviewer",
+      image: "/images/authors/muhammad-younas.jpg",
+      bio: "Senior Technology Reviewer and Apple enthusiast with over 8 years of experience testing and reviewing consumer electronics. Specializes in mobile devices, laptops, and emerging tech.",
       social: {
-        twitter: "@johnsmith_tech",
-        linkedin: "johnsmith-tech"
+        twitter: "@muhammadyounas",
+        linkedin: "muhammad-younas",
+        website: "https://muhammadyounas.tech"
       },
-      expertise: ["Smartphones", "Mobile Apps", "5G Technology"]
-    },
-    {
-      name: "Sarah Johnson",
-      role: "Laptop & Computing Specialist",
-      image: "/images/team/sarah-johnson.jpg",
-      bio: "Computer science background with expertise in laptop reviews and performance testing.",
-      social: {
-        twitter: "@sarah_tech",
-        linkedin: "sarahjohnson-tech"
-      },
-      expertise: ["Laptops", "PC Hardware", "Performance Testing"]
-    },
-    {
-      name: "Mike Chen",
-      role: "AI & Software Analyst",
-      image: "/images/team/mike-chen.jpg",
-      bio: "AI researcher turned tech journalist, specializing in artificial intelligence and software reviews.",
-      social: {
-        twitter: "@mikechen_ai",
-        linkedin: "mikechen-ai"
-      },
-      expertise: ["Artificial Intelligence", "Software Development", "Machine Learning"]
-    },
-    {
-      name: "Lisa Brown",
-      role: "Photography & Creative Tech",
-      image: "/images/team/lisa-brown.jpg",
-      bio: "Professional photographer with deep knowledge of camera technology and creative software.",
-      social: {
-        twitter: "@lisa_photo",
-        linkedin: "lisabrown-photo"
-      },
-      expertise: ["Camera Technology", "Photo Editing", "Creative Software"]
+      expertise: ["Mobile Devices", "Apple Products", "Consumer Electronics", "Photography", "Tech Reviews"]
     }
   ];
 
@@ -184,23 +150,24 @@ export default function About() {
         <section className="mb-16">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Meet Our Team
+              Meet the Founder
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our diverse team of technology experts brings decades of combined experience 
-              in testing and reviewing tech products.
+              Passionate about technology and committed to providing honest, comprehensive reviews 
+              to help you make informed tech decisions.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
+          <div className="flex justify-center">
+            <div className="max-w-md">
+              {teamMembers.map((member, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <Image
                   src={member.image}
                   alt={member.name}
                   width={300}
                   height={300}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover object-center"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -224,20 +191,23 @@ export default function About() {
                     </div>
                   </div>
                   
-                  <div className="flex space-x-3">
-                    <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">
+                  <div className="flex space-x-3 justify-center">
+                    <a href={`https://twitter.com/${member.social.twitter.replace('@', '')}`} className="text-gray-400 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
                       <Twitter size={20} />
                     </a>
-                    <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">
+                    <a href={`https://linkedin.com/in/${member.social.linkedin}`} className="text-gray-400 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
                       <Linkedin size={20} />
                     </a>
-                    <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">
-                      <Mail size={20} />
-                    </a>
+                    {member.social.website && (
+                      <a href={member.social.website} className="text-gray-400 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
+                        <Globe size={20} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </section>
 
@@ -255,10 +225,10 @@ export default function About() {
                     <span className="text-white font-bold text-sm">1</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">2020 - The Beginning</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">2017 - The Beginning</h3>
                     <p className="text-gray-600">
-                      Founded by John Smith with a simple mission: provide honest tech reviews 
-                      in an increasingly cluttered digital landscape.
+                      Started tech reviewing journey with a passion for mobile devices and Apple products, 
+                      building expertise through hands-on testing and analysis.
                     </p>
                   </div>
                 </div>
@@ -268,10 +238,10 @@ export default function About() {
                     <span className="text-white font-bold text-sm">2</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">2021 - Team Expansion</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">2020 - Expanding Expertise</h3>
                     <p className="text-gray-600">
-                      Added specialized experts in laptops, AI, and photography to provide 
-                      comprehensive coverage across all tech categories.
+                      Broadened coverage to include consumer electronics, photography equipment, 
+                      and emerging technologies while maintaining focus on practical user experience.
                     </p>
                   </div>
                 </div>
@@ -281,10 +251,10 @@ export default function About() {
                     <span className="text-white font-bold text-sm">3</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">2023 - Recognition</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">2023 - Professional Recognition</h3>
                     <p className="text-gray-600">
-                      Recognized as one of the top tech review sites, reaching over 1 million 
-                      monthly readers and building a community of tech enthusiasts.
+                      Established reputation as a trusted voice in tech journalism with contributions 
+                      to major publications and hundreds of in-depth device reviews.
                     </p>
                   </div>
                 </div>
@@ -294,10 +264,10 @@ export default function About() {
                     <span className="text-white font-bold text-sm">4</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">2025 - Today</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">2025 - TechBlog Pro</h3>
                     <p className="text-gray-600">
-                      Continuing to evolve with the latest technology trends, expanding our 
-                      coverage to include AI tools, emerging tech, and sustainable technology.
+                      Launched TechBlog Pro to provide honest, comprehensive reviews and help consumers 
+                      make informed decisions about their technology purchases.
                     </p>
                   </div>
                 </div>

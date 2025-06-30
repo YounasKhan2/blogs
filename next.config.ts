@@ -113,10 +113,14 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com', // For Google profile images
+        port: '',
+        pathname: '**',
       },
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com', // For Cloudinary images
+        port: '',
+        pathname: '**',
       },
     ],
     formats: ['image/webp', 'image/avif'],

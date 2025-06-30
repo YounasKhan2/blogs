@@ -57,7 +57,7 @@ export default function TechReviews() {
                     alt={featuredPost.metadata.title}
                     width={600}
                     height={400}
-                    className="w-full h-64 md:h-full object-cover"
+                    className="w-full h-64 md:h-full object-cover object-center"
                     priority
                     placeholder="empty"
                   />
@@ -134,7 +134,7 @@ export default function TechReviews() {
                             alt={post.metadata.title}
                             width={400}
                             height={200}
-                            className="w-full h-48 object-cover"
+                            className="w-full h-48 object-cover object-center"
                             priority
                             placeholder="empty"
                           />
