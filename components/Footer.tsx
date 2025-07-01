@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone, Github, Linkedin } from 'lucide-react';
 import { FooterAd } from './AdSenseWrapper';
 
 const Footer = () => {
@@ -25,17 +25,15 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Facebook size={20} />
+                <Github size={20} />
               </a>
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Twitter size={20} />
+                <Linkedin size={20} />
               </a>
               <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
-                <Youtube size={20} />
-              </a>
+              
             </div>
           </div>
 
@@ -109,17 +107,17 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail size={16} className="text-blue-400" />
-                <span className="text-gray-400 text-sm">info@techblogpro.com</span>
+                <span className="text-gray-400 text-sm">younaskk120@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={16} className="text-blue-400" />
-                <span className="text-gray-400 text-sm">+1 (555) 123-4567</span>
+                <span className="text-gray-400 text-sm">+92 (313) 081-2324</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin size={16} className="text-blue-400 mt-0.5" />
                 <span className="text-gray-400 text-sm">
-                  123 Tech Street<br />
-                  Silicon Valley, CA 94041
+                  Quetta, Balochistan<br />
+                  Pakistan
                 </span>
               </div>
             </div>

@@ -118,7 +118,7 @@ export const metadata: Metadata = {
     },
   },
   other: {
-    'google-adsense-account': 'ca-pub-9113733158673282',
+    'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || '',
     'google-site-verification': 'your-google-verification-code',
     'msvalidate.01': 'your-bing-verification-code',
     'yandex-verification': 'your-yandex-verification-code',
@@ -134,7 +134,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="google-adsense-account" content="ca-pub-9113733158673282" />
+        <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''} />
         <meta name="theme-color" content="#0066cc" />
         <meta name="msapplication-TileColor" content="#0066cc" />
         <meta name="mobile-web-app-capable" content="yes" />

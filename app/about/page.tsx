@@ -3,20 +3,6 @@ import Image from 'next/image';
 import { Users, Award, Target, Heart, Mail, Linkedin, Twitter, Globe } from 'lucide-react';
 
 export default function About() {
-  const teamMembers = [
-    {
-      name: "Muhammad Younas",
-      role: "Founder & Senior Technology Reviewer",
-      image: "/images/authors/muhammad-younas.jpg",
-      bio: "Senior Technology Reviewer and Apple enthusiast with over 8 years of experience testing and reviewing consumer electronics. Specializes in mobile devices, laptops, and emerging tech.",
-      social: {
-        twitter: "@muhammadyounas",
-        linkedin: "muhammad-younas",
-        website: "https://muhammadyounas.tech"
-      },
-      expertise: ["Mobile Devices", "Apple Products", "Consumer Electronics", "Photography", "Tech Reviews"]
-    }
-  ];
 
   const stats = [
     { number: "500+", label: "Reviews Published", icon: Award },
@@ -146,70 +132,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Team */}
-        <section className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Meet the Founder
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Passionate about technology and committed to providing honest, comprehensive reviews 
-              to help you make informed tech decisions.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <div className="max-w-md">
-              {teamMembers.map((member, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={300}
-                  height={300}
-                  className="w-full h-64 object-cover object-center"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-blue-600 font-medium mb-4">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                    {member.bio}
-                  </p>
-                  
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-900 mb-2">Expertise:</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {member.expertise.map((skill) => (
-                        <span key={skill} className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="flex space-x-3 justify-center">
-                    <a href={`https://twitter.com/${member.social.twitter.replace('@', '')}`} className="text-gray-400 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
-                      <Twitter size={20} />
-                    </a>
-                    <a href={`https://linkedin.com/in/${member.social.linkedin}`} className="text-gray-400 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
-                      <Linkedin size={20} />
-                    </a>
-                    {member.social.website && (
-                      <a href={member.social.website} className="text-gray-400 hover:text-blue-600 transition-colors" target="_blank" rel="noopener noreferrer">
-                        <Globe size={20} />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-            </div>
-          </div>
-        </section>
 
         {/* History */}
         <section className="mb-16">

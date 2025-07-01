@@ -15,10 +15,16 @@ let adSenseLoaded = false;
 const loadAdSenseScript = () => {
   if (adSenseLoaded || typeof window === 'undefined') return Promise.resolve();
   
+  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  if (!clientId) {
+    console.warn('AdSense client ID not configured');
+    return Promise.resolve();
+  }
+  
   return new Promise<void>((resolve, reject) => {
     const script = document.createElement('script');
     script.async = true;
-    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9113733158673282';
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`;
     script.crossOrigin = 'anonymous';
     
     script.onload = () => {
@@ -84,7 +90,7 @@ export default function AdSense({
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-9113733158673282"
+        data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
         data-full-width-responsive={fullWidthResponsive.toString()}
