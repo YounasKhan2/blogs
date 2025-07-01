@@ -290,7 +290,7 @@ export default function Contact() {
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 disabled:cursor-not-allowed"
                   />
                   <label htmlFor="newsletter" className="ml-2 text-sm text-gray-600">
-                    Subscribe me to the newsletter for latest tech updates
+                    Subscribe me to the newsletter for latest tech updates.
                   </label>
                 </div>
                 
