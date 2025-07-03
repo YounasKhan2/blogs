@@ -142,7 +142,7 @@ export default async function PostPage({ params }: Props) {
               {/* Content */}
               <div className="p-8">
                 <div 
-                  className="prose prose-lg max-w-none
+                  className="prose prose-lg max-w-none dark:prose-invert
                     prose-headings:text-gray-900 prose-headings:font-bold
                     prose-h1:text-3xl prose-h1:mb-4
                     prose-h2:text-2xl prose-h2:mb-3 prose-h2:mt-8
