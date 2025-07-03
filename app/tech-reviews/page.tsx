@@ -2,6 +2,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, User, ChevronRight, Search, Calendar } from 'lucide-react';
 import { getAllPosts, getAllCategories, getPostsByCategory } from '@/lib/posts';
+import { generateStaticPageMetadata } from '../../lib/seo';
+import { StructuredDataScript } from '../../lib/seo/components';
+
+export const generateMetadata = async () => {
+  return generateStaticPageMetadata(
+    'Tech Reviews',
+    'Explore in-depth tech reviews, comparisons, and buying guides from TechBlog Pro.'
+  );
+};
 
 export default function TechReviews() {
   // Fetch all categories and posts grouped by category
@@ -29,6 +38,11 @@ export default function TechReviews() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} },
+        { type: 'website', data: {} }
+      ]} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">

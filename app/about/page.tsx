@@ -1,6 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Users, Award, Target, Heart, Mail, Linkedin, Twitter, Globe } from 'lucide-react';
+import { generateStaticPageMetadata } from '../../lib/seo';
+import { StructuredDataScript } from '../../lib/seo/components';
+
+export const generateMetadata = async () => {
+  return generateStaticPageMetadata(
+    'About TechBlog Pro',
+    'Learn more about TechBlog Pro, our mission, values, and the team behind the reviews.'
+  );
+};
 
 export default function About() {
 
@@ -36,6 +45,11 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} },
+        { type: 'website', data: {} }
+      ]} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-16">

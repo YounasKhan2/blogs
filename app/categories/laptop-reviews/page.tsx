@@ -1,8 +1,13 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Filter, Star, Clock, TrendingUp, Laptop, User, ChevronRight } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
+import { generateCategoryMetadata } from '../../../lib/seo';
+import { StructuredDataScript } from '../../../lib/seo/components';
+
+export const generateMetadata = async () => {
+  return generateCategoryMetadata('Laptop Reviews', 'In-depth laptop reviews, comparisons, and buying guides for all users.');
+};
 
 export default async function LaptopReviews() {
   // Get all posts and total count using consistent logic
@@ -40,6 +45,10 @@ export default async function LaptopReviews() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} }
+      ]} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">

@@ -1,15 +1,24 @@
 import Link from 'next/link';
-import type { Metadata } from 'next';
+import { generateStaticPageMetadata } from '../../lib/seo';
+import { StructuredDataScript } from '../../lib/seo/components';
 
-export const metadata: Metadata = {
-  title: 'Terms and Conditions - TechBlog Pro',
-  description: 'Read our terms and conditions governing the use of TechBlog Pro website and services. Important legal information for users.',
-  keywords: ['terms and conditions', 'terms of service', 'legal terms', 'techblog pro'],
+// Professional SEO system will handle metadata
+export const generateMetadata = async () => {
+  return generateStaticPageMetadata(
+    'Terms and Conditions',
+    'Read the Terms and Conditions for using TechBlog Pro. Understand your rights, responsibilities, and our policies.'
+  );
 };
 
 export default function TermsConditions() {
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} },
+        { type: 'website', data: {} }
+      ]} />
+      
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">

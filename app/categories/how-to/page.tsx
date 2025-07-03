@@ -1,8 +1,13 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Filter, Clock, TrendingUp, BookOpen, Play, Users, CheckCircle, AlertCircle, Settings } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
+import { generateCategoryMetadata } from '../../../lib/seo';
+import { StructuredDataScript } from '../../../lib/seo/components';
+
+export const generateMetadata = async () => {
+  return generateCategoryMetadata('How-to Guides', 'Step-by-step tutorials, troubleshooting, and tech guides for all skill levels.');
+};
 
 export default function HowToGuides() {
   // Server-side fetch
@@ -18,7 +23,6 @@ export default function HowToGuides() {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   };
-  // ...existing code...
 
   const categories = [
     { name: "All Guides", count: posts.length, active: true },
@@ -46,7 +50,11 @@ export default function HowToGuides() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} }
+      ]} />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

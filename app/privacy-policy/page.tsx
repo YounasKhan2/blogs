@@ -1,15 +1,24 @@
 import Link from 'next/link';
-import type { Metadata } from 'next';
+import { generateStaticPageMetadata } from '../../lib/seo';
+import { StructuredDataScript } from '../../lib/seo/components';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy - TechBlog Pro',
-  description: 'Learn how TechBlog Pro collects, uses, and protects your personal information. Our commitment to your privacy and data security.',
-  keywords: ['privacy policy', 'data protection', 'user privacy', 'techblog pro'],
+// Professional SEO system will handle metadata
+export const generateMetadata = async () => {
+  return generateStaticPageMetadata(
+    'Privacy Policy',
+    'Read the Privacy Policy for TechBlog Pro. Learn how we collect, use, and protect your personal information.'
+  );
 };
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} },
+        { type: 'website', data: {} }
+      ]} />
+      
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">

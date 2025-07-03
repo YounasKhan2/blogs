@@ -3,6 +3,15 @@ import Link from 'next/link';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Users, Zap, CheckCircle, AlertCircle } from 'lucide-react';
+import { generateStaticPageMetadata } from '../../lib/seo';
+import { StructuredDataScript } from '../../lib/seo/components';
+
+export const generateMetadata = async () => {
+  return generateStaticPageMetadata(
+    'Contact TechBlog Pro',
+    'Contact TechBlog Pro for inquiries, support, or feedback. We value your questions and suggestions.'
+  );
+};
 
 export default function Contact() {
   // Form state management
@@ -142,6 +151,11 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} },
+        { type: 'website', data: {} }
+      ]} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-16">

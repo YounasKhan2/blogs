@@ -1,9 +1,15 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import AdSense, { SidebarAd, ArticleAd } from '../../../components/AdSense';
 import { Clock, User, ChevronRight, Smartphone, Star, Filter, TrendingUp, Search } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
+import { generateCategoryMetadata } from '../../../lib/seo';
+import { StructuredDataScript } from '../../../lib/seo/components';
+
+// Generate metadata for SEO
+export const generateMetadata = async () => {
+  return generateCategoryMetadata('Mobile Reviews', 'Latest smartphone reviews, comparisons, and mobile buying guides.');
+};
 
 // Server component: fetch posts at the top level
 export default async function MobileReviews() {
@@ -42,6 +48,10 @@ export default async function MobileReviews() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} }
+      ]} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">

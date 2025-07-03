@@ -1,8 +1,9 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, User, ChevronRight, Brain, Star, Filter, TrendingUp } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
+import { generateCategoryMetadata } from '../../../lib/seo';
+import { StructuredDataScript } from '../../../lib/seo/components';
 
 function renderStars(rating: number): React.ReactNode {
   const stars = [];
@@ -22,6 +23,9 @@ function renderStars(rating: number): React.ReactNode {
   return <span className="flex">{stars}</span>;
 }
 
+export const generateMetadata = async () => {
+  return generateCategoryMetadata('AI Technology', 'Explore the latest AI tools, language models, and artificial intelligence news and reviews.');
+};
 
 export default async function AiCategoryPage() {
   // Get all posts and total count using consistent logic
@@ -42,6 +46,10 @@ export default async function AiCategoryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} }
+      ]} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="mb-12">

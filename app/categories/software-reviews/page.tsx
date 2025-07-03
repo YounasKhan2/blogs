@@ -1,8 +1,13 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Filter, Star, Clock, TrendingUp, Settings, Download, Shield, Zap } from 'lucide-react';
 import { getPostsByCategory } from '@/lib/posts';
+import { generateCategoryMetadata } from '../../../lib/seo';
+import { StructuredDataScript } from '../../../lib/seo/components';
+
+export const generateMetadata = async () => {
+  return generateCategoryMetadata('Software Reviews', 'Software applications, productivity tools, and app reviews.');
+};
 
 export default function SoftwareReviews() {
   // Server-side fetch
@@ -57,7 +62,11 @@ export default function SoftwareReviews() {
   // By default, show all posts (no client-side filtering)
   const filteredPosts = allPosts;
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-8">
+      {/* SEO Structured Data */}
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} }
+      ]} />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

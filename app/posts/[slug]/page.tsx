@@ -1,11 +1,13 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 
 import { ArrowLeft, Clock, User, Calendar, Tag, Share2 } from 'lucide-react';
-import type { Metadata } from 'next';
 import { getPostBySlug, getAllPostSlugs, getRelatedPosts } from '../../../lib/posts';
 import { ArticleAd, SidebarAd } from '../../../components/AdSenseWrapper';
+import { generatePostMetadata } from '../../../lib/seo';
+import { StructuredDataScript } from '../../../lib/seo/components';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -16,70 +18,16 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
+// Professional SEO metadata will be handled by our SEO system
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  
   if (!post) {
     return {
-      title: 'Post Not Found | TechBlog Pro'
+      title: 'Post Not Found | TechBlog Pro',
     };
   }
-
-  const publishedTime = new Date(post.metadata.date).toISOString();
-  const modifiedTime = new Date().toISOString();
-
-  return {
-    title: `${post.metadata.title} | TechBlog Pro`,
-    description: post.metadata.excerpt,
-    keywords: [...post.metadata.tags, 'tech review', 'technology', 'expert analysis', '2025'],
-    authors: [{ name: post.metadata.author, url: 'https://techblogpro.com/authors/muhammad-younas' }],
-    creator: post.metadata.author,
-    publisher: 'TechBlog Pro',
-    category: post.metadata.category,
-    openGraph: {
-      title: post.metadata.title,
-      description: post.metadata.excerpt,
-      type: 'article',
-      publishedTime: publishedTime,
-      modifiedTime: modifiedTime,
-      authors: [post.metadata.author],
-      tags: post.metadata.tags,
-      section: post.metadata.category,
-      images: post.metadata.image ? [
-        {
-          url: post.metadata.image,
-          width: 1200,
-          height: 630,
-          alt: post.metadata.title,
-        }
-      ] : undefined,
-      url: `https://techblogpro.com/posts/${slug}`,
-      siteName: 'TechBlog Pro',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.metadata.title,
-      description: post.metadata.excerpt,
-      images: post.metadata.image ? [post.metadata.image] : undefined,
-      creator: '@techblogpro',
-      site: '@techblogpro',
-    },
-    alternates: {
-      canonical: `https://techblogpro.com/posts/${slug}`,
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-  };
+  return generatePostMetadata(post);
 }
 
 export default async function PostPage({ params }: Props) {
@@ -92,53 +40,22 @@ export default async function PostPage({ params }: Props) {
 
   const relatedPosts = getRelatedPosts(slug, 3);
 
-  // Generate structured data for the blog post
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": post.metadata.title,
-    "description": post.metadata.excerpt,
-    "image": post.metadata.image ? [post.metadata.image] : undefined,
-    "author": {
-      "@type": "Person",
-      "name": post.metadata.author,
-      "url": "https://techblogpro.com/authors/muhammad-younas"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "TechBlog Pro",
-      "url": "https://techblogpro.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://techblogpro.com/logo.png"
-      }
-    },
-    "datePublished": new Date(post.metadata.date).toISOString(),
-    "dateModified": new Date().toISOString(),
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://techblogpro.com/posts/${slug}`
-    },
-    "keywords": post.metadata.tags.join(", "),
-    "articleSection": post.metadata.category,
-    "wordCount": post.readingTime.words,
-    "timeRequired": `PT${Math.ceil(post.readingTime.minutes)}M`,
-    "url": `https://techblogpro.com/posts/${slug}`,
-    "isPartOf": {
-      "@type": "Blog",
-      "name": "TechBlog Pro",
-      "url": "https://techblogpro.com"
-    }
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData)
-        }}
-      />
+      <StructuredDataScript schemas={[
+        { type: 'organization', data: {} },
+        { type: 'article', data: {
+          title: post.metadata.title,
+          description: post.metadata.excerpt,
+          author: post.metadata.author,
+          publishedTime: post.metadata.date,
+          modifiedTime: new Date().toISOString(),
+          image: post.metadata.image,
+          tags: post.metadata.tags,
+          category: post.metadata.category,
+          slug: post.slug,
+        } }
+      ]} />
       <div className="min-h-screen bg-gray-50">
         {/* Navigation */}
         <div className="bg-white border-b">
