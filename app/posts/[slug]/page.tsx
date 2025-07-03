@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-
 import { ArrowLeft, Clock, User, Calendar, Tag, Share2 } from 'lucide-react';
 import { getPostBySlug, getAllPostSlugs, getRelatedPosts } from '../../../lib/posts';
 import { ArticleAd, SidebarAd } from '../../../components/AdSenseWrapper';
@@ -94,13 +93,13 @@ export default async function PostPage({ params }: Props) {
                     {post.metadata.excerpt}
                   </p>
                 
-                  <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-500">
+                  <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-500 dark:text-gray-300">
                     <div className="flex items-center space-x-2">
-                      <User size={16} className="text-gray-400" />
+                      <User size={16} className="text-gray-400 dark:text-gray-300" />
                       <span className="font-medium">By {post.metadata.author}</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Calendar size={16} className="text-gray-400" />
+                      <Calendar size={16} className="text-gray-400 dark:text-gray-300" />
                       <span>{new Date(post.metadata.date).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
@@ -108,13 +107,13 @@ export default async function PostPage({ params }: Props) {
                       })}</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Clock size={16} className="text-gray-400" />
+                      <Clock size={16} className="text-gray-400 dark:text-gray-300" />
                       <span>{post.readingTime.text}</span>
                     </div>
                     {post.metadata.difficulty && (
                       <div className="flex items-center space-x-2">
-                        <Tag size={16} className="text-gray-400" />
-                        <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs font-medium">
+                        <Tag size={16} className="text-gray-400 dark:text-gray-300" />
+                        <span className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-2 py-1 rounded-md text-xs font-medium">
                           {post.metadata.difficulty}
                         </span>
                       </div>
@@ -144,7 +143,7 @@ export default async function PostPage({ params }: Props) {
                 {/* Content */}
                 <div className="p-6 sm:p-8 lg:p-10">
                   <div
-                    className="prose prose-lg sm:prose-xl max-w-none
+                    className="prose prose-lg sm:prose-xl max-w-none dark:prose-invert
                       prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight
                       prose-h1:text-2xl sm:prose-h1:text-3xl lg:prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-8
                       prose-h2:text-xl sm:prose-h2:text-2xl lg:prose-h2:text-3xl prose-h2:mb-4 prose-h2:mt-8
