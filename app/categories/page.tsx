@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { Smartphone, Laptop, Brain, Settings, Gamepad2, Monitor, Headphones, Camera, Watch, Tablet, BookOpen } from 'lucide-react';
 import { generateCategoryMetadata } from '../../lib/seo';
