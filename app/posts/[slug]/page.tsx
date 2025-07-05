@@ -7,6 +7,7 @@ import { getPostBySlug, getAllPostSlugs, getRelatedPosts } from '../../../lib/po
 import { ArticleAd, SidebarAd } from '../../../components/AdSenseWrapper';
 import { generatePostMetadata } from '../../../lib/seo';
 import { StructuredDataScript } from '../../../lib/seo/components';
+import PostCommentsClient from '../../../components/PostCommentsClient';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -165,7 +166,8 @@ export default async function PostPage({ params }: Props) {
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                 </div>
-                
+                {/* Comments */}
+                <PostCommentsClient />
                 {/* Tags */}
                 {post.metadata.tags.length > 0 && (
                   <div className="px-6 sm:px-8 lg:px-10 pb-6">
